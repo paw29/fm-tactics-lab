@@ -1417,6 +1417,9 @@ class TacticsApi:
                 workers=integer(data.get('workers',worker_limits()['recommended']),1,worker_limits()['maximum'],'并行数')
                 if tactical_details is None:
                     variants=[('A',reference),('B',scenario)]if reference else[('B',scenario)]
+                    if path=='/api/run' and data.get('variants'):
+                        # fork: brute-force batches - many variants share one job, one pool and one seed list
+                        variants=[(f'V{i:03d}',validate_scenario(item))for i,item in enumerate(data['variants'])]
                 screen_details=None
                 if path=='/api/run-attribute-screen':
                     with IMPORT_LOCK:
@@ -1441,7 +1444,7 @@ class TacticsApi:
                         (directory/f'{label}.phases.json').write_text(json.dumps(phase_inputs.pack(item,CATALOG),ensure_ascii=False,indent=2),encoding='utf8')
                     pool_summary=pool_draws=None;configs=[]
                     if pool:
-                        pool_summary=fm27_tactic_pool.summary(pool,key);pool_draws=fm27_tactic_pool.draws(pool,seeds,key)
+                        salt=str(data.get('pool_salt') or key);pool_summary=fm27_tactic_pool.summary(pool,salt);pool_draws=fm27_tactic_pool.draws(pool,seeds,salt)
                         for label,items in expanded.items():
                             for entry_index,item in enumerate(items):
                                 document=json.dumps(item,ensure_ascii=False,indent=2).encode('utf8');payload=encode_scenario(item)
@@ -1512,8 +1515,8 @@ class TacticsApi:
         except Exception as e:return self.send({'error':str(e)},500)
 
 def request_size_limit(target):
-    return 8000000 if urlparse(target).path in (
-        '/api/import-fmf', '/api/pool/import-fmf', '/api/save/league-pool', '/api/run-attribute-screen', '/api/run-tactical-screen', '/api/tactical-screen/estimate') else 1500000
+    return 64000000 if urlparse(target).path=='/api/run' else 8000000 if urlparse(target).path in (
+        '/api/run', '/api/import-fmf', '/api/pool/import-fmf', '/api/save/league-pool', '/api/run-attribute-screen', '/api/run-tactical-screen', '/api/tactical-screen/estimate') else 1500000
 
 
 class Handler(BaseHTTPRequestHandler):
