@@ -74,7 +74,7 @@ def execution_receipts(rows, scenario):
     versions = [r for r in rows if r.get('event') == 'experimental_engine_version']
     probes = sorted((r for r in rows if r.get('event') == 'native_execution_probe'
                      and r.get('stage') == 'finished'), key=lambda r: r['side'])
-    if len(versions) != 1 or versions[0]['after'] != 0x1b000000 or len(probes) != 2:
+    if len(versions) != 1 or versions[0]['after'] not in (0x1b000000, 0x1b010000) or len(probes) != 2:
         raise ValueError('缺少原生实验执行力回执')
     for side, row in enumerate(probes):
         error = execution_probe_error(row, scenario['experimental_execution'][side],

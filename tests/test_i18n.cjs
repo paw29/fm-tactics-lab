@@ -35,6 +35,8 @@ async function environment(system,browser){
  assert.equal(en.control.attrs.placeholder,'Choose save');
  assert.deepEqual(en.state,en.original);
  const translate=en.context.window.FM27I18n.translate;
+ assert.equal(translate('普通联赛 / 洲际联赛阶段（13）'),'League / continental league phase (13)');
+ assert.equal(translate('自定义'),'Custom');
  assert.equal(translate('保持队形'),'Hold shape');
  assert.equal(translate('有球阶段配置'),'In-possession phase Configuration');
  assert.equal(translate('导入客队战术池'),'Import into away tactic pool');

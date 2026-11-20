@@ -7,17 +7,18 @@ $('#engine-settings').after(modePanel);
 const experimentLabel=document.createElement('label');experimentLabel.innerHTML='实验名称<input id="experiment-name" maxlength="100" placeholder="留空自动命名">';
 $('#seed').closest('label').before(experimentLabel);
 const executionOptions=document.createElement('details');
-executionOptions.className='card save-mode-panel';
+executionOptions.className='match-settings-section';
 const executionComponents=[
- ['understanding','战术理解',50],['buy_in','教练认可',25],
+ ['understanding','战术理解（计入总分）',50],['buy_in','教练认可',25],
  ['opposition','对手情报',15],
 ];
 executionOptions.innerHTML=`
  <summary>战术执行力实验</summary>
- <p class="tiny muted">分别设置双方的三项分数。球员能力贡献按每名球员的 CA 和两阶段角色适配自动计算。</p>
- <label><input id="execution-enabled" type="checkbox" disabled>启用</label>
+ <p class="tiny muted">手动战术理解只用于计算总分。八个战术区域沿用引擎生成值。球员能力贡献按每名球员的 CA 和两阶段角色适配自动计算。</p>
+ <label class="execution-mode-toggle"><input id="execution-enabled" type="checkbox" disabled>启用手动执行力</label>
  <p id="execution-availability" class="tiny muted" hidden>此引擎版本暂不支持战术执行力实验</p>
- <div class="table-scroll"><table>
+ <p id="execution-automatic" class="tiny">由原版引擎计算</p>
+ <div id="execution-inputs" class="table-scroll" hidden><table>
   <thead><tr><th scope="col">分项</th><th scope="col">己方</th><th scope="col">对方</th></tr></thead>
   <tbody>${executionComponents.map(([key,label,weight])=>`<tr>
    <th scope="row">${label} · ${weight}%</th>
@@ -25,7 +26,67 @@ executionOptions.innerHTML=`
     aria-label="${name}${label}" type="number" min="0" max="100" step="1" value="70" disabled></td>`).join('')}
   </tr>`).join('')}<tr><th scope="row">球员能力贡献 · 10%</th><td colspan="2">逐球员自动计算</td></tr></tbody>
  </table></div>`;
-modePanel.after(executionOptions);
+const matchImportanceOptions=document.createElement('section');
+matchImportanceOptions.className='match-importance-options';
+matchImportanceOptions.innerHTML=`
+ <label>比赛重要性（双方共用） <select id="match-importance" disabled>
+  <option value="1">友谊赛（1）</option>
+  <option value="13" selected>普通联赛 / 洲际联赛阶段（13）</option>
+  <option value="15">八强（15）</option>
+  <option value="16">半决赛（16）</option>
+  <option value="19">决赛（19）</option>
+  <option value="custom">自定义</option>
+ </select></label>
+ <label id="match-importance-custom-label" hidden>重要性（1–20）
+  <input id="match-importance-custom" type="number" min="1" max="20" step="1" value="13" required disabled>
+ </label>
+ <span id="match-importance-availability" class="tiny muted" hidden>当前引擎版本暂不支持设置比赛重要性</span>`;
+const matchSettingsDialog=document.createElement('dialog');
+matchSettingsDialog.className='save-dialog match-settings-dialog';
+matchSettingsDialog.id='match-settings-dialog';
+matchSettingsDialog.setAttribute('aria-labelledby','match-settings-title');
+matchSettingsDialog.innerHTML='<h2 id="match-settings-title">比赛设置</h2><div class="match-settings-body"></div><div class="dialog-actions"><button type="button" class="button primary" id="match-settings-done">完成</button></div>';
+const careerRoundOptions=document.createElement('div');
+careerRoundOptions.className='match-settings-section';
+matchSettingsDialog.querySelector('.match-settings-body').append(matchImportanceOptions,careerRoundOptions,executionOptions);
+document.body.append(matchSettingsDialog);
+const runSettings=document.createElement('div');
+runSettings.className='run-settings';
+runSettings.innerHTML='<button type="button" id="match-settings-open" class="button" aria-haspopup="dialog" aria-controls="match-settings-dialog">比赛设置</button><span id="match-settings-summary" class="tiny"></span>';
+$('#run').before(runSettings);
+const comparisonSummary=document.createElement('span');
+comparisonSummary.id='run-comparison-summary';
+comparisonSummary.className='run-comparison-summary tiny';
+$('#compare').closest('label').append(comparisonSummary);
+const runMatchCount=document.createElement('span');
+runMatchCount.id='run-match-count';
+runMatchCount.className='tiny';
+$('#run').before(runMatchCount);
+$('#match-settings-open').onclick=()=>matchSettingsDialog.showModal();
+$('#match-settings-done').onclick=()=>matchSettingsDialog.close();
+function matchImportanceLabel(){
+ const preset=$('#match-importance');
+ if(preset.disabled)return '重要性由引擎计算';
+ if(preset.value==='custom')return '自定义 '+($('#match-importance-custom').value||'—')+' / 20';
+ if(preset.value==='13')return '普通联赛（13）';
+ return preset.selectedOptions[0]?.textContent||'—';
+}
+function updateMatchSettingsSummary(){
+ const execution=$('#execution-enabled').checked?'执行力手动':'执行力自动';
+ const rounds=saveMode==='save'&&careerTwoRounds?' · 两轮测试':'';
+ $('#match-settings-summary').textContent=matchImportanceLabel()+' · '+execution+rounds;
+}
+function updateMatchImportanceAvailability(available){
+ const preset=$('#match-importance');
+ const custom=preset.value==='custom';
+ preset.disabled=!available;
+ $('#match-importance-custom-label').hidden=!custom;
+ $('#match-importance-custom').disabled=!available||!custom;
+ $('#match-importance-availability').hidden=available;
+ updateMatchSettingsSummary();
+}
+$('#match-importance').onchange=()=>updateMatchImportanceAvailability(!$('#match-importance').disabled);
+$('#match-importance-custom').oninput=updateMatchSettingsSummary;
 function updateExecutionAvailability(available){
  const enabled=$('#execution-enabled');
  enabled.disabled=!available;
@@ -34,8 +95,31 @@ function updateExecutionAvailability(available){
  enabled.onchange();
 }
 $('#execution-enabled').onchange=()=>{
- for(const input of $$('[data-execution-component]'))input.disabled=!$('#execution-enabled').checked;
+ const automatic=!$('#execution-enabled').checked;
+ for(const input of $$('[data-execution-component]'))input.disabled=automatic;
+ $('#execution-inputs').hidden=automatic;
+ $('#execution-automatic').hidden=!automatic;
+ updateMatchSettingsSummary();
 };
+function comparisonTacticName(scenario){
+ return scenario?.teams?.[0]?.tactic_name||scenario?.teams?.[0]?.name||'当前战术';
+}
+function liveComparisonSummary(){
+ if(!reference)return '对照 A：尚未保存';
+ const original=localStorage.getItem('fm27-career-original');
+ const imported=saveMode==='save'&&original===JSON.stringify(reference.teams?.[0]);
+ const name='对照 A：'+(imported?'导入时的 ':'')+comparisonTacticName(reference);
+ return $('#compare').checked?name+' · 本次 B：'+comparisonTacticName(state):name;
+}
+function updateRunContext(){
+ const history=view==='results';
+ modePanel.hidden=history;
+ $('#match-settings-open').textContent=history?'下次运行设置':'比赛设置';
+ comparisonSummary.textContent=liveComparisonSummary();
+ comparisonSummary.title=comparisonSummary.textContent;
+ updateMatchSettingsSummary();
+ updateSaveTotal();
+}
 function saveModeDraft(){if(state)localStorage.setItem('fm27-mode-draft-'+saveMode,JSON.stringify(state));}
 function setSaveMode(value){
  if(activeJob){toast('请先等待当前实验结束或取消');return;}
@@ -50,7 +134,7 @@ function setSaveMode(value){
 }
 function drawSaveMode(){
  const status=saveInfo?.status;
- modePanel.innerHTML=`<div class="save-mode-top"><div class="segmented"><button data-mode="free" class="${saveMode==='free'?'active':''}">自由推演</button><button data-mode="save" class="${saveMode==='save'?'active':''}">存档对战</button></div>${saveMode==='save'?'<span class="tiny muted">真实属性 · 两阶段战术 · 多对手主客场测试</span>':''}</div>${saveMode==='save'?`<div class="save-mode-body"><label>存档完整路径<input id="career-path" value="${esc(saveInfo?.source||'')}" placeholder="例如 D:\\存档\\生涯.fm"></label><button id="career-pick" class="button">选择存档…</button><button id="career-read" class="button" ${status==='reading'?'disabled':''}>读取存档</button><span class="tiny" role="status">${esc(saveInfo?.stage||'请选择 .fm 存档；战术 FMF 仍在战术板导入')}</span>${status==='complete'?`<p class="tiny muted">存档日期 ${esc(saveInfo.date)} · 构建 ${esc(saveInfo.build)} · 当前存档属性与教练偏好</p><div class="save-team-controls">${careerLeagueControls()}<label>测试球队<select id="career-club">${careerClubs().map(c=>`<option value="${c.uid}" ${c.uid===saveClub?'selected':''}>${esc(c.name)}${c.players!=null?'（'+c.players+'人）':' · 名单按需读取'}${saveInfo.managed.some(m=>m.club_uid===c.uid)?' · 人类经理执教':''}</option>`).join('')}</select></label>${saveRoster?`<label>存储战术<select id="career-tactic">${saveRoster.tactics.filter(t=>t.available).map(t=>`<option value="${t.index}">${esc(t.name)}</option>`).join('')}</select></label><button id="career-load" class="button primary" ${saveRoster.tactics.some(t=>t.available)?'':'disabled'}>载入战术板</button><button id="career-lineup-open" class="button">一线队／比赛名单</button>`:''}${saveLoaded?'<button id="league-round" class="button primary">跑一圈联赛</button>':''}<button id="career-opponents" class="button">选择存档对手</button></div>${saveLoaded?`<p class="tiny">已载入：${esc(state?.teams[0]?.name||'')} · ${esc(saveLoaded.tactic_name)} <button id="career-restore" class="button small">恢复导入方案</button></p><p class="tiny muted">${esc(saveLoaded.notice)}</p>`:''}${saveInfo.warnings?.length?`<details><summary>解析提示（${saveInfo.warnings.length}）</summary>${saveInfo.warnings.map(w=>`<p class="tiny">${esc(w)}</p>`).join('')}</details>`:''}${careerRoundControls()}<p class="tiny">已选 ${saveChosen.size} 个对手方案。每队场数沿用底部场数，主客场各半；启用对照时总场数翻倍。此模式编辑主队，运行时载入所选对手的教练偏好预设。<strong id="career-total"></strong></p>`:''}</div>`:''}`;
+ modePanel.innerHTML=`<div class="save-mode-top"><div class="segmented"><button data-mode="free" class="${saveMode==='free'?'active':''}">自由推演</button><button data-mode="save" class="${saveMode==='save'?'active':''}">存档对战</button></div>${saveMode==='save'?'<span class="tiny muted">真实属性 · 两阶段战术 · 多对手主客场测试</span>':''}</div>${saveMode==='save'?`<div class="save-mode-body"><label>存档完整路径<input id="career-path" value="${esc(saveInfo?.source||'')}" placeholder="例如 D:\\存档\\生涯.fm"></label><button id="career-pick" class="button">选择存档…</button><button id="career-read" class="button" ${status==='reading'?'disabled':''}>读取存档</button><span class="tiny" role="status">${esc(saveInfo?.stage||'请选择 .fm 存档；战术 FMF 仍在战术板导入')}</span>${status==='complete'?`<p class="tiny muted">存档日期 ${esc(saveInfo.date)} · 构建 ${esc(saveInfo.build)} · 当前存档属性与教练偏好</p><div class="save-team-controls">${careerLeagueControls()}<label>测试球队<select id="career-club">${careerClubs().map(c=>`<option value="${c.uid}" ${c.uid===saveClub?'selected':''}>${esc(c.name)}${c.players!=null?'（'+c.players+'人）':' · 名单按需读取'}${saveInfo.managed.some(m=>m.club_uid===c.uid)?' · 人类经理执教':''}</option>`).join('')}</select></label>${saveRoster?`<label>存储战术<select id="career-tactic">${saveRoster.tactics.filter(t=>t.available).map(t=>`<option value="${t.index}">${esc(t.name)}</option>`).join('')}</select></label><button id="career-load" class="button primary" ${saveRoster.tactics.some(t=>t.available)?'':'disabled'}>载入战术板</button><button id="career-lineup-open" class="button">一线队／比赛名单</button>`:''}${saveLoaded?'<button id="league-round" class="button primary">跑一圈联赛</button>':''}<button id="career-opponents" class="button">选择存档对手</button></div>${saveLoaded?`<p class="tiny">已载入：${esc(state?.teams[0]?.name||'')} · ${esc(saveLoaded.tactic_name)} <button id="career-restore" class="button small">恢复导入方案</button></p><p class="tiny muted">${esc(saveLoaded.notice)}</p>`:''}${saveInfo.warnings?.length?`<details><summary>解析提示（${saveInfo.warnings.length}）</summary>${saveInfo.warnings.map(w=>`<p class="tiny">${esc(w)}</p>`).join('')}</details>`:''}<p class="tiny">已选 ${saveChosen.size} 个对手方案。对手使用所选的存档方案。</p>`:''}</div>`:''}`;
  modePanel.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setSaveMode(b.dataset.mode));
  if($('#career-pick'))$('#career-pick').onclick=async()=>{try{const r=await api('/api/save/pick',{});if(r.path){$('#career-path').value=r.path;$('#career-read').click();}}catch(e){toast(e.message)}};
  const readButton=$('#career-read');if(readButton)readButton.onclick=async()=>{try{const r=await api('/api/save/import',{path:$('#career-path').value});clearCareerSelection();careerLeague='';saveInfo={id:r.id,status:'reading',stage:r.reused?'存档未变化，复用已解析数据':'正在读取存档',source:$('#career-path').value};if(r.reused)toast('存档未变化，已复用解析结果与对手预设');drawSaveMode();pollSave();}catch(e){toast(e.message)}};
@@ -61,10 +145,17 @@ function drawSaveMode(){
  if($('#career-opponents'))$('#career-opponents').onclick=()=>discoverSaveOpponents();
  if(saveMode==='save'&&saveLoaded&&state){const t=state.teams[0];const note=document.createElement('span');note.textContent=' · '+t.lineup.length+' 名首发 + '+((t.roster_size??t.players.length)-t.lineup.length)+' 名替补';$('#career-restore')?.before(note);}
  if($('#career-restore'))$('#career-restore').onclick=()=>{const saved=localStorage.getItem('fm27-career-original');if(saved&&confirm('恢复导入时的己方阵容与战术？当前修改会被替换。')){state.teams[0]=JSON.parse(saved);save();render();drawSaveMode();}};
- const countLabel=$('#count').closest('label');countLabel.firstChild.textContent=saveMode==='save'?'每队场数':'每方案场数';
- bindCareerTesting();updateSaveTotal();
+ const countLabel=$('#count').closest('label');countLabel.firstChild.textContent=saveMode==='save'?'首轮每队场数':'每方案场数';
+ careerRoundOptions.hidden=saveMode!=='save';
+ careerRoundOptions.innerHTML=saveMode==='save'?careerRoundControls():'';
+ bindCareerTesting();updateRunContext();
 }
-function updateSaveTotal(){const e=$('#career-total');if(e)e.textContent=`预计 ${saveChosen.size*(Number($('#count').value)+(careerTwoRounds?careerRetest:0))*($('#compare').checked?2:1)} 场`;}
+function updateSaveTotal(){
+ const input=$('#count'),count=Number(input.value),career=saveMode==='save';
+ const opponents=career?saveChosen.size:1;
+ const valid=input.checkValidity()&&count>0&&(!career||count%2===0&&(!careerTwoRounds||$('#career-retest')?.checkValidity()));
+ runMatchCount.textContent=valid&&opponents?`预计 ${opponents*(count+(career&&careerTwoRounds?careerRetest:0))*($('#compare').checked?2:1)} 场`:'';
+}
 $('#count').addEventListener('input',updateSaveTotal);$('#compare').addEventListener('change',updateSaveTotal);
 async function pollSave(){clearTimeout(saveTimer);try{const requested=saveInfo?.id;const value=await api('/api/save/status'+(saveInfo?.id?'?id='+saveInfo.id:''));if(saveMode!=='save'||saveInfo?.id!==requested)return;saveInfo={...saveInfo,...value};if(careerLeague&&!value.leagues?.some(l=>l.key===careerLeague))careerLeague='';drawSaveMode();if(value.status==='reading')saveTimer=setTimeout(pollSave,1500);else if(value.status==='complete'){saveClub=careerClubs().some(c=>c.uid===saveClub)?saveClub:(careerClubs()[0]?.uid??null);if(saveClub!==null)await readSaveClub();else{saveRoster=null;drawSaveMode();toast('当前存档未找到可载入的五大联赛或执教球队');}}else if(value.status==='error')toast(value.stage);}catch(e){toast(e.message);}}
 function savedBench(roster){
@@ -79,7 +170,16 @@ async function readSaveClub(){
   const roster=await api('/api/save/club',{id,club_uid:club});
   if(saveMode!=='save'||saveInfo?.id!==id||saveClub!==club)return;
   roster.bench=savedBench(roster);
-  roster.picks=roster.selections.filter(s=>!s.substitute).sort((a,b)=>a.slot-b.slot).map(s=>s.source_uid);
+  const known=new Set(roster.players.map(p=>p.uid));
+  const starts=roster.selections.filter(s=>!s.substitute&&known.has(s.source_uid));
+  const picks=Array(11).fill(null),seen=new Set();
+  for(const {slot,source_uid} of starts){
+   if(slot>=0&&slot<11&&picks[slot]===null&&!seen.has(source_uid)){
+    picks[slot]=source_uid;seen.add(source_uid);
+   }
+  }
+  roster.savedPicks=picks;roster.savedBench=roster.bench.slice();
+  roster.picks=picks.slice();roster.manualSelection=false;
   saveRoster=roster;drawSaveMode();
   await initializeBoardRoster();
   if(saveMode==='save'&&saveInfo?.id===id&&saveClub===club&&state)render();
@@ -90,7 +190,12 @@ async function loadSaveTeam(){
   if(!$('#career-tactic')?.value)throw Error('该队没有可完整解析的存储战术');
   if(!confirm('用此队的存档阵容和所选战术替换当前主队？'))return;
   const id=saveInfo.id,club=saveClub;
-  const r=await api('/api/save/load',{id,club_uid:club,tactic_index:$('#career-tactic').value==='board'?'board':Number($('#career-tactic').value),lineup:saveInfo.save_mode!=='online_draft'&&saveRoster.picks.length===11?saveRoster.picks:null,scenario:state});
+  const current=saveLoaded?.save_id===id&&saveLoaded.club_uid===club&&state.teams[0].squad;
+  const lineup=current?state.teams[0].lineup.map(i=>state.teams[0].players[i].source_uid):saveRoster.picks;
+  const bench=current?state.teams[0].players.slice(0,state.teams[0].roster_size).filter((_,i)=>!state.teams[0].lineup.includes(i)).map(p=>p.source_uid):saveRoster.bench;
+  const r=await api('/api/save/load',{id,club_uid:club,tactic_index:$('#career-tactic').value==='board'?'board':Number($('#career-tactic').value),
+   lineup:(current||saveRoster.manualSelection)?lineup:null,
+   bench:(current||saveRoster.manualSelection||saveRoster.savedBench?.length)?bench:null,scenario:state});
   if(saveMode!=='save'||saveInfo?.id!==id||saveClub!==club)return;
   state=r.scenario;reference=clone(state);saveLoaded=r.source;
   localStorage.setItem('fm27-career-original',JSON.stringify(state.teams[0]));
@@ -128,16 +233,48 @@ async function previewLeagueRound(){
   const unavailable=(report.requested_teams||[]).filter(o=>o.same_league&&!clubs.has(o.club_uid));
   const assistants=[...clubs.values()].filter(o=>o.source_kind==='assistant_preference_preset').map(o=>o.name+' · '+o.source);
   const missed=unavailable.map(o=>o.name+' · '+(report.failures?.find(f=>f.club_uid===o.club_uid)?.error||o.reason||'不可用'));
-  const t=state.teams[0],compare=$('#compare').checked,fixtures=clubs.size*(2+(careerTwoRounds?careerRetest:0))*(compare?2:1);
-  const message=[t.name+' · '+(t.tactic_name||saveLoaded.tactic_name),
-   t.lineup.length+' 名首发 + '+(t.roster_size-t.lineup.length)+' 名替补',
-   clubs.size+' / '+report.same_league_clubs+' 个联赛对手 · '+(careerTwoRounds?'两轮测试 · 2 + '+careerRetest+' / 队':'每队主客场各一场')+' · '+fixtures+' 场',
-   ...assistants,...missed].join('\n');
-  if(!confirm(message))return;
-  saveOpponents=report.opponents;saveChosen=new Set([...clubs.values()].map(o=>o.key));
-  $('#count').value='2';drawSaveMode();await run();
+  showLeagueRun([...clubs.values()],report.same_league_clubs,[...assistants,...missed]);
  }catch(e){showActionError('联赛准备失败',e.message);}
  finally{button.disabled=false;button.textContent='跑一圈联赛';}
+}
+function showLeagueRun(opponents,leagueSize,notes){
+ const dialog=document.createElement('dialog');
+ dialog.className='save-dialog league-run-dialog';
+ dialog.setAttribute('aria-labelledby','league-run-title');
+ dialog.innerHTML=`
+  <h2 id="league-run-title">跑一圈联赛</h2>
+  <p>${opponents.length} / ${leagueSize} 个联赛对手 · 每队主客场各一场</p>
+  <p>比赛重要性 · ${esc(matchImportanceLabel())} · ${$('#execution-enabled').checked?'执行力手动':'执行力自动'}</p>
+  ${$('#compare').checked?`<p>${esc(liveComparisonSummary())}</p>`:''}
+  <div class="career-round-controls">
+   <label><input type="checkbox" data-league-retest>用新种子复测</label>
+   <label data-league-count-label hidden>复测每队场数<input data-league-count type="number" min="2" max="10000" step="2" value="${careerRetest||100}" required disabled></label>
+  </div>
+  <p class="tiny muted" data-league-warning hidden>开启复测后，两轮都会关闭双方的针对性指令与指定盯人。</p>
+  ${notes.length?`<details><summary>对手方案说明</summary>${notes.map(note=>`<p class="tiny">${esc(note)}</p>`).join('')}</details>`:''}
+  <div class="dialog-actions"><strong data-league-total aria-live="polite"></strong><button type="button" class="button" data-close>取消</button><button type="button" class="button primary" data-start>开始联赛测试</button></div>`;
+ const retest=dialog.querySelector('[data-league-retest]');
+ const count=dialog.querySelector('[data-league-count]');
+ const start=dialog.querySelector('[data-start]');
+ const update=()=>{
+  count.disabled=!retest.checked;
+  dialog.querySelector('[data-league-count-label]').hidden=!retest.checked;
+  dialog.querySelector('[data-league-warning]').hidden=!retest.checked;
+  start.disabled=!count.checkValidity();
+  const total=opponents.length*(2+(retest.checked?Number(count.value):0))*($('#compare').checked?2:1);
+  dialog.querySelector('[data-league-total]').textContent=start.disabled?'':`预计 ${total} 场`;
+ };
+ retest.onchange=update;
+ count.oninput=update;
+ dialog.querySelector('[data-close]').onclick=()=>dialog.close();
+ start.onclick=()=>{
+  const leagueRun={two_rounds:retest.checked,retest_count:retest.checked?Number(count.value):0,
+                   opponents:opponents.map(({key})=>({key}))};
+  dialog.close();
+  void run({count:2,leagueRun});
+ };
+ dialog.onclose=()=>dialog.remove();
+ document.body.append(dialog);update();dialog.showModal();
 }
 async function discoverSaveOpponents(request=++saveOpponentRequest,id=saveInfo?.id,club=saveClub){try{const r=await api('/api/save/opponents',{id,club_uid:club});if(request!==saveOpponentRequest||saveMode!=='save'||id!==saveInfo?.id||club!==saveClub)return;if(r.status==='error')throw Error(r.stage||'同联赛对手读取失败');if(r.status==='reading'){toast(r.stage);clearTimeout(saveTimer);saveTimer=setTimeout(()=>discoverSaveOpponents(request,id,club),2500);return;}saveOpponents=r.opponents;showSaveOpponents(r);}catch(e){if(request===saveOpponentRequest&&saveInfo?.id===id&&saveClub===club)toast(e.message);}}
 function showSaveOpponents(report,{initial=saveChosen,onAccept=null,scope}={}){
@@ -201,7 +338,17 @@ async function previewSaveOpponent(key){
 }
 api=async function(url,data){
  if((url==='/api/run'||url==='/api/run-attribute-screen')&&data){
-  data={...data,name:$('#experiment-name').value.trim()||undefined};
+  data={...data,name:$('#experiment-name').value.trim()||undefined,scenario:{...data.scenario}};
+  if(data.reference)data.reference={...data.reference};
+  delete data.scenario.match_importance;
+  if(data.reference)delete data.reference.match_importance;
+  const preset=$('#match-importance');
+  if(!preset.disabled){
+   const input=preset.value==='custom'?$('#match-importance-custom'):preset;
+   if(!input.checkValidity())throw Error('比赛重要性必须为 1–20 的整数');
+   data.scenario.match_importance=Number(input.value);
+   if(data.reference)data.reference.match_importance=data.scenario.match_importance;
+  }
   delete data.scenario.experimental_execution;
   if(data.reference)delete data.reference.experimental_execution;
   if($('#execution-enabled').checked){
@@ -216,18 +363,39 @@ api=async function(url,data){
   if(url==='/api/run'&&saveMode==='save'){
    delete data.scenario.away_tactic_pool;if(data.reference)delete data.reference.away_tactic_pool;
    if(!saveLoaded||saveLoaded.club_uid!==saveClub||saveLoaded.save_id!==saveInfo.id)throw Error('请先将所选球队载入战术板');
-   if(!saveChosen.size)throw Error('请至少选择一个存档对手');
-   url='/api/save/run';data={...data,two_rounds:careerTwoRounds,retest_count:careerRetest,save_id:saveInfo.id,club_uid:saveClub,opponents:saveOpponents.filter(o=>saveChosen.has(o.key)).map(o=>({key:o.key}))};
+   const {leagueRun,...request}=data;
+   if(!leagueRun&&careerTwoRounds&&!$('#career-retest').checkValidity())throw Error('复测每队场数必须为 2–10000 的偶数');
+   const options=leagueRun??{two_rounds:careerTwoRounds,retest_count:careerRetest,
+    opponents:saveOpponents.filter(o=>saveChosen.has(o.key)).map(({key})=>({key}))};
+   if(!options.opponents.length)throw Error('请至少选择一个存档对手');
+   url='/api/save/run';data={...request,...options,save_id:saveInfo.id,club_uid:saveClub};
   }
  }
  return saveApiPrevious(url,data);
 };
+function historicalConditions(job){
+ const run=job.runs?.[job.detailIndex??job.runs.length-1];
+ const conditionText=(importance,manual)=>{
+  const level=Number.isInteger(importance)?'比赛重要性 '+importance+' / 20':'比赛重要性由引擎计算';
+  return level+' · '+(manual?'执行力手动':'执行力自动');
+ };
+ const conditions=Object.entries(job.match_conditions||{});
+ if(!conditions.length){
+  return conditionText(run?.match_importance,!!job.experimental_execution);
+ }
+ const descriptions=conditions.map(([group,condition])=>
+  [group,conditionText(condition.importance,condition.manual_execution)]);
+ if(descriptions.every(([,description])=>description===descriptions[0][1]))return descriptions[0][1];
+ return descriptions.map(([group,description])=>(group==='A'?'对照 A：':'本次 B：')+description).join('｜');
+}
 const saveResultsPrevious=resultsView;
 resultsView=function(){
  loadResultNames(selectedJob);
  let html=saveResultsPrevious();if(!selectedJob)return html;
  const j=selectedJob;
-  html=careerRoundResults(j)+html;
+ const mainScope=careerResultScope(j);
+ const totalScope=careerResultScope(j,true);
+ if(mainScope)html=careerRoundResults(j)+`<h3 class="result-round-scope">主统计 · ${mainScope}</h3>`+html;
  if(j.experimental_execution){
   const row=j.runs[j.detailIndex??Math.max(0,j.runs.length-1)];
   const variant=row?.variant??Object.keys(j.experimental_execution)[0];
@@ -252,11 +420,11 @@ resultsView=function(){
  if(j.experiment_type==='save_opponents'){
   html=html.replaceAll('主队视角','己方视角').replaceAll('主队胜率','己方胜率');
   const rows=Object.entries(j.opponent_metrics||{}).flatMap(([key,groups])=>Object.entries(groups).filter(([g,m])=>m).map(([g,m])=>{const name=Object.values(j.schedule).find(v=>v.opponent_key===key)?.opponent;return `<tr><td>${esc(name)} · ${g==='A'?'对照':'本次'}</td><td>${m.n}</td><td>${pct(m.win_rate)}</td><td>${pct(m.possession)}</td><td>${fmt(m.xg)} / ${fmt(m.xga)}</td><td>${fmt(m.shots)}</td><td>${pct(m.pass_completion)}</td></tr>`;}));
-  html=`<section class="card"><div class="card-head"><h3>逐对手表现 · 己方视角</h3></div><div class="table-scroll"><table><thead><tr><th>对手／方案</th><th>场数</th><th>胜率</th><th>控球</th><th>预期进球／预期失球</th><th>射门</th><th>传球成功</th></tr></thead><tbody>${rows.join('')}</tbody></table></div></section>`+html;
+  html=`<section class="card"><div class="card-head"><h3>逐对手表现 · 己方视角${totalScope?' · '+totalScope:''}</h3></div><div class="table-scroll"><table><thead><tr><th>对手／方案</th><th>场数</th><th>胜率</th><th>控球</th><th>预期进球／预期失球</th><th>射门</th><th>传球成功</th></tr></thead><tbody>${rows.join('')}</tbody></table></div></section>`+html;
  }
  if(j.experiment_type==='save_opponents')html=careerVenueSummary(j)+html;
  const busy=['queued','running'].includes(j.status);
- return `<div class="card experiment-heading"><h2>${esc(j.name||'实验 '+j.id)}</h2><button class="button small" id="rename-experiment">重命名</button><button class="button small" id="delete-experiment" ${busy?'disabled title="请等待实验结束或取消后再删除"':''}>删除实验</button><label>查找实验<input id="find-experiment" placeholder="按名称搜索"></label></div>${html}`;
+ return `<div class="card experiment-heading"><h2>${esc(j.name||'实验 '+j.id)}</h2><button class="button small" id="rename-experiment">重命名</button><button class="button small" id="delete-experiment" ${busy?'disabled title="请等待实验结束或取消后再删除"':''}>删除实验</button><label>查找实验<input id="find-experiment" placeholder="按名称搜索"></label><p class="experiment-conditions"><strong>本次实验设置</strong> · ${esc(historicalConditions(j))}</p></div>${saveEventLeaderboards(j)}${html}`;
 };
 async function deleteExperiment(button){
  const {id,name}=selectedJob;
@@ -285,12 +453,15 @@ async function deleteExperiment(button){
  toast('实验已删除');
 }
 const saveBindPrevious=bind;
-bind=function(){saveBindPrevious();
+bind=function(){saveBindPrevious();updateRunContext();
  if($('#lineup-player'))[...$('#lineup-player').options].forEach(o=>o.disabled=Number(o.value)>=team().roster_size);
  if($('#sp-strategy')&&view==='setpieces'){const select=$('#sp-strategy'),value=spCurrent().strategy;if(![...select.options].some(o=>+o.value===value)){select.add(new Option('原版存储策略（代码 '+value+'）',value));select.value=value;}}
  $$('[data-job]').forEach(b=>{const h=history.find(h=>h.id===b.dataset.job);if(h){b.textContent=(h.name||'实验 '+h.id)+' · '+h.completed+'/'+h.total;b.title=new Date(h.created*1000).toLocaleString(window.FM27I18n.language);}});
  if($('#rename-experiment'))$('#rename-experiment').onclick=async()=>{const name=prompt('实验名称（1–100字）',selectedJob.name||'');if(name===null)return;try{const r=await api('/api/jobs/rename',{id:selectedJob.id,name});selectedJob.name=r.name;const h=history.find(h=>h.id===r.id);if(h)h.name=r.name;if(polledJob?.id===r.id)polledJob.name=r.name;render();}catch(e){toast(e.message)}};
  if($('#delete-experiment'))$('#delete-experiment').onclick=e=>deleteExperiment(e.currentTarget);
+ if($('[data-retry-save-leaderboards]'))$('[data-retry-save-leaderboards]').onclick=()=>{
+  saveLeaderboardCache.delete(selectedJob.id+':'+selectedJob.completed);render();
+ };
  if($('#find-experiment'))$('#find-experiment').oninput=e=>$$('[data-job]').forEach(b=>b.hidden=!b.textContent.toLowerCase().includes(e.target.value.toLowerCase()));
 };
 drawSaveMode();
@@ -323,5 +494,6 @@ function careerVenueSummary(job){
   return '<div class="table-scroll"><table><caption>'+esc(variantLabel(group,job))+'</caption><thead><tr>'+
    ['场地','场数','胜','平','负','进球','失球','积分','场均预期进球','场均预期失球'].map(v=>'<th>'+v+'</th>').join('')+'</tr></thead><tbody>'+rows+'</tbody></table></div>';
  }).join('');
- return '<section class="card" id="career-venue-summary"><div class="card-head"><h3>主客场表现</h3></div>'+tables+'</section>';
+ const scope=careerResultScope(job,true);
+ return '<section class="card" id="career-venue-summary"><div class="card-head"><h3>主客场表现'+(scope?' · '+scope:'')+'</h3></div>'+tables+'</section>';
 }

@@ -55,3 +55,15 @@ class SaveLayoutVariantTests(unittest.TestCase):
         bad = bytearray(extended)
         bad[604] = 2
         self.assertEqual(routine_header_bytes(bad, 0, len(bad), self.layout), 590)
+
+    def test_steam_27_1_tactic_signature_and_set_piece_header(self):
+        current = tactics.find_tactics_layout(26, '27.1.0+2505117')
+        self.assertEqual(current.user_signature, bytes.fromhex('22 44 00 1b 01 00 00 00'))
+        self.assertEqual(self.layout.user_signature, bytes.fromhex('22 44 00 1b 00 01 00 00'))
+        marker = current.routine_area_marker
+        prefix = marker + bytes(578 - len(marker))
+        record = bytes(24) + b'\x01\x01'
+        footer = bytes.fromhex('00 00 00 00 3d 00 01')
+        for count in (0, 2):
+            data = prefix + struct.pack('<H', count) + record * count + footer
+            self.assertEqual(routine_header_bytes(data, 0, len(data), current), 587 + 26 * count)

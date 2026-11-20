@@ -97,3 +97,9 @@ class SaveBindingTests(unittest.TestCase):
         result = self.load('board', None, 'new-save')
         self.assertEqual(result['roster_size'], 11)
         self.assertNotIn('source_uid', result['players'][11])
+
+    def test_missing_start_does_not_take_player_from_a_saved_slot(self):
+        team = self.team(None)
+        preferred = [None, 1, *range(2, 11)]
+        result = plans.roster(self.lib, 'new-save', 680, team, preferred)
+        self.assertEqual([p['source_uid'] for p in result['players'][:11]], [11, *range(1, 11)])

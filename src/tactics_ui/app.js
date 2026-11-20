@@ -126,10 +126,10 @@ seedModeInput.addEventListener('change', () => {
  syncSeedMode();
 });
 syncSeedMode();
-function seedRequest() {
+function seedRequest(countOverride) {
  const countInput = $('#count');
- if (countInput.value === '' || !countInput.checkValidity()) throw Error('场数超出有效范围');
- const request = {seed_mode:seedModeInput.value, count:Number(countInput.value)};
+ if (countOverride===undefined&&(countInput.value === '' || !countInput.checkValidity())) throw Error('场数超出有效范围');
+ const request = {seed_mode:seedModeInput.value, count:countOverride??Number(countInput.value)};
  if (request.seed_mode === 'fixed') {
   if (firstSeedInput.value === '' || !firstSeedInput.checkValidity()) throw Error('种子超出范围');
   request.first_seed = Number(firstSeedInput.value);
@@ -146,10 +146,10 @@ function showActionError(title,detail){
  $('#action-error').scrollIntoView({block:'nearest'});
 }
 $('#dismiss-action-error').onclick=clearActionError;
-async function run(){
+async function run(options={}){
  clearActionError();
  try{
-  const request=seedRequest();
+  const request=seedRequest(options.count);
   const career=saveMode==='save';
   const count=request.count;
   if(career&&(count<2||count%2))throw Error('主客场各半时，每队场数必须为偶数');
@@ -157,6 +157,7 @@ async function run(){
   if(!workers.value||!workers.checkValidity())throw Error('请输入有效的并行数');
   if($('#compare').checked&&!reference)throw Error('请先保存对照战术');
   const data={workers:Number(workers.value),scenario:clone(state),...request};
+  if(options.leagueRun)data.leagueRun=options.leagueRun;
   if($('#compare').checked)data.reference=clone(reference);
   $('#run').disabled=true;
   $('#run-label').textContent='正在提交比赛';
@@ -180,4 +181,4 @@ $('#export').onclick=async()=>{try{download('fm27-tactics.json',(await api('/api
  }catch(err){showActionError('完整方案打开失败',err.message)}finally{e.target.value='';button.disabled=false;button.textContent='打开完整方案 JSON';}
 };
 $('#reset-no').onclick=()=>$('#confirm-reset').close();$('#reset-yes').onclick=()=>{state=clone(defaults);side=phase=slot=player=0;save();$('#confirm-reset').close();render();toast('已恢复原生样本输入')};
-boot();
+window.addEventListener('DOMContentLoaded',boot,{once:true});

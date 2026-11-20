@@ -7,7 +7,7 @@ import subprocess
 import sys
 
 from prepare_private import ASSETS
-from generate_profile import adapter_paths
+from generate_profile import ADAPTERS, adapter_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -37,21 +37,26 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-root', required=True, type=Path)
     parser.add_argument('--port', type=int, default=18765)
-    parser.add_argument('--platform', choices=('steam', 'epic'), default='steam')
+    parser.add_argument('--platform', choices=ADAPTERS, default='steam')
     args = parser.parse_args()
     if os.name != 'nt' or sys.version_info[:2] != (3, 12):
         raise SystemExit('This source edition requires Windows x64 and Python 3.12.')
     check_inputs(args.platform)
     _, engine = adapter_paths(args.platform)
-    # Use the common prepared assets alongside the separate Epic adapter.
-    if args.platform == 'epic':
+    if args.platform != 'steam':
         for name in ASSETS:
             target = engine / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / 'private/engine' / name, target)
+        # Present the same adapter-relative paths as the unified EXE.
+        native = engine / 'fm27_native'
+        adapter = native / args.platform
+        adapter.mkdir(exist_ok=True)
+        for name in ('FM27Simulator.exe', 'engine_compat_profile.json', 'adapter_version.json'):
+            shutil.copy2(native / name, adapter / name)
     source = ROOT / 'build/source'
     stage_source(source)
-    data = ROOT / ('data-epic' if args.platform == 'epic' else 'data')
+    data = ROOT / ('data' if args.platform == 'steam' else 'data-epic')
     data.mkdir(exist_ok=True)
     env = {key: value for key, value in os.environ.items() if not key.startswith('FM27_')}
     env.update(FM27_ENGINE_ROOT=str(engine), FM27_GAME_ROOT=str(args.game_root.resolve()),

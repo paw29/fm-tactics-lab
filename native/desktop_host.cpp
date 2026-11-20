@@ -18,6 +18,7 @@
 #include <array>
 static std::recursive_mutex worker_log_lock;
 #include "fm27_tactic_bindings.h"
+#include "native_layout.h"
 #pragma comment(lib,"bcrypt.lib")
 
 // Headless native match host. This intentionally retains the complete, unchanged
@@ -44,7 +45,12 @@ static void* at(uintptr_t rva){
         fprintf(log_file,"{\"event\":\"formal_unmapped_reference\",\"reference\":%u}\n",missing[rva-0xf0000000]);
         fflush(log_file);desktop_finish_and_exit(251);
     }
-    return native_base+rva;
+    const auto resolved=native_layout::rva(rva);
+    if(!resolved){
+        fprintf(log_file,"{\"event\":\"native_adapter_address_missing\",\"rva\":%llu}\n",(unsigned long long)rva);
+        desktop_finish_and_exit(251);
+    }
+    return native_base+resolved;
 }
 static int audit_policies(){
     std::vector<uint32_t> positions;
@@ -55,7 +61,9 @@ static int audit_policies(){
         fprintf(log_file,"{\"event\":\"role_policy\",\"phase\":%u,\"position\":%u,\"cb\":%u,\"dm\":%u,\"mask\":\"%llu\"}\n",phase,position,cb,dm,(unsigned long long)mask);
     }
     const uint64_t duties[]={0,2097152,4194304,8388608,33554432,67108864,17179869184};
-    for(auto row:fm27_role_positions)for(auto duty:duties)for(uint32_t version:{0x1a080000u,0x1b000000u}){
+    std::vector<uint32_t> versions{0x1a080000u,0x1b000000u};
+    if(native_layout::steam_27_1)versions.push_back(native_layout::tactic_version);
+    for(auto row:fm27_role_positions)for(auto duty:duties)for(auto version:versions){
         char statuses[44]={};statuses[0]='0';uint64_t editable=0;
         for(unsigned option=1;option<=42;option++){
             uint32_t status=0;auto ok=((unsigned char(*)(unsigned,const uint32_t*,uint64_t,const uint32_t*,uint32_t*))at(row.phase?0x27740:0x47ff410))(option,&row.position,row.role|duty,&version,&status);
@@ -65,10 +73,11 @@ static int audit_policies(){
     }
     fflush(log_file);return 0;
 }
-static constexpr uint32_t current_pi_policy_version=0x1b000000u;
+static constexpr uint32_t current_pi_policy_version=native_layout::tactic_version;
 static constexpr unsigned pi_policy_version_offsets[]={0xf0,0x430,0x750,0x798};
 struct ScenarioEdit {uint32_t kind,side,a,b,value;};
 static std::vector<ScenarioEdit> scenario_edits;
+static constexpr uint32_t match_importance_record=63;
 static std::vector<unsigned char> source_generation_config;
 static ScenarioEdit current_scenario_edit={};
 static const char* scenario_stage="initial";
@@ -90,8 +99,8 @@ static unsigned char* priority_list(unsigned char* manager,unsigned id){
 }
 static bool valid_oi(uint32_t v){return !(v&~0x83f3fu)&&(v&7)<=2&&((v>>3)&7)<=2&&((v>>8)&7)<=3&&((v>>11)&7)<=3;}
 static unsigned char* routine_vector(unsigned char* manager,unsigned type){
-    static const unsigned offsets[]={0xd10,0xd40,0xda0,0xdd0,0xd70,0xd28,0xd58,0xdb8,0xde8,0xd88};
-    return type<10?manager+0x8f0+offsets[type]:nullptr;
+    static constexpr unsigned offsets[]={0xd10,0xd40,0xda0,0xdd0,0xd70,0xd28,0xd58,0xdb8,0xde8,0xd88};
+    return type<10?manager+native_layout::manager(0x8f0+offsets[type]):nullptr;
 }
 static unsigned char* routine(unsigned char* manager,unsigned encoded){
     if(encoded/16>=10||encoded%16>=3)return nullptr;
@@ -99,7 +108,7 @@ static unsigned char* routine(unsigned char* manager,unsigned encoded){
 }
 static unsigned char* tactic_cell(unsigned char* manager,unsigned encoded,bool canonical=false){
     if(encoded/16>1||encoded%16>=11)return nullptr;
-    return manager+(canonical?0x2768:0x1818)+(encoded/16?0x438:0x118)+(encoded%16)*0x48;
+    return manager+(canonical?native_layout::manager(0x2768):native_layout::manager(0x1818))+(encoded/16?0x438:0x118)+(encoded%16)*0x48;
 }
 #include "formal_tactic_vector.h"
 static uint64_t* instruction_entry(unsigned char* cell,bool create){
@@ -116,11 +125,11 @@ static bool profile_value(unsigned char* player,unsigned field,uint32_t value,bo
     if(field==0){if(value<140||value>220)return false;float height=value/100.0f;uint32_t bits;memcpy(&bits,&height,4);if(write)memcpy(player+0x6c,&bits,4);return *(uint32_t*)(player+0x6c)==bits;}
     if(field==1){offset=0x79;size=1;min=14;max=60;}
     else if(field>=2&&field<=8){offset=0x72+field-2;size=1;min=1;max=20;}
-    else if(field==9||field==10){offset=0xbb8+4*(field-9);size=4;}
-    else if(field>=11&&field<=18){static const unsigned offsets[]={0xc98,0xc8c,0xc96,0xc78,0xc8a,0xc90,0xc7a,0xc84};offset=offsets[field-11];size=2;max=field==11?200:(field==18?65535:10000);}
+    else if(field==9||field==10){offset=native_layout::player_input(0xbb8)+4*(field-9);size=4;}
+    else if(field>=11&&field<=18){static const unsigned offsets[]={native_layout::player_input(0xc98),native_layout::player_input(0xc8c),native_layout::player_input(0xc96),native_layout::player_input(0xc78),native_layout::player_input(0xc8a),native_layout::player_input(0xc90),native_layout::player_input(0xc7a),native_layout::player_input(0xc84)};offset=offsets[field-11];size=2;max=field==11?200:(field==18?65535:10000);}
     else if(field==19){offset=0x70;size=1;min=40;max=140;}
-    else if(field==20||field==21){offset=field==20?0xca8:0xca2;size=1;max=100;}
-    else if(field==22){offset=0xca3;size=1;min=1;max=20;}
+    else if(field==20||field==21){offset=field==20?native_layout::player_input(0xca8):native_layout::player_input(0xca2);size=1;max=100;}
+    else if(field==22){offset=native_layout::player_input(0xca3);size=1;min=1;max=20;}
     else return false;
     if(value<min||value>max)return false;
     if(write&&field==20){if(!owner_team)return false;int adjustment=(signed char)owner_team[0x121];int input=(int)value*2-50-adjustment*5;if(input<0||input>100||abs(input-(int)value)>25)return false;value=(uint32_t)input;}if(write)memcpy(player+offset,&value,size);
@@ -129,7 +138,7 @@ static bool profile_value(unsigned char* player,unsigned field,uint32_t value,bo
 static void log_phase_players(unsigned char* team,unsigned phase){
     fputs("[",log_file);
     for(unsigned i=0;i<11;i++){
-        auto actor=*(unsigned char**)(team+0x138+8*i);auto cell=actor+(phase?0xdb8:0xce0);auto pi=instruction_entry(cell,false);
+        auto actor=*(unsigned char**)(team+0x138+8*i);auto cell=actor+(phase?native_layout::player_input(0xdb8):native_layout::player_input(0xce0));auto pi=instruction_entry(cell,false);
         fprintf(log_file,"%s{\"slot\":%u,\"position\":%u,\"role\":\"%llu\",\"instruction_flags\":\"%llu\"}",i?",":"",i,*(uint32_t*)cell,(unsigned long long)*(uint64_t*)(cell+0x40),(unsigned long long)(pi?pi[1]:0));
     }
     fputs("]",log_file);
@@ -154,22 +163,26 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
     unsigned char creator[2][0x28];bool changed[2]={false,false};
     for(unsigned side=0;side<2;side++){
         auto team=*(unsigned char**)(match+0x15380+8*side);auto manager=*(unsigned char**)(team+0x630);
-        memcpy(creator[side],manager+0x18f8,0x28);
+        memcpy(creator[side],manager+native_layout::manager(0x18f8),0x28);
         for(unsigned i=0;i<26;i++)original_roster[side][i]=*(unsigned char**)(team+0x138+i*8);
     }
     unsigned attributes=0,instructions=0;
+    bool has_importance=false;
     for(const auto& edit:scenario_edits){
         current_scenario_edit=edit;scenario_stage="records";
         if(edit.side>1)return false;
         auto team=*(unsigned char**)(match+0x15380+8*edit.side);
-        if(edit.kind==62){
+        if(edit.kind==match_importance_record){
+            if(has_importance||edit.side||edit.a||edit.b||edit.value<1||edit.value>20)return false;
+            has_importance=true;
+        }else if(edit.kind==62){
             if(edit.side||edit.a||edit.b||edit.value!=current_pi_policy_version)return false;
             // Native preparation takes the plan versions from the match, not
             // from the old carrier's plan. Set the input plan for PI checks and export too.
             *(uint32_t*)(match+0xa3a)=edit.value;
             for(unsigned side=0;side<2;side++){
                 auto manager=*(unsigned char**)(*(unsigned char**)(match+0x15380+8*side)+0x630);
-                for(auto offset:pi_policy_version_offsets)*(uint32_t*)(manager+0x1818+offset)=edit.value;
+                for(auto offset:pi_policy_version_offsets)*(uint32_t*)(manager+native_layout::manager(0x1818)+offset)=edit.value;
             }
         }else if(edit.kind==61){
             if(edit.a>4||edit.b||edit.value>100)return false;
@@ -195,6 +208,10 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
             for(const auto& option:fm27_team_options)if(option.group==edit.a&&option.bit)creator[edit.side][option.bit/8]&=(unsigned char)~(1u<<(option.bit%8));
             if(bit)creator[edit.side][bit/8]|=(unsigned char)(1u<<(bit%8));
             changed[edit.side]=true;instructions++;
+        }else if(edit.kind==64){
+            if(!native_layout::steam_27_1||edit.a/16!=9||edit.b||edit.value>0xffffff)return false;
+            auto manager=*(unsigned char**)(team+0x630);auto obj=routine(manager,edit.a);if(!obj)return false;
+            memcpy(obj+0x148,&edit.value,3);
         }else if(edit.kind==47){
             auto manager=*(unsigned char**)(team+0x630);auto obj=routine(manager,edit.a);if(!obj||edit.value>255)return false;obj[0x15]=(unsigned char)edit.value;
         }else if(edit.kind==60){
@@ -248,10 +265,10 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
             if(!valid_oi(edit.value))return false;auto manager=*(unsigned char**)(team+0x630);
             if(edit.kind==20){
                 auto other=*(unsigned char**)(match+0x15380+8*(1-edit.side));if(edit.a>=other[0x72d])return false;
-                set_oi(manager+0x16f8+edit.a*3,edit.value);
+                set_oi(manager+native_layout::manager(0x16f8)+edit.a*3,edit.value);
             }else{
                 bool valid=false;for(auto p:fm27_positions)if(p==edit.a)valid=true;if(!valid)return false;
-                auto row=((unsigned char*(*)(void*,uint32_t))at(0x32e4380))(manager+0x1748,edit.a);set_oi(row,edit.value);
+                auto row=((unsigned char*(*)(void*,uint32_t))at(0x32e4380))(manager+native_layout::manager(0x1748),edit.a);set_oi(row,edit.value);
             }
         }else if(edit.kind==30){
             auto manager=*(unsigned char**)(team+0x630);auto list=priority_list(manager,edit.a);if(!list)return false;
@@ -263,14 +280,17 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
                 ((void(*)(void*,uint32_t,const uint32_t*,size_t))at(0x4bcffd0))(list,0xffffffff,&key,1);
             }
         }else if(edit.kind==46){
-            if(edit.a>2||edit.value>1)return false;auto manager=*(unsigned char**)(team+0x630);manager[0x16f0+edit.a]=(unsigned char)edit.value;
+            if(edit.a>2||edit.value>1)return false;auto manager=*(unsigned char**)(team+0x630);manager[native_layout::manager(0x16f0)+edit.a]=(unsigned char)edit.value;
         }else if(edit.kind==40){
             auto manager=*(unsigned char**)(team+0x630);auto vec=routine_vector(manager,edit.a);
             if(!vec||edit.value<1||edit.value>3)return false;
             auto begin=*(unsigned char***)vec,end=*(unsigned char***)(vec+8);if(begin==end)return false;
             while(size_t(end-begin)>edit.value){auto obj=*--end;((void(*)(void*,unsigned))(*(void***)obj)[0])(obj,1);*(void**)(vec+8)=end;}
             while(size_t(end-begin)<edit.value){
-                auto src=begin[0];size_t size=(edit.a==5||edit.a==7)?0x158:(edit.a==2||edit.a==3||edit.a==6||edit.a==8)?0x150:0x148;
+                auto src=begin[0];
+                static constexpr size_t sizes[]={0x148,0x148,0x150,0x150,0x148,0x158,
+                                                 0x150,0x158,0x150,native_layout::steam_27_1?0x150:0x148};
+                const auto size=sizes[edit.a];
                 auto obj=(unsigned char*)((void*(*)(void*,size_t))at(0xc03d0))(at(0x581bf30),size);memset(obj,0,size);*(void***)obj=*(void***)src;
                 ((void*(*)(void*,void*))(*(void***)obj)[2])(obj,src);
                 *(uint32_t*)(obj+0x10)=0x4e554c4c;
@@ -318,7 +338,7 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
             auto manager=*(unsigned char**)(team+0x630);
             // Serialized player -> OOP cell input, explicitly supplied when
             // importing a fresh recording; original preparation copies it.
-            manager[0x1fb4+edit.a]=(unsigned char)edit.value;
+            manager[native_layout::manager(0x1fb4)+edit.a]=(unsigned char)edit.value;
         }else if(edit.kind==11){
             if(edit.a>=11||edit.value>=team[0x72d])return false;
         }else if(edit.kind==10){
@@ -327,7 +347,7 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
                 auto manager=*(unsigned char**)(team+0x630);
                 // Serialized manager input bit 0 selects the supplied-plan
                 // path (49dc330); low bits zero select AI regeneration (df500).
-                auto flags=(uint32_t*)(manager+0x30a0);
+                auto flags=(uint32_t*)(manager+native_layout::manager(0x30a0));
                 *flags=(*flags&~1u)|edit.value;
             }
         }else return false;
@@ -335,7 +355,7 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
     for(unsigned side=0;side<2;side++)if(game_constraints[side]){
         scenario_stage="game_constraints";
         auto team=*(unsigned char**)(match+0x15380+side*8);auto manager=*(unsigned char**)(team+0x630);
-        bool seen_mapping[11]={};for(unsigned i=0;i<11;i++){unsigned mapped=manager[0x1fb4+i];if(mapped==255)mapped=i;if(mapped>=11||seen_mapping[mapped])return false;seen_mapping[mapped]=true;}
+        bool seen_mapping[11]={};for(unsigned i=0;i<11;i++){unsigned mapped=manager[native_layout::manager(0x1fb4)+i];if(mapped==255)mapped=i;if(mapped>=11||seen_mapping[mapped])return false;seen_mapping[mapped]=true;}
         uint64_t bits=0;memcpy(&bits,creator[side],8);
         if(((bits>>25&1)&&(bits&0x70000000ULL))||((bits>>26&1)&&(bits&0x30000000ULL))||((bits>>27&1)&&(bits&0x50000000ULL)))return false;
         for(unsigned phase=0;phase<2;phase++)for(unsigned i=0;i<11;i++){
@@ -364,7 +384,7 @@ static bool apply_scenario(unsigned char* match,bool tactics_only=false){
     for(unsigned side=0;side<2;side++)if(changed[side]&&!tactics_only){
         auto team=*(unsigned char**)(match+0x15380+8*side);
         auto manager=*(unsigned char**)(team+0x630);
-        for(unsigned offset:{0x18f8u,0x20a0u,0x2848u}){
+        for(unsigned offset:{native_layout::manager(0x18f8u),native_layout::manager(0x20a0u),native_layout::manager(0x2848u)}){
             memcpy(manager+offset,creator[side],16);
             manager[offset+0x25]=creator[side][0x25];
         }
@@ -381,7 +401,7 @@ static bool verify_scenario(unsigned char* match){
             if(*(uint32_t*)(match+0xa3a)!=edit.value)return false;
             for(unsigned side=0;side<2;side++){
                 auto prepared=*(unsigned char**)(*(unsigned char**)(match+0x15380+8*side)+0x630);
-                for(auto offset:pi_policy_version_offsets)if(*(uint32_t*)(prepared+0x1818+offset)!=edit.value)return false;
+                for(auto offset:pi_policy_version_offsets)if(*(uint32_t*)(prepared+native_layout::manager(0x1818)+offset)!=edit.value)return false;
             }
         }
         if(edit.kind==1){auto player=original_roster[edit.side][edit.a];if(player[0x480+edit.b]!=edit.value)return false;}
@@ -392,15 +412,15 @@ static bool verify_scenario(unsigned char* match){
             if(!entry||entry[1]!=expected)return false;
         }
         if(edit.kind==15&&!profile_value(original_roster[edit.side][edit.a],edit.b,edit.value,false,team)){fprintf(log_file,"{\"event\":\"profile_readback_mismatch\",\"side\":%u,\"player\":%u,\"field\":%u}\n",edit.side,edit.a,edit.b);return false;}
-        if(edit.kind==10&&((*(uint32_t*)(manager+0x30a0)&1)!=edit.value))return false;
+        if(edit.kind==10&&((*(uint32_t*)(manager+native_layout::manager(0x30a0))&1)!=edit.value))return false;
         if(edit.kind==14){for(bool canonical:{false,true}){auto cell=tactic_cell(manager,edit.a,canonical);if((*(uint64_t*)(cell+0x40)&~0xfffffffbf91fffffULL)!=(((uint64_t)edit.b<<32)|edit.value))return false;}}
-        if(edit.kind==20&&packed_oi(manager+0x16f8+edit.a*3)!=edit.value)return false;
+        if(edit.kind==20&&packed_oi(manager+native_layout::manager(0x16f8)+edit.a*3)!=edit.value)return false;
         if(edit.kind==21){
-            bool found=false;for(unsigned i=0;i<manager[0x1748];i++){auto row=manager+0x174c+i*8;if(*(uint32_t*)row==edit.a&&packed_oi(row+4)==edit.value)found=true;}if(!found)return false;
+            bool found=false;for(unsigned i=0;i<manager[native_layout::manager(0x1748)];i++){auto row=manager+native_layout::manager(0x174c)+i*8;if(*(uint32_t*)row==edit.a&&packed_oi(row+4)==edit.value)found=true;}if(!found)return false;
         }
         if(edit.kind==40){auto vec=routine_vector(manager,edit.a);if(!vec||size_t(*(void***)(vec+8)-*(void***)vec)!=edit.value)return false;}
         if(edit.kind==46){
-            if(manager[0x16f0+edit.a]!=edit.value)return false;
+            if(manager[native_layout::manager(0x16f0)+edit.a]!=edit.value)return false;
             uint32_t expected=edit.a==2?(edit.value?0x54464c4f:0x54465348):(edit.value?0x544f574c:0x544f5242);
             auto actual=((uint32_t(*)(void*,unsigned char,unsigned char,size_t))at(0x1ba2a30))(manager+0x8f0,9,edit.a,0);
             if(actual!=expected)return false;
@@ -437,7 +457,7 @@ static bool verify_scenario(unsigned char* match){
         }
         if(edit.kind==11&&*(unsigned char**)(team+0x138+edit.a*8)!=original_roster[edit.side][edit.value])return false;
         if(edit.kind==12){
-            for(unsigned plan:{0x1818u,0x2768u}){auto mapped=manager[plan+0x79c+edit.a];if((mapped==255?edit.a:mapped)!=edit.value)return false;}
+            for(unsigned plan:{native_layout::manager(0x1818u),native_layout::manager(0x2768u)}){auto mapped=manager[plan+0x79c+edit.a];if((mapped==255?edit.a:mapped)!=edit.value)return false;}
         }
         if(edit.kind>=4&&edit.kind<=7){
             for(bool canonical:{false,true}){
@@ -457,26 +477,27 @@ static bool verify_scenario(unsigned char* match){
             }
         }
         if(edit.kind==47){auto obj=routine(manager,edit.a);if(!obj||obj[0x15]!=edit.value)return false;}
-        if(edit.kind==60){for(unsigned offset:{0x18f8u,0x2848u})if(((manager[offset+edit.a/8]>>(edit.a%8))&1)!=edit.value)return false;}
+        if(edit.kind==64){auto obj=routine(manager,edit.a);if(!obj||memcmp(obj+0x148,&edit.value,3))return false;}
+        if(edit.kind==60){for(unsigned offset:{native_layout::manager(0x18f8u),native_layout::manager(0x2848u)})if(((manager[offset+edit.a/8]>>(edit.a%8))&1)!=edit.value)return false;}
         if(edit.kind==2){
             unsigned bit=((unsigned(*)(unsigned))at(0x6687d0))(edit.value);
             for(const auto& option:fm27_team_options)if(option.group==edit.a&&option.bit){
-                bool value=(manager[0x2848+option.bit/8]>>(option.bit%8))&1;
-                bool active_value=(manager[0x18f8+option.bit/8]>>(option.bit%8))&1;
+                bool value=(manager[native_layout::manager(0x2848)+option.bit/8]>>(option.bit%8))&1;
+                bool active_value=(manager[native_layout::manager(0x18f8)+option.bit/8]>>(option.bit%8))&1;
                 if(value!=(option.bit==bit)||active_value!=value){fprintf(log_file,"{\"event\":\"scenario_bit_mismatch\",\"bit\":%u,\"canonical\":%s,\"active\":%s,\"expected\":%s}\n",option.bit,value?"true":"false",active_value?"true":"false",option.bit==bit?"true":"false");fflush(log_file);return false;}
             }
         }
-        if(edit.kind==3&&manager[0x286d]!=edit.value)return false;
+        if(edit.kind==3&&manager[native_layout::manager(0x286d)]!=edit.value)return false;
     }
     unsigned oi_checks=0;
     for(unsigned side=0;side<2;side++){
         auto own=*(unsigned char**)(match+0x15380+8*side),other=*(unsigned char**)(match+0x15380+8*(1-side));auto manager=*(unsigned char**)(own+0x630);
         for(unsigned i=0;i<11;i++){
-            auto player=*(unsigned char**)(other+0x138+i*8);uint32_t position=*(uint32_t*)(player+0xce0);unsigned char actual[3]={};
-            ((void(*)(void*,void*,uint64_t,uint32_t*))at(0x493a280))(manager+0x16f8,actual,i,&position);
-            auto expected=manager+0x16f8+i*3;
+            auto player=*(unsigned char**)(other+0x138+i*8);uint32_t position=*(uint32_t*)(player+native_layout::player_input(0xce0));unsigned char actual[3]={};
+            ((void(*)(void*,void*,uint64_t,uint32_t*))at(0x493a280))(manager+native_layout::manager(0x16f8),actual,i,&position);
+            auto expected=manager+native_layout::manager(0x16f8)+i*3;
             unsigned char fallback[3]={0,0,8};
-            if(!(expected[2]&8)){expected=fallback;for(unsigned j=0;j<manager[0x1748];j++){auto row=manager+0x174c+j*8;if(*(uint32_t*)row==position){expected=row+4;break;}}}
+            if(!(expected[2]&8)){expected=fallback;for(unsigned j=0;j<manager[native_layout::manager(0x1748)];j++){auto row=manager+native_layout::manager(0x174c)+j*8;if(*(uint32_t*)row==position){expected=row+4;break;}}}
             if(packed_oi(actual)!=packed_oi(expected))return false;oi_checks++;
         }
     }
@@ -486,10 +507,10 @@ static bool verify_scenario(unsigned char* match){
     for(unsigned side=0;side<2;side++){
         auto team=*(unsigned char**)(match+0x15380+side*8);auto manager=*(unsigned char**)(team+0x630);
         for(unsigned i=0;i<11;i++){
-            auto player=*(unsigned char**)(team+0x138+i*8);unsigned mapped=manager[0x1fb4+i];if(mapped==255)mapped=i;
+            auto player=*(unsigned char**)(team+0x138+i*8);unsigned mapped=manager[native_layout::manager(0x1fb4)+i];if(mapped==255)mapped=i;
             if(mapped>=11)return false;
             for(unsigned phase=0;phase<2;phase++){
-                auto input=tactic_cell(manager,phase*16+(phase?mapped:i));auto actual=player+(phase?0xdb8:0xce0);
+                auto input=tactic_cell(manager,phase*16+(phase?mapped:i));auto actual=player+(phase?native_layout::player_input(0xdb8):native_layout::player_input(0xce0));
                 if(*(uint32_t*)input!=*(uint32_t*)actual||(*(uint64_t*)(input+0x40)&0xfffffffbf91fffffULL)!=(*(uint64_t*)(actual+0x40)&0xfffffffbf91fffffULL)){
                     fprintf(log_file,"{\"event\":\"player_tactic_binding_mismatch\",\"side\":%u,\"player_slot\":%u,\"phase\":%u,\"input_position\":%u,\"actual_position\":%u}\n",side,i,phase,*(uint32_t*)input,*(uint32_t*)actual);fflush(log_file);return false;
                 }
@@ -501,7 +522,7 @@ static bool verify_scenario(unsigned char* match){
     }
     for(unsigned side=0;side<2;side++)for(unsigned phase=0;phase<2;phase++){
         auto team=*(unsigned char**)(match+0x15380+side*8);auto manager=*(unsigned char**)(team+0x630);uint64_t lo=0,hi=0;
-        for(auto group:fm27_team_instruction_phases)if(group.phase==phase)for(auto option:fm27_team_options)if(option.group==group.group&&option.bit&&(manager[0x18f8+option.bit/8]>>(option.bit%8)&1)){
+        for(auto group:fm27_team_instruction_phases)if(group.phase==phase)for(auto option:fm27_team_options)if(option.group==group.group&&option.bit&&(manager[native_layout::manager(0x18f8)+option.bit/8]>>(option.bit%8)&1)){
             if(option.bit<64)lo|=1ULL<<option.bit;else hi|=1ULL<<(option.bit-64);
         }
         fprintf(log_file,"{\"event\":\"native_phase_configuration\",\"side\":%u,\"phase\":%u,\"team_flags_low\":\"%llu\",\"team_flags_high\":\"%llu\",\"players\":",side,phase,(unsigned long long)lo,(unsigned long long)hi);
@@ -522,7 +543,7 @@ static const char* native_type(void* pointer){
     if(col<base||col+24>=base+434540544||*(uint32_t*)col!=1)return nullptr;
     auto descriptor=*(uint32_t*)(col+12);
     if(descriptor+256>=434540544)return nullptr;
-    auto name=(char*)at(descriptor+16);
+    auto name=(char*)(native_base+descriptor+16);
     return strncmp(name,".?A",3)?nullptr:name;
 }
 static void dump_match_input(unsigned char* match){
@@ -539,26 +560,26 @@ static void dump_match_input(unsigned char* match){
     fputs("{\"objects\":[",f);objects("match",match,0x155b0);
     auto queued_begin=*(unsigned char**)(match+0x14800),queued_end=*(unsigned char**)(match+0x14808);
     if(queued_end-queued_begin>0&&queued_end-queued_begin<65536)objects("queued",queued_begin,queued_end-queued_begin);
-    for(unsigned side=0;side<2;side++){auto team=*(unsigned char**)(match+0x15380+8*side);objects(side?"away":"home",team,0x738);objects(side?"away_player0":"home_player0",*(unsigned char**)(team+0x138),0x1e60);}
+    for(unsigned side=0;side<2;side++){auto team=*(unsigned char**)(match+0x15380+8*side);objects(side?"away":"home",team,0x738);objects(side?"away_player0":"home_player0",*(unsigned char**)(team+0x138),native_layout::player_runtime(0x1e60));}
     fputs("null],\"teams\":[",f);
     for(unsigned side=0;side<2;side++){
         auto team=*(unsigned char**)(match+0x15380+8*side);
         unsigned count=team[0x72d];if(count>26)ExitProcess(106);
         fprintf(f,"%s{\"side\":%u,\"count\":%u,\"header_hex\":",side?",":"",side,count);hex(team,0x138);
         auto manager=*(unsigned char**)(team+0x630);
-        fputs(",\"creator_hex\":",f);hex(manager+0x2848,0x28);
-        fprintf(f,",\"manager_input_flags\":%u",*(uint32_t*)(manager+0x30a0));
+        fputs(",\"creator_hex\":",f);hex(manager+native_layout::manager(0x2848),0x28);
+        fprintf(f,",\"manager_input_flags\":%u",*(uint32_t*)(manager+native_layout::manager(0x30a0)));
         fputs(",\"manager_tactical_hex\":",f);hex(manager+0x2e0,0x2c30);
         fputs(",\"tactical_slots\":[",f);
         for(unsigned phase=0;phase<2;phase++){
             fprintf(f,"%s[",phase?",":"");
-            for(unsigned slot=0;slot<11;slot++){if(slot)fputc(',',f);hex(manager+0x2768+(phase?0x438:0x118)+slot*0x48,0x48);}fputc(']',f);
+            for(unsigned slot=0;slot<11;slot++){if(slot)fputc(',',f);hex(manager+native_layout::manager(0x2768)+(phase?0x438:0x118)+slot*0x48,0x48);}fputc(']',f);
         }
         fputc(']',f);
         fputs(",\"opposition\":[",f);
-        for(unsigned i=0;i<26;i++)fprintf(f,"%s%u",i?",":"",manager[0x16f8+i*3]|(manager[0x16f9+i*3]<<8)|(manager[0x16fa+i*3]<<16));
+        for(unsigned i=0;i<26;i++)fprintf(f,"%s%u",i?",":"",manager[native_layout::manager(0x16f8)+i*3]|(manager[native_layout::manager(0x16f9)+i*3]<<8)|(manager[native_layout::manager(0x16fa)+i*3]<<16));
         fputs("],\"opposition_positions\":[",f);
-        for(unsigned i=0;i<manager[0x1748];i++){auto e=manager+0x174c+i*8;fprintf(f,"%s{\"position\":%u,\"packed\":%u}",i?",":"",*(uint32_t*)e,e[4]|(e[5]<<8)|(e[6]<<16));}
+        for(unsigned i=0;i<manager[native_layout::manager(0x1748)];i++){auto e=manager+native_layout::manager(0x174c)+i*8;fprintf(f,"%s{\"position\":%u,\"packed\":%u}",i?",":"",*(uint32_t*)e,e[4]|(e[5]<<8)|(e[6]<<16));}
         fputs("],\"taker_lists\":[",f);
         unsigned list_index=0;
         for(unsigned off:{0u,0x18u,0x30u,0x48u,0x60u,0x78u,0x90u,0xa8u,0xc0u,0xd8u,0xf0u,0x108u,0x120u,0x138u,0x150u,0x168u,0x180u,0x198u,0x1c8u,0x1e0u}){
@@ -568,12 +589,12 @@ static void dump_match_input(unsigned char* match){
             for(auto p=begin;p<end;p++)fprintf(f,"%s%u",p==begin?"":",",*p);fputs("]}",f);
         }
         fputs("],\"routine_objects\":[",f);unsigned found=0;
-        for(unsigned off=0x8f0;off<0x16f8;off+=8){auto type=native_type(manager+off);if(type&&strstr(type,"SET_PIECE")){
+        for(unsigned off=0x8f0;off<native_layout::manager(0x16f8);off+=8){auto type=native_type(manager+off);if(type&&strstr(type,"SET_PIECE")){
             fprintf(f,"%s{\"offset\":%u,\"type\":\"%s\",\"vtable_rva\":%llu,\"data\":",found++?",":"",off,type,*(uint64_t*)(manager+off)-(uintptr_t)native_base);hex(manager+off,96);fputc('}',f);
         }}fputc(']',f);
         fputs(",\"routine_variants\":[",f);
         for(unsigned group=0;group<10;group++){
-            auto vec=manager+0x8f0+0xd10+24*group;auto begin=*(unsigned char***)vec,end=*(unsigned char***)(vec+8);
+            auto vec=manager+native_layout::manager(0x8f0+0xd10)+24*group;auto begin=*(unsigned char***)vec,end=*(unsigned char***)(vec+8);
             fprintf(f,"%s[",group?",":"");
             for(auto ptr=begin;ptr<end;ptr++){
                 auto obj=*ptr;auto vt=*(void***)obj;unsigned type=((unsigned char(*)(void*))vt[6])(obj);
@@ -604,7 +625,7 @@ static void dump_match_input(unsigned char* match){
             fputs(",\"state_hex\":",f);hex(player+0x2e0,0x200);
             fputs(",\"identity_extra_hex\":",f);hex(player+0x80,0x200);
             fputs(",\"input_tail_hex\":",f);hex(player+0x4c5,0x81b);
-            fprintf(f,",\"foot_runtime\":[%d,%d]",*(int*)(player+0x1bf0),*(int*)(player+0x1c80));
+            fprintf(f,",\"foot_runtime\":[%d,%d]",*(int*)(player+native_layout::player_runtime(0x1bf0)),*(int*)(player+native_layout::player_runtime(0x1c80)));
             fputs(",\"attributes\":[",f);for(unsigned a=0;a<69;a++)fprintf(f,"%s%u",a?",":"",player[0x480+a]);fputs("]}",f);
         }
         fputs("]}",f);
@@ -612,6 +633,7 @@ static void dump_match_input(unsigned char* match){
     fputs("]}\n",f);fclose(f);
 }
 #include "fm27_engine_compat.h"
+#include "native_match_importance.h"
 static char native_image_sha256[65]={};
 static bool fingerprint_image(const fs::path& path){
     BCRYPT_ALG_HANDLE algorithm=nullptr;BCRYPT_HASH_HANDLE hash=nullptr;
@@ -637,10 +659,13 @@ static bool known_image(const fs::path& path){
         fflush(log_file);
         return false;
     }
-    return compatible_image(path);
+    if(!compatible_image(path))return false;
 #else
-    return compatible_image(path)&&fingerprint_image(path);
+    if(!compatible_image(path)||!fingerprint_image(path))return false;
 #endif
+    fprintf(log_file,"{\"event\":\"native_match_importance_capability\",\"supported\":%s}\n",
+            locate_match_importance(path)?"true":"false");fflush(log_file);
+    return true;
 }
 #include "native_statistics.h"
 #include "native_fmf_probe.h"
@@ -779,7 +804,7 @@ static int native_match(void* interface_object){
     auto slots=(void**)__readgsqword(0x58);
     // Read the TLS-index RVA from the PE TLS directory rather than assuming it.
     auto dos=(IMAGE_DOS_HEADER*)native_base;auto nt=(IMAGE_NT_HEADERS64*)(native_base+dos->e_lfanew);
-    auto tls_directory=(IMAGE_TLS_DIRECTORY64*)at(nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_TLS].VirtualAddress);
+    auto tls_directory=(IMAGE_TLS_DIRECTORY64*)(native_base+nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_TLS].VirtualAddress);
     auto index=*(unsigned int*)tls_directory->AddressOfIndex;
     auto tls=(unsigned char*)slots[index];
     if(!tls[0x4b8])((void(*)())at(0x4941140))();
@@ -788,6 +813,12 @@ static int native_match(void* interface_object){
     auto accepted=((unsigned char(*)(void*,void*,void*,unsigned int))at(0x4bab520))(match,&reference,interface_object,0);
     fprintf(log_file,"{\"event\":\"native_fixture_deserialized\",\"accepted\":%s,\"input_adapter\":\"original_native\"}\n",accepted?"true":"false");fflush(log_file);
     if(!accepted)desktop_finish_and_exit(88);
+    if(native_layout::steam_27_1){
+        auto version=(uint32_t*)(match+0xa3a);
+        fprintf(log_file,"{\"event\":\"native_match_rules_version\",\"fixture_version\":%u,\"effective_version\":%u}\n",
+                *version,native_layout::tactic_version);
+        *version=native_layout::tactic_version;
+    }
     auto release_ref=[](void*& value){if(value){auto p=value;value=nullptr;if(InterlockedDecrement((volatile LONG*)((unsigned char*)p+8))==0)((void(*)(void*,unsigned))(*(void***)p)[0])(p,1);}};
     release_ref(reference);release_ref(native_stream);
     desktop_read_ai_tactics(match);
@@ -803,9 +834,16 @@ static int native_match(void* interface_object){
     fprintf(log_file,"{\"event\":\"native_input_seed\",\"fixture_seed\":%u,\"effective_seed\":%u,\"override\":%s}\n",fixture_seed,*(uint32_t*)(match+0x20),seed_override?"true":"false");fflush(log_file);
     source_generation_install(match);
     execution_install(match);
+    match_importance=0;
+    for(const auto& edit:scenario_edits)if(edit.kind==match_importance_record)match_importance=edit.value;
+    if(!install_match_importance()){
+        fputs("{\"event\":\"native_match_importance_unavailable\"}\n",log_file);fflush(log_file);
+        desktop_finish_and_exit(109);
+    }
     timing_prepare=GetTickCount64();
     ((void(*)(void*))at(0x4b98f50))(match);
     timing_ready=GetTickCount64();
+    if(!verify_match_importance(match))desktop_finish_and_exit(109);
     for(const auto& edit:scenario_edits)if(edit.kind==17){
         auto team=*(unsigned char**)(match+0x15380+8*edit.side);
         if(edit.value<11||edit.value>team[0x72d])desktop_finish_and_exit(108);
@@ -886,6 +924,7 @@ static int native_match(void* interface_object){
             if(!worker_manifest.empty()){
                 if(!desktop_events_stop())desktop_finish_and_exit(181);
                 execution_end_match();
+                match_importance=0;
                 fputs("{\"event\":\"original_match_release_started\"}\n",log_file);fflush(log_file);
                 ((void(*)(void*))(*(void***)interface_object)[1])(interface_object);
                 ((void(*)(void*))at(0x4ba6800))(match);
@@ -1033,7 +1072,7 @@ static int scan_activation(HMODULE module,const wchar_t* path){
     fprintf(log_file,"{\"event\":\"activation_scan_completed\",\"turned_zero_after_load\":%u,\"already_zero_at_load\":%u}\n",listed,already);fflush(log_file);
     // After 20 s the game's start-up is long finished: check that the engine interface comes up.
     unsigned char object[0x48]={};
-    auto result=((void*(*)(void*))(base+0x4ba21d0))(object);
+    auto result=((void*(*)(void*))at(0x4ba21d0))(object);
     fprintf(log_file,"{\"event\":\"native_interface_created\",\"self_returned\":%s,\"vtable_rva\":\"0x%llx\"}\n",result==object?"true":"false",*(unsigned long long*)object-(unsigned long long)base);fflush(log_file);
     return 0;
 }
@@ -1078,7 +1117,7 @@ static int child(bool run_match){
             timing_active=GetTickCount64();
             fprintf(log_file,"{\"event\":\"native_activation_completed\"}\n");fflush(log_file);
             unsigned char object[0x48]={};
-            auto result=((void*(*)(void*))((unsigned char*)module+0x4ba21d0))(object);
+            auto result=((void*(*)(void*))at(0x4ba21d0))(object);
             fprintf(log_file,"{\"event\":\"native_interface_created\",\"self_returned\":%s,\"vtable_rva\":\"0x%llx\"}\n",result==object?"true":"false",*(unsigned long long*)object-(unsigned long long)module);fflush(log_file);
             if(run_match)return worker_manifest.empty()?native_match(object):worker_loop(object);
             return 0;

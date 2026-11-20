@@ -14,19 +14,20 @@ U16 = Struct('<H')
 def routine_header_bytes(section, area, end, layout):
     """Return the FM27 routine offset after the counted 26-byte header records."""
     size = layout.routine_area_header_bytes
-    if size != 590 or area + size > end:
+    footer = {590: b'\0\0\0\0\x3c\0\x01\0\0\0', 587: b'\0\0\0\0\x3d\0\x01'}.get(size)
+    if footer is None or area + size > end:
         return size
-    count_at = area + size - 12
+    count_at = area + size - len(footer) - U16.size
     count, = U16.unpack_from(section, count_at)
     if not count:
         return size
     records_end = count_at + U16.size + 26 * count
-    if records_end + 10 > end or section[records_end:records_end + 6] != b'\0\0\0\0\x3c\0':
+    if records_end + len(footer) > end or section[records_end:records_end + 6] != footer[:6]:
         return size
     if any(section[offset - 2:offset] != b'\x01\x01'
            for offset in range(count_at + U16.size + 26, records_end + 1, 26)):
         return size
-    return records_end + 10 - area
+    return records_end + len(footer) - area
 
 
 def read_routine(section, start, end, kind, layout):
@@ -41,6 +42,7 @@ def read_routine(section, start, end, kind, layout):
         cursor += size
         return data
 
+    throw_in = list(take(3)) if kind == 9 and layout.routine_area_header_bytes == 587 else None
     swing = take(1)[0] if kind in (5, 7) else 255
     strategy = take(1)[0] if kind in (2, 3, 5, 6, 7, 8) else 255
     groups = []
@@ -68,8 +70,11 @@ def read_routine(section, start, end, kind, layout):
             or not tactics._routine_tail_pattern(layout).fullmatch(tail)):
         raise ValueError('存档定位球的套路名称、频率或结尾无效')
     flags = take(1)[0]
-    return {'name': name, 'frequency': frequency, 'strategy': strategy, 'swing': swing,
-            'groups': groups, 'priority': priority, 'backups': backups, 'opaque_flags': flags}, cursor
+    routine = {'name': name, 'frequency': frequency, 'strategy': strategy, 'swing': swing,
+               'groups': groups, 'priority': priority, 'backups': backups, 'opaque_flags': flags}
+    if throw_in is not None:
+        routine['throw_in_variant_bytes'] = throw_in
+    return routine, cursor
 
 
 def read_team_routines(section, team_id, layout, file_name, starts):
@@ -112,10 +117,11 @@ def read_team_routines(section, team_id, layout, file_name, starts):
             # Empty names and default copies are present even in saves whose
             # managers never edited their set pieces. Keep every saved variant
             # of a category once the category contains a custom routine.
-            if any(row['name'] or any(row[k] != default[k] for k in default if k not in ('name', 'opaque_flags'))
+            if any(row['name'] or any(row.get('throw_in_variant_bytes', ()))
+                   or any(row[k] != default[k] for k in default if k not in ('name', 'opaque_flags'))
                    for row in variants) or len(variants) > 1:
                 saved[str(kind)] = variants
-            elif default['name']:
+            elif default['name'] or any(default.get('throw_in_variant_bytes', ())):
                 saved[str(kind)] = [default]
     if tuple(checked_names) != names:
         raise ValueError('存档定位球的套路记录未通过边界核对')

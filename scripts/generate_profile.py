@@ -9,6 +9,7 @@ import struct
 from profile_header import header
 
 ROOT = Path(__file__).resolve().parents[1]
+ADAPTERS = ('steam', 'epic', 'epic_27_1')
 
 
 def pe_sections(raw):
@@ -54,8 +55,8 @@ def restore_profile(metadata, raw):
 
 
 def adapter_paths(platform):
-    prefix = 'epic_' if platform == 'epic' else ''
-    engine = ROOT / 'private' / ('epic-engine' if platform == 'epic' else 'engine')
+    prefix = '' if platform == 'steam' else platform + '_'
+    engine = ROOT / 'private' / (platform + '-engine' if prefix else 'engine')
     return prefix, engine
 
 
@@ -63,13 +64,14 @@ def generate(dll, platform='steam'):
     prefix, engine = adapter_paths(platform)
     metadata = json.loads((ROOT / 'native' / (prefix + 'profile_metadata.json')).read_text(encoding='utf8'))
     profile = restore_profile(metadata, Path(dll).read_bytes())
-    if platform == 'epic':
+    digest_ranges = platform != 'steam'
+    if digest_ranges:
         profile = metadata
     native = ROOT / 'private' / (prefix + 'native')
     engine = engine / 'fm27_native'
     native.mkdir(parents=True, exist_ok=True)
     engine.mkdir(parents=True, exist_ok=True)
-    (native / 'engine_compat_profile.h').write_text(header(profile, digest_ranges=platform == 'epic'), encoding='ascii')
+    (native / 'engine_compat_profile.h').write_text(header(profile, digest_ranges=digest_ranges), encoding='ascii')
     (engine / 'engine_compat_profile.json').write_text(json.dumps(profile, indent=2), encoding='utf8')
     print('Generated private compatibility contract from the verified local reference DLL.')
 
@@ -77,6 +79,6 @@ def generate(dll, platform='steam'):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-dll', required=True, type=Path)
-    parser.add_argument('--platform', choices=('steam', 'epic'), default='steam')
+    parser.add_argument('--platform', choices=ADAPTERS, default='steam')
     args = parser.parse_args()
     generate(args.reference_dll, args.platform)

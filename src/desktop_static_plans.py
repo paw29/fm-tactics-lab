@@ -33,7 +33,9 @@ def roster(lib,key,club,team,preferred=()):
         uid=preferred[i] if i<len(preferred) else None
         if uid not in allowed or uid in chosen:
             position=positions.get(cell['position'],'mc')
-            uid=max((u for u in allowed if u not in chosen),
+            reserved=set(preferred[i+1:11])
+            available=[u for u in allowed if u not in chosen and u not in reserved]
+            uid=max(available or (u for u in allowed if u not in chosen),
                     key=lambda u:(allowed[u]['positions'].get(position,0),ability(allowed[u]),-u))
         chosen.append(uid)
     rest=[u for u in preferred[11:] if u in allowed and u not in chosen]

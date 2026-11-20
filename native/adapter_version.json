@@ -1,11 +1,12 @@
 {
-  "version": "27.0.1+2503222",
-  "reference_dll_sha256": "8c6971ce0b1c8afe6529ea3f46205a5175aea988a97d7421a980da42e23fe340",
-  "mapped_references": 102,
+  "version": "27.1.0+2505117",
+  "reference_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+  "mapped_references": 106,
   "unmapped_references": [
     "0xfb2580",
     "0x4a7c550"
   ],
+  "tactic_version": "1b010000",
   "native_worker_protocol": 2,
   "session_scope": "remaining_batch_lane",
   "execution_context_reset": true,

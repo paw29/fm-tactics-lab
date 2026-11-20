@@ -31,6 +31,7 @@ import fm27_tactic_pool
 import fm27_match_events
 import desktop_generation_protocol
 import desktop_attribute_analysis as attribute_analysis
+import desktop_tactical_analysis as tactical_analysis
 import desktop_locale
 import desktop_generation_catalog
 import desktop_source_plans
@@ -47,6 +48,7 @@ ENGINE_DLL_SHA256 = ENGINE_COMPATIBILITY['actual_dll_sha256']
 EXECUTION_EXPERIMENT_DLLS = {
     '252ff8fb5b7a4a5a5464db6ba632e309eef9b6e65ffa992ae20575a189e66c6a',
     '8c6971ce0b1c8afe6529ea3f46205a5175aea988a97d7421a980da42e23fe340',
+    'd12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b',
 }
 EXECUTION_COMPONENTS = ('understanding', 'buy_in', 'opposition', 'ability')
 
@@ -73,8 +75,14 @@ PIS = {g['id']:g for g in CATALOG['player_instructions']}
 TAKER_KEYS=['penalties']+[f'{kind}_{direction}_{"foot"if kind in ("corners","wide_free_kicks")else "side"}'for kind in ('corners','direct_free_kicks','wide_free_kicks','deep_free_kicks','throw_ins')for direction in ('left','right')]
 # The original tactics menu uses the current PI rules, while the carrier PKM
 # stores older plan versions. Use the menu version for both editing and input.
-PI_POLICY_VERSION=0x1b000000
-CATALOG['pi_policy_version']=f'{PI_POLICY_VERSION:08x}'
+def apply_engine_policy(status):
+    version=status.get('tactic_version','1b000000')
+    if version not in CATALOG['policy_versions']:
+        raise ValueError('缺少当前引擎的个人指令规则，请更新桌面工具的数据包。')
+    CATALOG['pi_policy_version']=version
+
+
+apply_engine_policy(ENGINE_COMPATIBILITY)
 def unpack_oi(value):
     return {'press':value&7,'mark':(value>>3)&7,'tackle':(value>>8)&7,'foot':(value>>11)&7,'personal':bool(value&0x80000)}
 def pack_oi(row):
@@ -293,6 +301,10 @@ def validate_scenario(data):
                 if ncell['instructions']['14']==35 and not ncell['target_position']:raise ValueError('指定盯防需要选择位置')
     if 'native_generation'in data:
         normalized['native_generation']=desktop_generation_protocol.normalize(data['native_generation'],normalized['teams'])
+    if 'match_importance' in data:
+        normalized['match_importance'] = integer(data['match_importance'], 1, 20, '比赛重要性')
+        if not ENGINE_COMPATIBILITY.get('match_importance_available'):
+            raise ValueError('当前引擎版本暂不支持设置比赛重要性')
     if 'experimental_execution' in data:
         if 'native_generation' in data:
             raise ValueError('实验执行力目前只支持已加载的战术方案')
@@ -323,8 +335,10 @@ def enabled_pool(scenario):
 
 def encode_scenario(data,absolute=False):
     data=validate_scenario(data);records=[]
+    if 'match_importance' in data:
+        records.append((63, 0, 0, 0, data['match_importance']))
     if data['rules']=='game':
-        records.append((62,0,0,0,PI_POLICY_VERSION))
+        records.append((62,0,0,0,int(CATALOG['pi_policy_version'],16)))
     for side, value in enumerate(data.get('experimental_execution', [])):
         if isinstance(value, dict):
             records.extend((61, side, index, 0, value[key])
@@ -433,6 +447,14 @@ MAX_SAVE_OPPONENTS = 120
 MAX_ATTRIBUTE_MATCHES = 100000
 
 
+def experiment_conditions(scenario, reference):
+    return {
+        label: {'importance': item.get('match_importance'),
+                'manual_execution': 'experimental_execution' in item}
+        for label, item in (('A', reference), ('B', scenario)) if item is not None
+    }
+
+
 def create_save_job(data):
     desktop_engine.require_available(ENGINE_COMPATIBILITY)
     if SAVE_LIBRARY.real_active: raise ValueError('请等待真实AI战术生成完成')
@@ -470,7 +492,8 @@ def create_save_job(data):
              'output_dir':str(directory),'_dir':directory,'_cancel':False,
              'name':experiment_name(data.get('name'),f"{scenario['teams'][0]['name']} · {len(selected)}队"),
              'experiment_type':'save_opponents','schedule':{},'variant_names':{},'team_names':{},
-             'mode':'comparison'if reference else'single','event_details':event_details,'test_rounds':rounds,'seed_mode':seed_mode}
+             'mode':'comparison'if reference else'single','event_details':event_details,'test_rounds':rounds,'seed_mode':seed_mode,
+             'match_conditions':experiment_conditions(scenario,reference)}
         JOBS[key]=job;persist(job)
     def stage(text):
         with LOCK:
@@ -629,6 +652,8 @@ def import_fmf(data):
             if g>=8 or i>=len(backups[g]):raise ValueError('定位球备用任务越界')
             backups[g][i]=v
         variants[variant]={'name':bytes.fromhex(decoded['name_utf8_hex']).decode('utf8')[:64],'frequency':routine['frequency'],'strategy':routine['strategy'],'swing':routine['swing'],'groups':routine['groups'],'backups':backups,'priority':routine['priority'],'opaque_flags':routine['opaque_flags']}
+        if 'throw_in_variant_bytes' in routine:
+            variants[variant]['throw_in_variant_bytes']=routine['throw_in_variant_bytes']
         scenario=validate_scenario(scenario);report={'setpiece_type':kind,'notice':'已通过原版解析器导入'+setpieces.TYPE_NAMES[kind]+'套路；包含任务、备用任务、分配顺序、发球策略和频率。','native_roundtrip_verified':True}
         (directory/'import_report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8');return {'scenario':scenario,'report':report}
     if result.returncode or not parsed or not decoded or not parsed['accepted']or parsed['stream_error']:raise ValueError('本机游戏解析器未完整接受此战术，未改动当前配置')
@@ -661,31 +686,7 @@ def export_setpiece(data):
     name=''.join(c for c in routine['name']if c not in '\\/:*?"<>|'and ord(c)>=32).strip(' .')or'定位球'
     return {'filename':name+'.fmf','file_base64':base64.b64encode(payload).decode(),'report':{'native_roundtrip_verified':True,'notice':'定位球 FMF 已通过原版回读核验。'}}
 
-def prepare_attribute_screen(data,scenario,seeds):
-    if data.get('event_details',False)is not False:raise ValueError('关键属性批量分析使用快速统计模式')
-    if data.get('reference')or'native_generation'in scenario:raise ValueError('请使用固定双方战术运行关键属性分析')
-    side=integer(data.get('side',0),0,1,'测试球队')
-    chosen=data.get('slots',list(range(11)))
-    if not isinstance(chosen,list)or not chosen:raise ValueError('请选择至少一个首发位置')
-    slots=[integer(slot,0,10,'首发位置')for slot in chosen]
-    if len(slots)!=len(set(slots)):raise ValueError('首发位置重复')
-    discovery_count=integer(data.get('exploration_count',16),4,100,'探索场数')
-    if not 2<=len(seeds)-discovery_count<=200:raise ValueError('验证批次需要2–200个独立种子')
-    candidate_threshold=float(data.get('candidate_threshold',.02));strong_threshold=float(data.get('strong_threshold',.05))
-    if not math.isfinite(candidate_threshold)or not 0<=candidate_threshold<=1:raise ValueError('候选收益线须为0–1之间的数值')
-    if not math.isfinite(strong_threshold)or not candidate_threshold<=strong_threshold<=1:raise ValueError('强候选收益线须不低于候选收益线且不超过1')
-    candidate_limit=integer(data.get('candidate_limit',5),1,15,'候选属性数')
-    recommendation_limit=integer(data.get('recommendation_limit',3),1,candidate_limit,'总览推荐数')
-    stable_min_pairs=integer(data.get('stable_min_pairs',8),2,200,'稳定推荐参考配对数')
-    validation_mode=data.get('validation_mode','two_stage')
-    if validation_mode not in('two_stage','full'):raise ValueError('验证运行方式无效')
-    profile_mode=data.get('profile_mode','current')
-    if profile_mode not in('current','standard'):raise ValueError('代表档位模式无效')
-    standard_levels=None
-    if profile_mode=='standard':
-        raw_levels=data.get('standard_levels',[8,12,16])
-        if not isinstance(raw_levels,list)or not 1<=len(raw_levels)<=3:raise ValueError('标准属性档位需要1–3个数值')
-        standard_levels=sorted(set(integer(value,1,19,'标准属性档位')for value in raw_levels))
+def experiment_opponents(data,scenario,side):
     opponents=[]
     save_id=data.get('save_id')
     if save_id is not None:
@@ -694,7 +695,7 @@ def prepare_attribute_screen(data,scenario,seeds):
             raise ValueError('己方阵容与所选存档或球队不一致，请重新载入')
         keys=data.get('opponents')
         if not isinstance(keys,list) or not 1<=len(keys)<=MAX_SAVE_OPPONENTS or any(not isinstance(key,str) for key in keys) or len(keys)!=len(set(keys)):
-            raise ValueError(f'属性实验请选择 1–{MAX_SAVE_OPPONENTS} 支不重复的存档对手')
+            raise ValueError(f'实验请选择 1–{MAX_SAVE_OPPONENTS} 支不重复的存档对手')
         if not SAVE_LIBRARY.folder(save_id).is_dir():
             raise ValueError('找不到存档，请重新读取')
         report=SAVE_LIBRARY.inspect_opponents(save_id,own)
@@ -723,6 +724,35 @@ def prepare_attribute_screen(data,scenario,seeds):
     else:
         fixed=copy.deepcopy(scenario);fixed.pop('away_tactic_pool',None)
         opponents.append((fixed['teams'][1-side].get('tactic_name')or'当前对手',fixed))
+    return opponents
+
+
+def prepare_attribute_screen(data,scenario,seeds):
+    if data.get('event_details',False)is not False:raise ValueError('关键属性批量分析使用快速统计模式')
+    if data.get('reference')or'native_generation'in scenario:raise ValueError('请使用固定双方战术运行关键属性分析')
+    side=integer(data.get('side',0),0,1,'测试球队')
+    chosen=data.get('slots',list(range(11)))
+    if not isinstance(chosen,list)or not chosen:raise ValueError('请选择至少一个首发位置')
+    slots=[integer(slot,0,10,'首发位置')for slot in chosen]
+    if len(slots)!=len(set(slots)):raise ValueError('首发位置重复')
+    discovery_count=integer(data.get('exploration_count',16),4,100,'探索场数')
+    if not 2<=len(seeds)-discovery_count<=200:raise ValueError('验证批次需要2–200个独立种子')
+    candidate_threshold=float(data.get('candidate_threshold',.02));strong_threshold=float(data.get('strong_threshold',.05))
+    if not math.isfinite(candidate_threshold)or not 0<=candidate_threshold<=1:raise ValueError('候选收益线须为0–1之间的数值')
+    if not math.isfinite(strong_threshold)or not candidate_threshold<=strong_threshold<=1:raise ValueError('强候选收益线须不低于候选收益线且不超过1')
+    candidate_limit=integer(data.get('candidate_limit',5),1,15,'候选属性数')
+    recommendation_limit=integer(data.get('recommendation_limit',3),1,candidate_limit,'总览推荐数')
+    stable_min_pairs=integer(data.get('stable_min_pairs',8),2,200,'稳定推荐参考配对数')
+    validation_mode=data.get('validation_mode','two_stage')
+    if validation_mode not in('two_stage','full'):raise ValueError('验证运行方式无效')
+    profile_mode=data.get('profile_mode','current')
+    if profile_mode not in('current','standard'):raise ValueError('代表档位模式无效')
+    standard_levels=None
+    if profile_mode=='standard':
+        raw_levels=data.get('standard_levels',[8,12,16])
+        if not isinstance(raw_levels,list)or not 1<=len(raw_levels)<=3:raise ValueError('标准属性档位需要1–3个数值')
+        standard_levels=sorted(set(integer(value,1,19,'标准属性档位')for value in raw_levels))
+    opponents=experiment_opponents(data,scenario,side)
     attributes={item['name']:item['id']for item in CATALOG['attributes']}
     attribute_increase=integer(data.get('attribute_increase',3),1,19,'属性提升点数')
     scope=data.get('attribute_scope','broad')
@@ -750,6 +780,89 @@ def prepare_attribute_screen(data,scenario,seeds):
         raise ValueError('单次分析超过十万场，请减少位置、对手或场数')
     stored=copy.deepcopy(scenario);stored.pop('away_tactic_pool',None)
     return variants,details,stored
+
+def tactical_screen_plan(data, scenario):
+    kind = data.get('kind')
+    if kind not in tactical_analysis.LABELS or 'native_generation' in scenario:
+        raise ValueError('请选择实验类型并载入固定双方战术')
+    side = integer(data.get('side', 0), 0, 1, '测试球队')
+    phases = data.get('phases')
+    slots = data.get('slots', [0])
+    groups = data.get('groups', [])
+    if (not isinstance(phases, list) or not phases or len(phases) > 2
+            or not isinstance(slots, list) or not slots or len(slots) > 11
+            or not isinstance(groups, list) or len(groups) > len(GROUPS)):
+        raise ValueError('请选择有效的阶段、位置与指令')
+    phases = sorted({integer(value, 0, 1, '阶段') for value in phases})
+    slots = sorted({integer(value, 0, 10, '位置') for value in slots})
+    groups = {integer(value, 0, 64, '指令编号') for value in groups}
+    if groups - (set(GROUPS) if kind == 'team' else set(PIS)):
+        raise ValueError('所选指令不存在')
+    mark_position = data.get('mark_position', 0)
+    if type(mark_position) is not int or mark_position not in [0, *(p['mask'] for p in POSITIONS.values())]:
+        raise ValueError('指定盯防位置不存在')
+    mark_player = data.get('mark_player')
+    if mark_player is not None:
+        if data.get('save_id') is not None or data.get('opponents') == 'pool':
+            raise ValueError('指定球员只支持当前固定对手')
+        opponent = scenario['teams'][1-side]
+        mark_player = integer(mark_player, 0, opponent.get('roster_size', len(opponent['players'])) - 1, '盯防球员')
+    discovery = integer(data.get('exploration_count', 8), 4, 100, '探索种子数')
+    confirmation = integer(data.get('validation_count', 32), 2, 200, '复测种子数')
+    home_away = data.get('home_away', data.get('save_id') is not None)
+    validate_all = data.get('validate_all', False)
+    if type(home_away) is not bool or type(validate_all) is not bool:
+        raise ValueError('请选择有效的主客场与复测方式')
+    changes = list(tactical_analysis.candidates(sys.modules[__name__], scenario, side, kind,
+                                                phases, slots, groups, mark_position, mark_player))
+    if not changes:
+        raise ValueError('当前战术没有符合条件的候选项')
+    keys = data.get('opponents')
+    if data.get('save_id') is not None:
+        if not isinstance(keys, list) or not 1 <= len(keys) <= MAX_SAVE_OPPONENTS:
+            raise ValueError('请选择存档对手')
+        count = len(keys)
+    elif keys == 'pool':
+        count = len(scenario.get('away_tactic_pool', {}).get('entries', []))
+        if not count:
+            raise ValueError('请选择战术池对手')
+    else:
+        count = 1
+    if home_away and data.get('save_id') is None:
+        capacity = min(len(team['players']) for team in DEFAULT['teams'])
+        if any(team.get('roster_size', len(team['players'])) > capacity for team in scenario['teams']):
+            raise ValueError(f'主客互换要求每队比赛名单最多 {capacity} 人，请缩减替补或关闭主客场各测')
+    contexts = count * (2 if home_away else 1)
+    bundles = {}
+    for edit in changes:
+        key = (edit['phase'], edit['slot'], edit['group'])
+        bundles[key] = bundles.get(key, 0) + 1
+    finalists = len(changes) if validate_all else sum(min(n, 2) for n in bundles.values())
+    exploration = (len(changes) + 1) * contexts * discovery
+    validation = (finalists + 1) * contexts * confirmation
+    if exploration + validation > MAX_ATTRIBUTE_MATCHES:
+        raise ValueError('单次分析超过十万场，请减少位置、对手或场数')
+    details = dict(kind=kind, side=side, home_away=home_away, validate_all=validate_all,
+                   discovery_count=discovery, validation_count=confirmation)
+    estimate = dict(candidates=len(changes), exploration=exploration, validation=validation)
+    return changes, details, estimate
+
+
+def prepare_tactical_screen(data, scenario):
+    changes, details, estimate = tactical_screen_plan(data, scenario)
+    discovery, confirmation = details['discovery_count'], details['validation_count']
+    mode, seeds = match_seeds(data, discovery + confirmation)
+    opponents = experiment_opponents(data, scenario, details['side'])
+    for _, context in opponents:
+        for team in context['teams']:
+            team.pop('squad', None)
+    variants, cases = tactical_analysis.variants(sys.modules[__name__], opponents, details['side'],
+                                                  changes, details['home_away'])
+    details.update(cases=cases, exploration_seeds=seeds[:discovery], validation_seeds=seeds[discovery:])
+    stored = copy.deepcopy(scenario)
+    stored.pop('away_tactic_pool', None)
+    return variants, details, stored, mode, seeds, estimate['exploration'] + estimate['validation']
+
 
 def persist(job):
     from desktop_storage import write_json_atomic, publish_summary
@@ -779,7 +892,7 @@ def episode_metrics(runs,side):
     return {'generated':len(runs),'n':n,'unavailable':len(runs)-n,'goals_for':sum(r['result']['score'][side]for r in valid),'goals_against':sum(r['result']['score'][1-side]for r in valid),'goals_per_100':sum(r['result']['score'][side]for r in valid)*100/n if n else None,'conceded_per_100':sum(r['result']['score'][1-side]for r in valid)*100/n if n else None,'shots_per_100':sum(r['statistics']['teams'][side]['shots']for r in valid)*100/n if n else None,'xg_per_100':sum(r['statistics']['teams'][side]['xg']for r in valid)*100/n if n else None}
 
 def update_metrics(job,scenarios):
-    if job.get('attribute_screen'):return
+    if job.get('attribute_screen') or job.get('tactical_screen'):return
     if job.get('tactic_pool'):
         entries=job['tactic_pool'].get('entries',[])
         counts=fm27_tactic_pool.completed_draw_counts(job['runs'],len(entries))
@@ -861,21 +974,33 @@ def execute(job,scenarios,seeds):
     try:
         completed={(r['variant'],r['seed'])for r in job['runs']}
         pool_variants=job.get('_pool_variants')or{}
-        tasks=[]
-        for index,seed in enumerate(seeds):
-            for label,_ in scenarios:
-                if(label,seed)in completed:continue
-                if pool_variants:
-                    entry_index=job['_pool_draws'][str(seed)];scenario=pool_variants[label][entry_index];config=job['_dir']/f'{label}_pool{entry_index}.bin'
-                else:
-                    scenario=next(s for v,s in scenarios if v==label);config=job['_dir']/f'{label}.bin'
-                task={'key':f'{label}:{seed}','variant':label,'seed':seed,'scenario':scenario,
-                    'position_names':{p['mask']:p['id']for p in POSITIONS.values()},'episode':job.get('episode_settings'),
-                    'config':config,'path':job['_dir']/f'{index:04d}_{label}_seed_{seed}.jsonl'}
-                if pool_variants:
-                    task['tactic_pool_entry']=entry_index;task['tactic_pool_name']=job['tactic_pool']['entries'][entry_index]['name']
-                tasks.append(task)
-        for task in tasks:task['event_details']=job.get('event_details',True)
+        scenario_by_label = dict(scenarios)
+
+        def pending_tasks(allowed_seeds=None, allowed_labels=None):
+            tasks = []
+            for index, seed in enumerate(seeds):
+                if allowed_seeds is not None and seed not in allowed_seeds:
+                    continue
+                for label, base in scenario_by_label.items():
+                    if (label, seed) in completed or allowed_labels is not None and label not in allowed_labels:
+                        continue
+                    scenario = base
+                    config = job['_dir']/f'{label}.bin'
+                    task = {'key':f'{label}:{seed}', 'variant':label, 'seed':seed,
+                            'position_names':{p['mask']:p['id'] for p in POSITIONS.values()},
+                            'episode':job.get('episode_settings'), 'event_details':job.get('event_details',True),
+                            'path':job['_dir']/f'{index:04d}_{label}_seed_{seed}.jsonl'}
+                    if pool_variants:
+                        entry_index=job['_pool_draws'][str(seed)]
+                        scenario=pool_variants[label][entry_index]
+                        config=job['_dir']/f'{label}_pool{entry_index}.bin'
+                        task.update(tactic_pool_entry=entry_index,
+                                    tactic_pool_name=job['tactic_pool']['entries'][entry_index]['name'])
+                    task.update(scenario=scenario, config=config)
+                    tasks.append(task)
+            return tasks
+
+        tasks = pending_tasks() if not job.get('tactical_screen') else []
         def result(run):
             with LOCK:
                 if pool_variants:
@@ -915,6 +1040,25 @@ def execute(job,scenarios,seeds):
                 runner.run(tasks,result,progress)
             with LOCK:
                 job['attribute_report']=attribute_analysis.research_report(job['runs'],details)
+        elif job.get('tactical_screen'):
+            settings = job['tactical_screen']
+            discovery = set(settings['exploration_seeds'])
+            with LOCK:
+                job['stage'] = '战术探索'
+                persist(job)
+            runner.run(pending_tasks(discovery), result, progress)
+            if not runner.stop.is_set() and not job['failures']:
+                rows = tactical_analysis.report(job['runs'], settings)
+                selected = set(range(len(rows))) if settings['validate_all'] else tactical_analysis.shortlist(rows)
+                labels = {entry[key] for i in selected for entry in settings['cases'][i]['entries']
+                          for key in ('baseline', 'variant')}
+                validation = pending_tasks(set(settings['validation_seeds']), labels)
+                with LOCK:
+                    job.update(tactical_report=rows, stage='独立战术复测', total=job['completed'] + len(validation))
+                    persist(job)
+                runner.run(validation, result, progress)
+            with LOCK:
+                job['tactical_report'] = tactical_analysis.report(job['runs'], settings)
         elif job.get('test_rounds'):
             for stage in job['test_rounds']:
                 if runner.stop.is_set() or job['failures']:break
@@ -941,6 +1085,8 @@ def resume_job(job,workers):
     if job.get('initial_state_policy',{}).get('id')!='controlled-start-v3':raise ValueError('旧实验的开赛状态规则不同，请新建实验，避免混合结果')
     if job.get('batch_schema')!=1:raise ValueError('旧任务缺少批量校验记录，请新建实验')
     provenance=json.loads((job['_dir']/'provenance.json').read_text(encoding='utf8'))
+    if job.get('tactical_screen') != provenance.get('tactical_screen'):
+        raise ValueError('战术实验方案已改变，无法续跑')
     if job.get('attribute_screen')!=provenance.get('attribute_screen'):raise ValueError('属性实验方案已改变，无法续跑')
     if job.get('test_rounds',[])!=provenance.get('test_rounds',[]):raise ValueError('两轮种子计划已改变，不能混合续跑')
     if job.get('event_details',True)!=provenance.get('event_details',True):raise ValueError('事件采集模式与原任务不同，不能混合续跑')
@@ -1035,7 +1181,7 @@ class TacticsApi:
         if path=='/api/catalog':return self.send(CATALOG)
         if path=='/api/defaults':return self.send(DEFAULT)
         if path=='/api/phase-defaults':return self.send(phase_inputs.pack(DEFAULT,CATALOG))
-        if path=='/api/status':return self.send({'engine':'original_native','engine_compatibility':ENGINE_COMPATIBILITY,'server_pid':os.getpid(),'application_version':'v1114','execution_available':execution_available(),'fmf_version_validation':'original_game_reader','fixture_me_version':'26.8.0.0','independent':True,'team_groups':len(GROUPS),'team_options':sum(len(g['options'])for g in GROUPS.values()),'player_groups':17,'roles':79,'batch':{'max_matches_per_variant':10000,**worker_limits(),'isolation':'bounded_reused_native_sessions','jobs_per_native_session':None,'session_policy':'remaining_batch_lane_when_supported','postprocess_workers':2,'whole_match_automatic_retries':0}})
+        if path=='/api/status':return self.send({'engine':'original_native','engine_compatibility':ENGINE_COMPATIBILITY,'server_pid':os.getpid(),'application_version':'v1118.1','execution_available':execution_available(),'fmf_version_validation':'original_game_reader','fixture_me_version':'26.8.0.0','independent':True,'team_groups':len(GROUPS),'team_options':sum(len(g['options'])for g in GROUPS.values()),'player_groups':17,'roles':79,'batch':{'max_matches_per_variant':10000,**worker_limits(),'isolation':'bounded_reused_native_sessions','jobs_per_native_session':None,'session_policy':'remaining_batch_lane_when_supported','postprocess_workers':2,'whole_match_automatic_retries':0}})
         if path=='/api/save/status':
             query=parse_qs(urlparse(self.path).query)
             try: return self.send(SAVE_LIBRARY.status(query.get('id',[None])[0]))
@@ -1055,6 +1201,17 @@ class TacticsApi:
                     for job in jobs
                 ]))
         parts=path.strip('/').split('/')
+        if len(parts)==4 and parts[:2]==['api','jobs'] and parts[3]=='player-leaderboards':
+            with LOCK:
+                job=JOBS.get(parts[2])
+                if not job or job.get('experiment_type')!='save_opponents':
+                    return self.send({'error':'任务不存在'},404)
+                if job.get('event_details') is False:
+                    return self.send({})
+                directory=job['_dir']
+                schedule=dict(job.get('schedule',{}))
+                runs=list(job['runs'])
+            return self.send(fm27_match_events.save_leaderboards(directory,schedule,runs))
         if len(parts)==4 and parts[:2]==['api','jobs'] and parts[3]=='player-names':
             import desktop_player_display
             with LOCK:
@@ -1212,6 +1369,7 @@ class TacticsApi:
                     if any(j['status']in ('queued','running')for j in JOBS.values()):return self.send({'error':'比赛运行中不能更换游戏目录'},409)
                     ENGINE_COMPATIBILITY=desktop_engine.initialize(ROOT, selected)
                     ENGINE_DLL_SHA256=ENGINE_COMPATIBILITY['actual_dll_sha256']
+                    apply_engine_policy(ENGINE_COMPATIBILITY)
                     (RUNS.parent/'game-root.txt').write_text(selected,encoding='utf-8-sig')
                     return self.send({**ENGINE_COMPATIBILITY,'execution_available':execution_available()})
             if path in ('/api/import-fmf','/api/pool/import-fmf','/api/export-fmf','/api/export-setpiece'):
@@ -1223,7 +1381,9 @@ class TacticsApi:
             if path=='/api/validate':return self.send({'scenario':validate_scenario(data),'records':(len(encode_scenario(data))-12)//20})
             if path=='/api/phase-plan':return self.send({'scenario':phase_inputs.pack(validate_scenario(data),CATALOG)})
             if path=='/api/repair':return self.send(repair_saved_scenario(data))
-            if path in('/api/run','/api/run-episodes','/api/run-attribute-screen'):
+            if path == '/api/tactical-screen/estimate':
+                return self.send(tactical_screen_plan(data, validate_scenario(data['scenario']))[2])
+            if path in('/api/run','/api/run-episodes','/api/run-attribute-screen','/api/run-tactical-screen'):
                 if SAVE_LIBRARY.real_active:raise ValueError('请等待真实AI战术生成完成后运行比赛')
                 if SAVE_LIBRARY.active:raise ValueError('请等待存档及历史输入解析完成后运行比赛')
                 event_details=data.get('event_details',True)
@@ -1242,13 +1402,21 @@ class TacticsApi:
                         if variant>=len(routines):raise ValueError('测试套路不存在')
                         target['teams'][tested_side]['setpieces']['routines'][str(tested_type)]=[copy.deepcopy(routines[variant])]
                     episode={'type':tested_type if tested_type>=5 else tested_type+5,'tested_type':tested_type,'tested_side':tested_side,'attacking_side':tested_side if tested_type>=5 else 1-tested_side,'window_seconds':seconds}
-                if path=='/api/run-attribute-screen' and data.get('seed_mode')=='random':
+                tactical_details = None
+                if path == '/api/run-tactical-screen':
+                    with IMPORT_LOCK:
+                        variants,tactical_details,scenario,seed_mode,seeds,total=prepare_tactical_screen(data,scenario)
+                    reference = None
+                    event_details = False
+                    require_space(RUNS,additional_bytes=total*256*1024)
+                elif path=='/api/run-attribute-screen' and data.get('seed_mode')=='random':
                     seed_count=integer(data.get('count'),6,300,'总种子数')
                     seed_mode,seeds=match_seeds(data,seed_count)
                 else:
                     seed_mode,seeds=match_seeds(data)
                 workers=integer(data.get('workers',worker_limits()['recommended']),1,worker_limits()['maximum'],'并行数')
-                variants=[('A',reference),('B',scenario)]if reference else[('B',scenario)]
+                if tactical_details is None:
+                    variants=[('A',reference),('B',scenario)]if reference else[('B',scenario)]
                 screen_details=None
                 if path=='/api/run-attribute-screen':
                     with IMPORT_LOCK:
@@ -1285,8 +1453,11 @@ class TacticsApi:
                     if retest_fixture and provenance_source:provenance['save_source']=provenance_source
                     provenance['event_details']=event_details
                     provenance['seed_mode']=seed_mode
+                    if tactical_details is not None:
+                        provenance['tactical_screen']=tactical_details
                     if screen_details is not None:
                         provenance['attribute_screen']=screen_details
+                    if tactical_details is not None or screen_details is not None:
                         if data.get('save_id'):
                             source=SAVE_LIBRARY.status(data['save_id'])
                             provenance['save_source']={k:source[k]for k in ('id','source','source_sha256','date','build')}
@@ -1298,12 +1469,16 @@ class TacticsApi:
                     job={'batch_schema':1,'workers':workers,'failures':[],'active':[],'id':key,'status':'queued','completed':0,'total':len(seeds)*len(variants),'runs':[],'metrics':{},'created':time.time(),'output_dir':str(directory),'_dir':directory,'seed_mode':seed_mode}
                     job['name']=experiment_name(data.get('name'),f"{scenario['teams'][0]['name']} · {scenario['teams'][0].get('tactic_name') or '战术实验'} · {len(seeds)}场")
                     job['event_details']=event_details
+                    job['match_conditions']=experiment_conditions(scenario,reference)
                     job['engine_compatibility']=copy.deepcopy(ENGINE_COMPATIBILITY)
                     job['runtime_mode']='isolated_native_episode'if episode else'reused_native_worker'
                     job['jobs_per_native_session']=1 if episode else 64
                     job['initial_state_policy']={'id':'controlled-start-v3','player_values':copy.deepcopy(profiles.CONTROLLED_START),'morale_verified':True,'cohesion_verified':True}
                     job['mode']='comparison'if reference else'single';job['variant_names']={label:item['teams'][0].get('tactic_name','')for label,item in variants}
                     job['team_names']={label:[t['name']for t in item['teams']]for label,item in variants}
+                    if tactical_details is not None:
+                        job.update(experiment_type='tactical_screen', tactical_screen=tactical_details,total=total)
+                        job['name']=experiment_name(data.get('name'), tactical_analysis.LABELS[tactical_details['kind']])
                     if screen_details is not None:
                         job.update(experiment_type='attribute_screen',attribute_screen=copy.deepcopy(screen_details),total=total)
                         job['name']=experiment_name(data.get('name'),scenario['teams'][screen_details['side']]['name']+' · 属性实验室')
@@ -1338,7 +1513,7 @@ class TacticsApi:
 
 def request_size_limit(target):
     return 8000000 if urlparse(target).path in (
-        '/api/import-fmf', '/api/pool/import-fmf', '/api/save/league-pool', '/api/run-attribute-screen') else 1500000
+        '/api/import-fmf', '/api/pool/import-fmf', '/api/save/league-pool', '/api/run-attribute-screen', '/api/run-tactical-screen', '/api/tactical-screen/estimate') else 1500000
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -1348,7 +1523,7 @@ class Handler(BaseHTTPRequestHandler):
         'desktop.js', 'desktop.css', 'app.js', 'advanced.js', 'setpieces.js',
         'batch.js', 'style.css', 'save-mode.js', 'save-mode.css', 'engine-settings.js',
         'squad-editor.js', 'tactic-pool.js', 'tactic-library.js', 'i18n.js', 'i18n-en.js',
-        'desktop-transport.js', 'league-testing.js', 'player-display.js', 'attribute-analysis.js',
+        'desktop-transport.js', 'league-testing.js', 'player-display.js', 'attribute-analysis.js', 'tactical-analysis.js',
     }
 
     def send(self, value, status=200, kind='application/json; charset=utf-8'):

@@ -119,7 +119,9 @@ def tactics_plan(payload):
 SP_HANDLERS=['DEFEND_CORNER','DEFEND_FREE_KICK','DEFEND_ID_WIDE_FREE_KICK','DEFEND_ID_DEEP_FREE_KICK','DEFEND_LONG_THROW_IN','ATTACK_CORNER','ATTACK_FREE_KICK','ATTACK_ID_WIDE_FREE_KICK','ATTACK_ID_DEEP_FREE_KICK','THROW_IN']
 SP_EXTENSIONS=['.dcspr','.dfkspr','.dfkspr','.dfkspr','.tispr','.acspr','.afkspr','.afkspr','.afkspr','.tispr']
 def setpiece_archive(kind,routine):
-    ext=SP_EXTENSIONS[kind];magic=(ext[1:4][::-1]+'.').encode('ascii');payload=bytearray(bytes([3,1])+magic+struct.pack('<H',60))
+    extra=bytes(routine.get('throw_in_variant_bytes', ())) if kind==9 else b''
+    ext=SP_EXTENSIONS[kind];magic=(ext[1:4][::-1]+'.').encode('ascii');payload=bytearray(bytes([3,1])+magic+struct.pack('<H',61 if extra else 60))
+    payload+=extra
     for key in ['swing','strategy']:
         if routine[key]!=255:payload.append(routine[key])
     for group,values in enumerate(routine['groups']):payload+=bytes([group,len(values)]+values)

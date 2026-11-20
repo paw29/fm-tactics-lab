@@ -38,6 +38,11 @@ def normalize(value,side,roster_size):
   for row in rows:
    r={'name':str(row['name'])[:64],'frequency':integer(row['frequency'],0,2)}
    r['opaque_flags']=integer(row.get('opaque_flags',0),0,255)
+   if 'throw_in_variant_bytes' in row:
+    extra=row['throw_in_variant_bytes']
+    if kind!=9 or not isinstance(extra,list) or len(extra)!=3:raise ValueError('进攻界外球扩展值格式无效')
+    extra=[integer(v,0,255) for v in extra]
+    if any(extra):r['throw_in_variant_bytes']=extra
    for k in ['strategy','swing']:
     if base[k]==255:
      if row[k]!=255:raise ValueError('该类型定位球不使用此发球策略')
@@ -79,6 +84,8 @@ def encode(value,side):
    slot=kind*16+i
    records.append((41,side,slot,0,row['frequency']))
    records.append((47,side,slot,0,row.get('opaque_flags',0)))
+   if 'throw_in_variant_bytes' in row:
+    records.append((64,side,slot,0,int.from_bytes(bytes(row['throw_in_variant_bytes']),'little')))
    if row['strategy']!=255:records.append((41,side,slot,1,row['strategy']))
    if row['swing']!=255:records.append((41,side,slot,2,row['swing']))
    records.append((42,side,slot,0,0))

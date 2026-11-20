@@ -1,5 +1,56 @@
 # Changelog
 
+## v1118.1 · 2026-11-18
+
+### 中文
+
+新增 Epic `27.1.0+2505117` 的原生适配，修复新版 Epic DLL 被送入 Steam 适配器后报 `PE_layout` 的问题。Steam 和 Epic 继续共用一个 EXE。已核对 Epic 样本的指纹、布局和接口，样本可加载。Epic 完赛仍待完整安装环境复测。Steam 27.1.0 已通过原生完赛复测。
+
+### English
+
+Adds a native adapter for Epic `27.1.0+2505117` and fixes the `PE_layout` error caused by selecting the Steam adapter for this Epic build. Steam and Epic still use one EXE. The supplied Epic DLL passed fingerprint and interface checks and loaded on Windows. A complete match on a full Epic installation still needs confirmation. Steam 27.1.0 passed a complete native match in regression testing.
+
+## v1118 · 2026-11-18
+
+### 中文
+
+相比 v1114，本次更新适配 **Steam FM27 27.1.0+2505117**。新版保存的生涯存档可以读取阵容、两阶段战术和自定义定位球。原版引擎也已重新验证了旧档对战、FMF 导入导出、战术执行力和 AI 战术生成。
+
+- **角色、球队指令和个人指令实验室**。从战术板点「实验室」，选一个首发位置的角色，或选一项球队／个人指令，批量比较可用候选。原战术和候选共用对手、主客场和种子，筛出的候选可以换种子再测。原有属性实验室也能从这里进入，存档实验可跨联赛选对手。
+- **自动挑选阵容**。在「一线队／比赛名单」里点「自动挑选」，按有球和无球两个阶段的位置熟练度、球员能力安排首发，并兼顾替补的位置覆盖。
+- **比赛重要性**。自由推演和存档对战共用预设，默认普通联赛，也可以自定义 1–20。手动战术执行力面板说明了战术理解总分和八个区域的关系。
+- **联赛测试和结果**。运行前可看到预计场数。「跑一圈联赛」默认对每个对手主客各一场，可加第二轮复测。详细模式提供整批进球榜和助攻榜，可按对照战术、本次战术和球队查看。
+- **并行启动修复**。原生宿主依次完成激活，激活后并行比赛。启动超时会单独提示，已完成的场次可继续接着跑。
+
+新版曼联档和旧版佛罗伦萨档均通过原生主客场测试。Steam 玩家更新工具后，在「存档对战」里重新点一次「读取存档」。统一 EXE 仍含原有 Epic 适配器，本轮原生验证覆盖 Steam。启动窗口会显示内部构建号 v1115。
+
+### English
+
+Compared with v1114, this release supports **Steam FM27 27.1.0+2505117**. It reads squads, both tactical phases, and custom set pieces from career saves written by the updated game. Native checks also covered older saves, FMF import and export, tactical execution, and AI tactic generation.
+
+- **Role, Team Instruction, and Player Instruction Labs.** Open Labs from the tactics board to test available roles for a starting position, or alternatives for a single team or player instruction. The baseline and variants share opponents, venues, and seeds. Shortlisted variants can be retested with fresh seeds. The existing Attribute Lab is available from the same menu, and career-save experiments can use opponents from multiple leagues.
+- **Auto-pick the match squad.** The lineup picker uses each player's ability and positional familiarity in and out of possession, with positional coverage on the bench.
+- **Match importance.** Free Simulation and Save Matchups share the same presets. The default is an ordinary league match, and custom values range from 1 to 20. The manual tactical execution panel also clarifies how the overall tactical understanding setting relates to the eight tactical areas.
+- **League tests and results.** See the estimated match count before running. The league shortcut schedules one home and one away match per opponent by default, with an optional retest. Detailed Save Matchups include batch goal and assist leaderboards for either tactic and team.
+- **Parallel startup fixes.** Native workers activate one at a time and run matches in parallel once ready. Activation timeouts are reported separately, and completed matches are retained for resume.
+
+Home and away native matches passed with a new Manchester United save and an older Fiorentina save. Steam users can re-import their save after updating. The unified EXE also includes the existing Epic adapter. This compatibility round was verified on Steam. The startup window shows the internal build number v1115.
+
+## v1115
+
+- 各路原生宿主依次激活，激活成功后照常并行比赛。激活超时会单独提示，已完成场次可以接续。
+- 对齐存档对战的「两轮测试」复选框，勾选后显示第二轮每队场数。
+- 在手动执行力面板标明战术理解的设置用于总分，八个区域仍由引擎计算。
+- 自由推演和存档对战共用比赛重要性预设，默认普通联赛。自定义可填 1–20，开赛前核对双方首发实际使用的值。
+- 把比赛设置、A/B 对照和预计总场数放到运行按钮附近。跑一圈联赛默认每个对手主客各一场，确认时可单独加复测。历史结果显示实际采用的条件和统计轮次。
+- 存档对战完整模式新增整批进球榜和助攻榜。按存档球员合并主客场数据，分别查看对照方案、本次方案、己方和对手。
+- Activate native workers one at a time and run matches in parallel once ready. Report activation timeouts explicitly and keep completed matches available for resume.
+- Align the two-round checkbox and show the round-two match count when enabled.
+- Clarify that the manual tactical understanding setting changes the overall score. The engine calculates the eight tactical areas.
+- Add shared match importance presets to Free Simulation and Save Matchups. Default to the league preset and allow a custom value from 1 to 20. Verify the value for every starter before kick-off.
+- Place match settings, A/B tactics, and the estimated match count by the Run button. The league shortcut defaults to one home and one away match per opponent, with optional retesting. Results show the settings used and the scope of each round's statistics.
+- Add batch goal and assist leaderboards to detailed Save Matchups, combining home and away counts by save player identity and showing A/B and team scopes.
+
 ## v1114 · 2026-11-14
 
 - Add Attribute Lab to the tactics board. Test one attribute at a time for selected starters, retest on fresh seeds, and export an HTML report. Pick up to 120 available career-save opponents and mix clubs from the five major leagues in one batch. The main EXE includes the feature from PR #18.

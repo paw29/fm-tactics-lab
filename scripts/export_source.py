@@ -6,6 +6,8 @@ from pathlib import Path
 import re
 import zipfile
 
+from generate_profile import ADAPTERS
+
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_DOCS = {'README.md', 'README.en.md', 'CHANGELOG.md', 'CONTRIBUTING.md',
                'THIRD_PARTY_NOTICES.md', 'docs/DEVELOPMENT.md',
@@ -17,8 +19,9 @@ TYPES = {'src': {'.py', '.js', '.css', '.html'},
 TAURI_FILES = {'tauri/.gitignore', 'tauri/Cargo.lock', 'tauri/Cargo.toml',
                'tauri/build.rs', 'tauri/tauri.conf.json'}
 ICONS = {'assets/app-icon.ico', 'assets/app-icon.png'}
-NATIVE_JSON = {'native/profile_metadata.json', 'native/adapter_version.json',
-               'native/epic_profile_metadata.json', 'native/epic_adapter_version.json'}
+NATIVE_PREFIXES = ['' if adapter == 'steam' else adapter + '_' for adapter in ADAPTERS]
+NATIVE_JSON = {f'native/{prefix}{name}.json' for prefix in NATIVE_PREFIXES
+               for name in ('profile_metadata', 'adapter_version')}
 SCREENSHOTS = {'docs/screenshots/tactics.png', 'docs/screenshots/players.png',
                'docs/screenshots/results.png', 'docs/screenshots/save-tactics.png',
                'docs/screenshots/save-tactics-progress.png', 'docs/screenshots/away-pool.png'}
@@ -60,7 +63,7 @@ def validate(root=ROOT):
             raise ValueError('Potential credential found: ' + str(path.relative_to(root)))
         if re.search(r'[0-9a-fA-F]{512,}', text):
             raise ValueError('Unexpected long hexadecimal dump: ' + str(path.relative_to(root)))
-    for name in ('profile_metadata.json', 'epic_profile_metadata.json'):
+    for name in (f'{prefix}profile_metadata.json' for prefix in NATIVE_PREFIXES):
         profile = json.loads((root / 'native' / name).read_text(encoding='utf8'))
         if any('hex' in row for row in profile['ranges']):
             raise ValueError('Original game function bytes must not be published')
@@ -85,5 +88,5 @@ def export(output, root=ROOT):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=ROOT / 'dist/fm-tactics-lab-v1114-source.zip')
+    parser.add_argument('--output', type=Path, default=ROOT / 'dist/fm-tactics-lab-v1118.1-source.zip')
     export(parser.parse_args().output)

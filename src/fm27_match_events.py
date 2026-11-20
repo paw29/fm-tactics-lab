@@ -1,5 +1,7 @@
 """Attribute original goal/card events and reconcile goals with score reversals."""
 from collections import Counter
+import json
+import re
 
 
 def _people(scenario):
@@ -176,3 +178,72 @@ def distribution(runs):
             if card['card']in ['yellow','second_yellow']:credit(card['player'],'yellow_cards')
             if card['card']in ['red','second_yellow']:credit(card['player'],'red_cards')
     return {'matches_with_events':available,'unverified_goal_matches':unverified_goals,'unverified_card_matches':unverified_cards,'players':sorted(people.values(),key=lambda p:(-p['goals'],-p['assists'],p['side'],p['native_id'])),'positions':sorted(positions.values(),key=lambda p:(-p['goals'],-p['assists'],p['side'],p['ip_position']))}
+
+
+def _saved_event_rosters(directory, variant):
+    if not re.fullmatch(r'(?:A|B)(?:_\d+_[HA])?', variant):
+        return [{}, {}]
+    try:
+        scenario = json.loads((directory / f'{variant}.json').read_text(encoding='utf8'))
+        rosters = []
+        generated = 'native_generation' in scenario
+        for team in scenario['teams']:
+            roster = {}
+            for player in team['players'][:team.get('roster_size')]:
+                uid = player.get('source_uid')
+                if type(uid) is int and 0 < uid < 0xffffffff:
+                    event_id = uid if generated else player['native_id']
+                    roster[event_id] = (uid, team['name'])
+            rosters.append(roster)
+        return rosters if len(rosters) == 2 else [{}, {}]
+    except (OSError, ValueError, KeyError, TypeError):
+        return [{}, {}]
+
+
+def save_leaderboards(directory, schedule, runs):
+    """Rank verified events on saved player UIDs and the tested team's perspective."""
+    groups = {}
+    rosters = {}
+    for run in runs:
+        variant = run['variant']
+        fixture = schedule.get(variant)
+        if not fixture or fixture.get('group') not in ('A', 'B') or fixture.get('tested_side') not in (0, 1):
+            continue
+        group = groups.setdefault(fixture['group'], {
+            'verified_matches': 0, 'excluded_matches': 0, 'unbound_events': 0, 'players': {},
+        })
+        events = run.get('events') or {}
+        if not events.get('collected') or events.get('scorers_verified_against_native_totals') is not True:
+            group['excluded_matches'] += 1
+            continue
+        group['verified_matches'] += 1
+        if variant not in rosters:
+            rosters[variant] = _saved_event_rosters(directory, variant)
+
+        for goal in events['goals']:
+            if goal.get('own_goal') or goal.get('cancelled'):
+                continue
+            for role, metric in (('scorer', 'goals'), ('assist', 'assists')):
+                player = goal.get(role)
+                if player is None:
+                    continue
+                side = player['side']
+                if side not in (0, 1) or side != goal['side']:
+                    group['unbound_events'] += 1
+                    continue
+                binding = rosters[variant][side].get(player['native_id'])
+                if binding is None:
+                    group['unbound_events'] += 1
+                    continue
+                uid, team = binding
+                scope = 'own' if side == fixture['tested_side'] else 'opponent'
+                row = group['players'].setdefault((scope, uid), {
+                    'scope': scope, 'source_uid': uid, 'team': team, 'name': player['name'],
+                    'variant': variant, 'side': side, 'native_id': player['native_id'],
+                    'goals': 0, 'assists': 0,
+                })
+                row[metric] += 1
+
+    for group in groups.values():
+        group['players'] = list(group['players'].values())
+    return groups

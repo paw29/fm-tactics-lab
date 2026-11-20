@@ -48,11 +48,21 @@ Each batch uses a sequence of random seeds. When comparing a saved reference wit
 
 ## Download and launch
 
-Download the unified Windows EXE from the [v1114 release](https://github.com/lqf0624/fm-tactics-lab/releases/tag/v1114). Quit the previous version before launching the update.
+Download the unified Windows EXE from the [v1118 release](https://github.com/lqf0624/fm-tactics-lab/releases/tag/v1118). Quit the previous version before launching the update.
 
-The verified Steam game build is `27.0.1+2503222`. For Steam, open the client and sign in to the account that owns the game. The app looks for the installation automatically. You can also select the game root containing `fm_Data` and `shared` in Engine Settings.
+The verified Steam game build is `27.1.0+2505117`. For Steam, open the client and sign in to the account that owns the game. The app looks for the installation automatically. You can also select the game root containing `fm_Data` and `shared` in Engine Settings.
 
 The EXE includes its Python runtime. Players do not need Python or a compiler. The interface follows the Windows display language and supports Chinese and English. Source setup is described in the [developer guide](docs/DEVELOPMENT.md).
+
+## v1118.1
+
+Adds a native adapter for Epic `27.1.0+2505117` and fixes the `PE_layout` error caused by selecting the Steam adapter for this Epic build. Steam and Epic still use one EXE. The supplied Epic DLL passed fingerprint and interface checks and loaded on Windows. A complete match on a full Epic installation still needs confirmation. Steam 27.1.0 passed a complete native match in regression testing.
+
+## v1118
+
+Supports Steam FM27 `27.1.0+2505117`. Open Labs from the tactics board to test player roles, team instructions, player instructions, and attributes. The squad picker can select starters and substitutes based on ability and familiarity in both phases.
+
+See the [v1118 release notes](https://github.com/lqf0624/fm-tactics-lab/releases/tag/v1118) for the full changes.
 
 ## v1114
 
@@ -168,7 +178,7 @@ The random away tactic pool can be combined with experimental tactical execution
 
 ## Version and project information
 
-The current source version is **v1114**, for Windows x64. The adapter reference build is `27.0.1+2503222`. Tool code is licensed under MIT; the engine and game resources come from your local installation.
+The current source version is **v1118**, for Windows x64. The adapter reference build is `27.1.0+2505117`. Tool code is licensed under MIT; the engine and game resources come from your local installation.
 
 Original engine code and a career match's complete conditions are separate considerations. This tool standardizes starting states; inputs, random states and in-match interventions affect results. Evidence and validation scope are described in [Simulation Fidelity](docs/SIMULATION_FIDELITY.md).
 
@@ -180,6 +190,6 @@ The interface follows the Windows display language. Simplified Chinese and Engli
 
 The Windows EXE supports both Steam and Epic and selects the native adapter from the installed game. The Tauri desktop interface uses standard I/O pipes for backend requests.
 
-Supports the November 12 Steam hotfix (`27.0.1+2503222`). Start a new batch with this build. To resume an unfinished batch, retain the original tool and game build used for that batch.
+Supports Steam FM27 `27.1.0+2505117`. Start a new batch with this build. To resume an unfinished batch, retain the original tool and game build used for that batch.
 
 A Manchester United save re-saved on this build was imported and used for 38 native matches with tactical execution enabled. Startup failures now report the diagnostic log path.

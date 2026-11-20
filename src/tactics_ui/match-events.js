@@ -31,6 +31,41 @@ function eventDistribution(j){
   return `<section class="card event-distribution"><div class="card-head"><h3>${esc(variantLabel(variant,j))} · 球员与位置分布</h3><span class="tag">${data.matches_with_events} 场有事件记录</span></div><div class="card-body"><details open><summary>按球员统计</summary>${table(data.players,false)}</details><details><summary>按位置统计</summary>${table(data.positions,true)}</details><p class="tiny muted">${data.unverified_goal_matches||data.unverified_card_matches?'未通过核对的进球／牌明细已排除。':''}两黄变红计两张黄牌及一次红牌；取消的进球不计入。位置按事件发生时记录。</p></div></section>`;
  }).join('');
 }
+const saveLeaderboardCache=new Map();
+function saveLeaderboardTable(players,metric,j){
+ const ranked=players.filter(p=>p[metric]>0).sort((a,b)=>
+  b[metric]-a[metric]||(metric==='goals'?b.assists-a.assists:b.goals-a.goals)||a.source_uid-b.source_uid);
+ const title=metric==='goals'?'进球榜':'助攻榜';
+ const label=metric==='goals'?'进球':'助攻';
+ const rows=ranked.map(p=>`<tr><td>${esc(resultPlayerName(p,p.variant,j))} <small>${esc(p.team)}</small></td><td>${p[metric]}</td></tr>`);
+ return `<section><h4>${title}</h4>${rows.length?`<div class="table-scroll"><table><thead><tr><th scope="col">球员</th><th scope="col">${label}</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`:'<p class="tiny muted">没有符合条件的记录</p>'}</section>`;
+}
+function saveLeaderboardGroup(j,data,label){
+ const tables=scope=>{
+  const players=data.players.filter(p=>p.scope===scope);
+  return '<div class="save-leaderboard-grid">'+saveLeaderboardTable(players,'goals',j)+saveLeaderboardTable(players,'assists',j)+'</div>';
+ };
+ return `<section class="save-leaderboard-group"><h3>${label} · ${data.verified_matches} 场已核对</h3>
+  ${data.excluded_matches?`<p class="tiny muted">未通过进球事件核对的场次 · ${data.excluded_matches}</p>`:''}
+  ${data.unbound_events?`<p class="tiny muted">无法绑定到存档球员的事件 · ${data.unbound_events}</p>`:''}
+  <h4>己方球员</h4>${tables('own')}<details><summary>对手球员</summary>${tables('opponent')}</details></section>`;
+}
+function saveEventLeaderboards(j){
+ if(j.experiment_type!=='save_opponents'||j.event_details===false||!j.runs?.length||['queued','running'].includes(j.status))return '';
+ const key=j.id+':'+j.completed;
+ let entry=saveLeaderboardCache.get(key);
+ if(!entry){
+  entry={};saveLeaderboardCache.set(key,entry);
+  api('/api/jobs/'+j.id+'/player-leaderboards').then(data=>entry.data=data).catch(error=>entry.error=error.message).finally(()=>{
+   if(view==='results'&&selectedJob?.id===j.id&&selectedJob.completed===j.completed)render();
+  });
+ }
+ const content=entry.data
+  ?['A','B'].filter(group=>entry.data[group]).map(group=>saveLeaderboardGroup(j,entry.data[group],group==='A'?'对照 A':'本次 B')).join('')||'<p class="tiny muted">没有符合条件的记录</p>'
+  :entry.error?`<p>${esc(entry.error)} <button type="button" class="button small" data-retry-save-leaderboards>重试</button></p>`:'<p role="status">正在汇总进球和助攻…</p>';
+ const scope=careerResultScope(j,true);
+ return `<section class="card event-distribution save-leaderboards"><div class="card-head"><h3>整批球员进球与助攻${scope?' · '+scope:''}</h3></div><div class="card-body">${content}</div></section>`;
+}
 const eventDetailPrevious=eventsView;eventsView=function(run){return matchEventDetails(run)+eventDetailPrevious(run);};
 function episodeResultsView(j){
  const settings=j.episode_settings,metrics=Object.entries(j.metrics||{}),selected=j.runs[j.detailIndex??Math.max(0,j.runs.length-1)];

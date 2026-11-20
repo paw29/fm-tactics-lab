@@ -1,0 +1,14 @@
+{
+  "version": "27.1.0+2505117",
+  "reference_dll_sha256": "f39d5d97aeb62f579cac0255d43bba29e34bc56d984eadea579805cfa275d0f1",
+  "mapped_references": 106,
+  "unmapped_references": [
+    "0xfb2580",
+    "0x4a7c550"
+  ],
+  "tactic_version": "1b010000",
+  "native_worker_protocol": 2,
+  "session_scope": "remaining_batch_lane",
+  "execution_context_reset": true,
+  "max_worker_jobs": 1000000
+}

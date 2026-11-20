@@ -1,15 +1,29 @@
+import io
 import json
 import os
 from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import threading
 import unittest
 from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1]
 os.environ.setdefault('FM27_ENGINE_ROOT',str(ROOT/'build/test-temp'))
 sys.path.insert(0,str(ROOT/'src'))
-from desktop_warm_batch import DesktopWarmRunner
+from desktop_warm_batch import DesktopWarmRunner, match_importance_receipt
+
+
+class MatchImportanceReceiptTests(unittest.TestCase):
+ def test_resume_requires_exact_starter_readbacks(self):
+  scenario={'match_importance':7}
+  receipt={'event':'native_match_importance_readback','requested':7,'verified':True,
+           'starters':[[7]*11,[7]*11]}
+  self.assertIsNone(match_importance_receipt([],{}))
+  self.assertEqual(match_importance_receipt([receipt],scenario),7)
+  for rows in ([], [receipt,receipt], [{**receipt,'starters':[[7]*11,[7]*10+[13]]}]):
+   with self.subTest(rows=rows),self.assertRaises(ValueError):
+    match_importance_receipt(rows,scenario)
 
 class WorkerSessionTests(unittest.TestCase):
  def setUp(self):
@@ -44,6 +58,71 @@ class WorkerSessionTests(unittest.TestCase):
   (self.root/'fm27_native/FM27Simulator.exe').write_bytes(b'upgraded-worker')
   runner=self.runner(dict(protocol=2,max_jobs=1000,execution_context_reset=True,per_match_resource_release=True))
   self.assertTrue(runner.counted_sessions)
+
+ def test_serial_startup_still_allows_eight_simultaneous_matches(self):
+  runner=self.runner(dict(protocol=2,max_jobs=64,execution_context_reset=True,per_match_resource_release=True))
+  runner.workers=8
+  matches=threading.Barrier(runner.workers,timeout=8)
+  lock=threading.Lock()
+  starting=set()
+  overlaps=[]
+  threads=[]
+
+  class Process:
+   def __init__(self,command,**kwargs):
+    manifest=Path(command[2]).read_text(encoding='utf8').splitlines()
+    self.log=Path(manifest[4])
+    self.startup=Path(command[4])
+    self.pid=int(manifest[5])+1000
+    self.stdout=io.BytesIO()
+    self.returncode=None
+    self.started=threading.Event()
+    with lock:
+     if starting:overlaps.append(self.pid)
+     starting.add(self.pid)
+    thread=threading.Thread(target=self.simulate)
+    threads.append(thread)
+    thread.start()
+
+   def simulate(self):
+    self.started.wait(.05)
+    with lock:starting.remove(self.pid)
+    self.startup.write_text('{"event":"native_activation_completed"}\n'
+                            '{"event":"native_interface_created"}\n'
+                            '{"event":"native_engine_compatibility","compatible":true}\n'
+                            '{"event":"native_image_fingerprint","sha256":"test"}\n'
+                            '{"event":"steam_session_cleanup","ok":true}\n',encoding='utf8')
+    try:
+     matches.wait()
+    except threading.BrokenBarrierError:
+     self.returncode=82
+     return
+    self.log.write_text('{"event":"host_icu_data_initialized"}\n'
+                        '{"event":"native_engine_bootstrap_returned"}\n',encoding='utf8')
+    ack=Path(str(self.log)+'.worker_done')
+    pending=Path(str(ack)+'.tmp')
+    pending.write_text(json.dumps(dict(released=True,exit_code=0,index=1,pid=self.pid)),encoding='utf8')
+    pending.replace(ack)
+    self.returncode=0
+
+   def poll(self):
+    return self.returncode
+
+   def communicate(self):
+    return b'',None
+
+  tasks=[dict(path=self.root/f'{seed}.jsonl',config=self.root/'input.bin',seed=seed,
+              scenario={},variant='B',event_details=False) for seed in range(8)]
+  checked=[]
+  with patch('desktop_warm_batch.subprocess.Popen',side_effect=Process),\
+       patch('desktop_warm_batch.own_child_processes'),\
+       patch('desktop_warm_batch.require_space'),\
+       patch.object(runner,'postprocess',side_effect=lambda task,*_:task['seed']):
+   try:runner.run(tasks,checked.append)
+   finally:
+    for thread in threads:thread.join()
+  self.assertEqual(overlaps,[])
+  self.assertEqual(sorted(checked),list(range(8)))
 
 class WorkerResourceTests(unittest.TestCase):
  def test_high_core_machine_has_headroom_and_conservative_default(self):

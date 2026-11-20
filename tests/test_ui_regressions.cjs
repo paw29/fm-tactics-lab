@@ -6,6 +6,107 @@ const vm=require('node:vm');
 const ui=path.join(__dirname,'../src/tactics_ui');
 function fragment(file,start,end){const text=fs.readFileSync(path.join(ui,file),'utf8');return text.slice(text.indexOf(start),end?text.indexOf(end,text.indexOf(start)):undefined);}
 function context(values){return vm.createContext(values);}
+test('automatic squad accounts for both shapes, current ability and reserve coverage',()=>{
+ const c=context({});
+ vm.runInContext(fragment('app.js','const POS_ATTR=','function autoLineup'),c);
+ vm.runInContext(fragment('squad-editor.js','const savedPositionKeys=','showSaveLineup=function'),c);
+ const positions=['GK','DL','DCL','DR','DCR','DMC','ML','MCL','MR','AMR','ST'];
+ const phases=[positions,positions.map((p,i)=>i===1?'WBL':p)]
+  .map(shape=>shape.map(position=>({position})));
+ const roster=[
+  {uid:1,ca:120,positions:{gk:20}},
+  {uid:2,ca:85,positions:{gk:18}},
+  {uid:3,ca:140,positions:{dl:20,wbl:20,dc:20}},
+  {uid:4,ca:110,positions:{dl:18,wbl:18}},
+  {uid:5,ca:200,positions:{dl:20,wbl:5}},
+  {uid:6,ca:100,positions:{dr:20}},
+  {uid:7,ca:125,positions:{dr:20}},
+  ...['dc','dm','ml','mc','mr','amr','stc'].map((p,i)=>({uid:8+i,ca:100,positions:{[p]:20}})),
+  ...Array.from({length:13},(_,i)=>({uid:30+i,ca:90,positions:{mc:13,dl:14,wbl:14}})),
+ ];
+ const picks=c.automaticMatchSquad(roster,phases);
+ assert.deepEqual([picks.starters[0],picks.starters[1],picks.starters[3]],[1,4,7]);
+ assert.deepEqual(new Set([picks.starters[2],picks.starters[4]]),new Set([3,8]));
+ assert.equal(picks.substitutes[0],2);
+ assert.equal(picks.substitutes.length,12);
+ assert.equal(new Set([...picks.starters,...picks.substitutes]).size,23);
+ const attributes=Array(15).fill(1);attributes[2]=20;
+ assert.equal(c.squadPositionFit({attributes,positions:{dl:8}},'DL'),20);
+ const onlyStarters=roster.filter(p=>picks.starters.includes(p.uid));
+ assert.deepEqual(Array.from(c.automaticMatchSquad(onlyStarters,phases).substitutes),[]);
+});
+test('free and save matches share the preset, and only custom requires a valid number',async()=>{
+ const controls={
+  '#match-importance':{value:'13',disabled:false,checkValidity:()=>true},
+  '#match-importance-custom':{value:'',checkValidity:()=>false},
+  '#match-importance-custom-label':{},
+  '#match-importance-availability':{},
+  '#experiment-name':{value:''},
+  '#execution-enabled':{checked:false},
+ };
+ const c=context({
+  $:selector=>controls[selector],saveApiPrevious:async(url,data)=>({url,data}),
+  saveMode:'free',saveLoaded:{club_uid:1,save_id:'save'},saveClub:1,saveInfo:{id:'save'},
+  saveChosen:new Set(['other']),saveOpponents:[{key:'other'}],careerTwoRounds:false,careerRetest:100,
+  updateMatchSettingsSummary(){},
+ });
+ vm.runInContext(fragment('save-mode.js','function updateMatchImportanceAvailability','function updateExecutionAvailability'),c);
+ c.updateMatchImportanceAvailability(true);
+ assert.equal(controls['#match-importance-custom-label'].hidden,true);
+ vm.runInContext(fragment('save-mode.js','api=async function(url,data){','const saveResultsPrevious'),c);
+ const input={scenario:{},reference:{}};
+ const free=await c.api('/api/run',input);
+ assert.equal(free.data.scenario.match_importance,13);
+ assert.equal(free.data.reference.match_importance,13);
+ assert.equal(input.scenario.match_importance,undefined);
+ c.saveMode='save';
+ controls['#match-importance'].value='19';
+ const save=await c.api('/api/run',input);
+ assert.equal(save.url,'/api/save/run');
+ assert.equal(save.data.scenario.match_importance,19);
+ controls['#match-importance'].value='custom';
+ controls['#match-importance'].onchange();
+ assert.equal(controls['#match-importance-custom-label'].hidden,false);
+ await assert.rejects(c.api('/api/run',input),/1–20/);
+ controls['#match-importance-custom'].value='7';
+ controls['#match-importance-custom'].checkValidity=()=>true;
+ const custom=await c.api('/api/run',input);
+ assert.equal(custom.data.scenario.match_importance,7);
+ assert.equal(custom.data.reference.match_importance,7);
+ c.careerTwoRounds=true;
+ const league=await c.api('/api/run',{...input,count:2,
+  leagueRun:{two_rounds:false,retest_count:0,opponents:[{key:'different'}]}});
+ assert.equal(league.data.count,2);
+ assert.equal(league.data.two_rounds,false);
+ assert.equal(league.data.opponents[0].key,'different');
+ assert.equal(league.data.leagueRun,undefined);
+ assert.ok(c.saveChosen.has('other'));
+});
+test('historical conditions and round labels use the completed experiment',()=>{
+ const c=context({});
+ vm.runInContext(fragment('save-mode.js','function historicalConditions','const saveResultsPrevious'),c);
+ vm.runInContext(fragment('league-testing.js','function careerResultScope'),c);
+ assert.equal(c.historicalConditions({match_conditions:{B:{importance:19,manual_execution:false}},runs:[]}),
+  '比赛重要性 19 / 20 · 执行力自动');
+ assert.equal(c.historicalConditions({runs:[{match_importance:13}]}),'比赛重要性 13 / 20 · 执行力自动');
+ const job={test_rounds:[{},{}],round_results:{2:{completed:0}}};
+ assert.equal(c.careerResultScope(job),'首轮');
+ job.round_results[2].completed=1;
+ assert.equal(c.careerResultScope(job),'复测');
+ assert.equal(c.careerResultScope(job,true),'两轮合计');
+});
+test('save leaderboards rank goals and assists independently',()=>{
+ const c=context({esc:String,resultPlayerName:p=>p.name});
+ vm.runInContext(fragment('match-events.js','function saveLeaderboardTable','const eventDetailPrevious'),c);
+ const players=[
+  {name:'Forward',team:'Own',scope:'own',source_uid:1,goals:5,assists:1},
+  {name:'Playmaker',team:'Own',scope:'own',source_uid:2,goals:2,assists:6},
+ ];
+ const scorers=c.saveLeaderboardTable(players,'goals',{});
+ const assists=c.saveLeaderboardTable(players,'assists',{});
+ assert.ok(scorers.indexOf('Forward')<scorers.indexOf('Playmaker'));
+ assert.ok(assists.indexOf('Playmaker')<assists.indexOf('Forward'));
+});
 test('opposition button opens the save opponent picker on a DOM click',async()=>{
  const button={};let opened=0;
  const c=context({view:'opposition',$:s=>s==='[data-oi-choose]'?button:null,$$:()=>[],saveOpponentRequest:0,saveInfo:{id:'save'},saveClub:1,saveMode:'save',api:async()=>({status:'complete',opponents:[]}),showSaveOpponents:()=>opened++,toast:assert.fail});

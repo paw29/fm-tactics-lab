@@ -20,11 +20,12 @@ class RetestSourceTests(unittest.TestCase):
         tree=ast.parse((ROOT/'src/fm27_tactics_server.py').read_text('utf8'))
         handler=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=='TacticsApi')
         method=next(n for n in handler.body if isinstance(n,ast.FunctionDef) and n.name=='post')
+        conditions=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='experiment_conditions')
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);old_dir=root/'old';old_dir.mkdir()
             native=root/'native';(native/'fixtures').mkdir(parents=True)
             for path in (native/'FM27Simulator.exe',native/'fixtures/match.pkm'):path.write_bytes(b'test fixture')
-            snapshot={'teams':[{'name':'Opponent'},{'name':'Own'}]}
+            snapshot={'teams':[{'name':'Opponent'},{'name':'Own'}],'match_importance':19}
             encode=lambda s:json.dumps(s,sort_keys=True).encode()
             variants=('A_2_H','B_0_A')
             for variant in variants:(old_dir/f'{variant}.json').write_text(json.dumps(snapshot),encoding='utf8')
@@ -44,7 +45,7 @@ class RetestSourceTests(unittest.TestCase):
                     experiment_name=lambda n,f:n or f,profiles=SimpleNamespace(CONTROLLED_START={}),
                     persist=lambda job:(job['_dir']/'summary.json').write_text(json.dumps({k:v for k,v in job.items() if not k.startswith('_')}),encoding='utf8'),
                     POOL=SimpleNamespace(submit=lambda *_:None),execute=lambda *_:None)
-            exec(compile(ast.Module(body=[method],type_ignores=[]),'<do_POST>','exec'),ns)
+            exec(compile(ast.Module(body=[conditions,method],type_ignores=[]),'<do_POST>','exec'),ns)
             for variant in variants:
                 with self.subTest(variant=variant):
                     request=SimpleNamespace(path='/api/jobs/retest',send=lambda data,status=200:(status,data))
@@ -55,4 +56,5 @@ class RetestSourceTests(unittest.TestCase):
                     summary=json.loads((created['_dir']/'summary.json').read_text('utf8'))
                     self.assertEqual(summary['retest_source'],{'id':'old','variant':variant})
                     self.assertEqual(summary['schedule']['B']['tested_side'],int(variant[-1]=='A'))
+                    self.assertEqual(summary['match_conditions'],{'B':{'importance':19,'manual_execution':False}})
                     self.assertEqual(json.loads((created['_dir']/'provenance.json').read_text('utf8'))['seeds'],[44,45])

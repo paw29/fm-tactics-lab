@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import queue
 import subprocess
+import threading
 import time
 import uuid
 
@@ -31,6 +32,20 @@ def merged_rows(receipt,rows):
     return receipt['session_rows']+[row for row in receipt['original_bootstrap_rows']if row['event']not in events]+rows
 
 
+def match_importance_receipt(rows, scenario):
+    expected = scenario.get('match_importance')
+    if expected is None:
+        return None
+    receipts = [row for row in rows if row.get('event') == 'native_match_importance_readback']
+    if len(receipts) != 1:
+        raise ValueError('比赛重要性缺少唯一的原生回读')
+    receipt = receipts[0]
+    if (receipt.get('verified') is not True or receipt.get('requested') != expected
+            or receipt.get('starters') != [[expected] * 11, [expected] * 11]):
+        raise ValueError('比赛重要性与双方首发的原生回读不一致')
+    return expected
+
+
 def inspect_saved_run(directory,run,scenario=None):
     log=directory/run['log']
     if not run.get('startup_receipt'):return inspect_log(log)
@@ -39,7 +54,9 @@ def inspect_saved_run(directory,run,scenario=None):
         raise ValueError('复用宿主启动回执已改变，无法接续此实验')
     receipt=json.loads(path.read_text(encoding='utf8'))
     rows=merged_rows(receipt,read_rows(log))
-    if scenario is not None:execution_receipts(rows,scenario)
+    if scenario is not None:
+        execution_receipts(rows,scenario)
+        match_importance_receipt(rows, scenario)
     return inspect_log(log,rows=rows)
 
 
@@ -85,6 +102,7 @@ class DesktopWarmRunner(BatchRunner):
         released=next(r for r in rows if r['event']=='original_match_release_completed')
         if not released['tls_context_cleared']:raise ValueError('上一场原生线程上下文未清除')
         execution = execution_receipts(rows, task['scenario'])
+        importance = match_importance_receipt(rows, task['scenario'])
         statistics=next((r for r in rows if r['event']=='native_match_statistics'),None)
         if not statistics or len(statistics['teams'])!=2:raise ValueError('缺少原生球队统计')
         for team in statistics['teams']:
@@ -110,6 +128,7 @@ class DesktopWarmRunner(BatchRunner):
         timings=next(r for r in rows if r['event']=='native_timings')
         return {'variant':task['variant'],'seed':task['seed'],'result':checked['result'],'episode':None,
                 **({'experimental_execution':execution} if execution is not None else {}),
+                **({'match_importance':importance} if importance is not None else {}),
                 'generated_plans':[r for r in rows if r.get('event')=='source_generation_readback'],
                 'statistics':statistics,'events':events,'score_changes':checked['score_changes'],'log':path.name,
                 'verified':True,'attempts':1,'retry_errors':[],'timings':timings,
@@ -132,6 +151,7 @@ class DesktopWarmRunner(BatchRunner):
         own_child_processes()
         if any(t.get('episode')for t in tasks):raise ValueError('定位球片段须使用独立片段入口')
         messages=queue.Queue(maxsize=6)
+        startup_slot=threading.Lock()
         lanes=[tasks[i::self.workers]for i in range(min(self.workers,len(tasks)))]
         # New hosts reset per-match execution state; old hosts retain isolation.
         session_size=self.session_size(lanes,any('experimental_execution'in task['scenario']for task in tasks))
@@ -165,7 +185,7 @@ class DesktopWarmRunner(BatchRunner):
                 fields.extend(values)
             manifest.write_text('\n'.join(fields)+'\n',encoding='utf8',newline='\n')
             cancellation=MatchCancellation();process=None;key=folder.name;completed=0;receipt=None;failure=None
-            began=last_progress=time.perf_counter();cancel_started=None
+            cancel_started=None;starting=False
             try:
                 env=os.environ.copy()
                 env.pop('FM27_SKIP_EVENT_DETAILS',None)
@@ -176,11 +196,24 @@ class DesktopWarmRunner(BatchRunner):
                     if name.startswith(('FM27_IMPORT_','FM27_EXPORT_','FM27_EPISODE_','FM27_SAVE_SECTION_','FM27_SAVED_CORE_','FM27_AI_'))or name=='FM27_DESKTOP_STATS_AUDIT':env.pop(name)
                 command=[str(self.host),'--worker-manifest',str(manifest),
                          '--output',str(startup),'--tick-step','1','--cancel-event',cancellation.name]
+                # Limit simultaneous DLL activation. Workers release this slot
+                # before simulating, so the configured match concurrency remains available.
+                while not self.stop.is_set():
+                    if startup_slot.acquire(timeout=.1):
+                        starting=True
+                        break
+                if not starting:return
                 with self.lock:
                     if self.stop.is_set():return
                     process=subprocess.Popen(command,cwd=self.root,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,creationflags=subprocess.CREATE_NO_WINDOW)
                     self.processes[key]=process;self.cancellations[key]=cancellation
+                began=last_progress=time.perf_counter()
                 while True:
+                    if starting and startup.is_file() and any(
+                        row.get('event')=='native_interface_created' for row in read_rows(startup,live=True)
+                    ):
+                        startup_slot.release()
+                        starting=False
                     while completed<len(chunk)and Path(str(chunk[completed]['path'])+'.worker_done').exists():
                         task=chunk[completed];path=Path(task['path']);rows=read_rows(path)
                         ack=json.loads(Path(str(path)+'.worker_done').read_text(encoding='utf8'))
@@ -216,12 +249,12 @@ class DesktopWarmRunner(BatchRunner):
                 output=process.communicate()[0].decode(errors='replace')
                 final=read_rows(startup,live=True)if startup.exists()else[]
                 cleanup=next((r for r in final if r['event']=='steam_session_cleanup'),None)
-                if not failure and process.returncode == 82 and any(
-                    row.get('event') == 'native_debug_text' and
-                    'did not locate a running instance of Steam' in row.get('text', '')
-                    for row in final
-                ):
-                    failure = '比赛引擎未连接到 Steam。请在同一 Windows 用户下启动 Steam，登录拥有 FM27 的账号，再继续未完成场次。'
+                if not failure and process.returncode == 82:
+                    if any(row.get('event')=='native_debug_text' and
+                           'did not locate a running instance of Steam' in row.get('text','') for row in final):
+                        failure = '比赛引擎未连接到 Steam。请在同一 Windows 用户下启动 Steam，登录拥有 FM27 的账号，再继续未完成场次。'
+                    elif any(row.get('event')=='activation_still_pending' for row in final):
+                        failure = '原版引擎激活超时。已完成场次已保留，可继续未完成场次。'
                 record={'returncode':process.returncode,'completed':completed,'expected':len(chunk),'failure':failure,
                         'stdout':output,'wall_seconds':time.perf_counter()-began,'manifest_sha256':sha(manifest),
                         'steam_session_cleanup':cleanup,'session_log':str(startup.relative_to(root))}
@@ -247,6 +280,7 @@ class DesktopWarmRunner(BatchRunner):
                 save(folder/'failure.json',{'error':repr(error),'completed':completed,'expected':len(chunk),'entered_logs_and_seeds_retained':True})
                 publish(('error',error))
             finally:
+                if starting:startup_slot.release()
                 with self.lock:self.processes.pop(key,None);self.cancellations.pop(key,None);self.active.pop(key,None)
                 cancellation.close()
                 if process is not None:

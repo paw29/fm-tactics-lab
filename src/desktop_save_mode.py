@@ -1148,7 +1148,11 @@ class SaveLibrary:
             starts=sorted((s for s in data['selections'] if s.get('club_uid')==club and s.get('team_slot')==0 and not s['substitute']),key=lambda s:s['slot'])
             automatic=copy.deepcopy(scenario['teams'][side])
             self.apply_plan(automatic,self.parsed_plan(key,index))
-            preferred = [s.get('source_uid') for s in starts]
+            by_slot = {s['slot']: s.get('source_uid') for s in starts}
+            saved_reserves = [s.get('source_uid') for s in sorted(
+                (s for s in data['selections'] if s.get('club_uid') == club
+                 and s.get('team_slot') == 0 and s['substitute']), key=lambda s:s['slot'])]
+            preferred = [by_slot.get(i) for i in range(11)] + saved_reserves
             if data.get('save_mode') == 'online_draft':
                 picks = [s for s in data['selections'] if s['club_uid'] == club]
                 by_slot = {s['slot']: s['source_uid'] for s in picks if not s['substitute']}
@@ -1156,7 +1160,11 @@ class SaveLibrary:
                 preferred = [by_slot.get(i) for i in range(11)] + [s['source_uid'] for s in bench]
             desktop_static_plans.roster(self,key,club,automatic,preferred)
             selected=[p['source_uid'] for p in automatic['players'][:11]]
-            if substitutes is None:substitutes=[p['source_uid'] for p in automatic['players'][11:automatic['roster_size']]]
+            if substitutes is None:
+                substitutes = list(dict.fromkeys(uid for uid in preferred[11:]
+                    if uid in people and uid not in selected))[:12]
+                if not substitutes:
+                    substitutes = [p['source_uid'] for p in automatic['players'][11:automatic['roster_size']]]
         if len(selected)!=11 or len(set(selected))!=11 or any(u not in people for u in selected):
             raise ValueError('首发必须是该队11名不同的已解析球员')
         team=scenario['teams'][side]

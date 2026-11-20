@@ -4,7 +4,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from generate_profile import adapter_paths, generate
+from generate_profile import ADAPTERS, adapter_paths, generate
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-dll', required=True, type=Path)
-    parser.add_argument('--platform', choices=('steam', 'epic'), default='steam')
+    parser.add_argument('--platform', choices=ADAPTERS, default='steam')
     args = parser.parse_args()
     if not shutil.which('cl'):
         raise SystemExit('Run in an x64 Native Tools Command Prompt for Visual Studio (cl.exe required).')
