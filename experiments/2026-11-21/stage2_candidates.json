@@ -1,0 +1,7136 @@
+[
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMR",
+"DML",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0644,
+"geo_min": 0.0412
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMR",
+"DML",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0642,
+"geo_min": 0.0411
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCL",
+"AMR",
+"MCR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.064,
+"geo_min": 0.0457
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0639,
+"geo_min": 0.0465
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"AMC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0638,
+"geo_min": 0.0464
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"STR",
+"ST",
+"AML",
+"STL"
+],
+"geo": 0.0636,
+"geo_min": 0.0341
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0636,
+"geo_min": 0.0506
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0635,
+"geo_min": 0.0423
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMC",
+"DML",
+"AMR",
+"STR",
+"AML",
+"STL"
+],
+"geo": 0.0634,
+"geo_min": 0.0341
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0633,
+"geo_min": 0.0422
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"STR",
+"ST",
+"AML",
+"STL"
+],
+"geo": 0.0633,
+"geo_min": 0.0386
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"DMR",
+"DML",
+"AML",
+"ST",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0633,
+"geo_min": 0.0385
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MCL",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0631,
+"geo_min": 0.0462
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DMR",
+"DC",
+"DML",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0631,
+"geo_min": 0.0397
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"DL",
+"AMC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0631,
+"geo_min": 0.0384
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DMR",
+"DC",
+"DML",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.063,
+"geo_min": 0.0396
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"AMR",
+"DR",
+"MCL",
+"AML",
+"MCR",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0629,
+"geo_min": 0.043
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0628,
+"geo_min": 0.0441
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"ST",
+"DML",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0626,
+"geo_min": 0.042
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMC",
+"DML",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0624,
+"geo_min": 0.0419
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"ST",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0622,
+"geo_min": 0.0454
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0622,
+"geo_min": 0.0455
+},
+{
+"label": "C_DMR-DML-MCR-MC-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DC",
+"DML",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0622,
+"geo_min": 0.0261
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0621,
+"geo_min": 0.0401
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0621,
+"geo_min": 0.0425
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0619,
+"geo_min": 0.0414
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DMR",
+"DC",
+"DML",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0619,
+"geo_min": 0.0406
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0619,
+"geo_min": 0.0454
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"AMR",
+"AMC",
+"MCL",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0618,
+"geo_min": 0.0424
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCL",
+"AMR",
+"MCR",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0618,
+"geo_min": 0.0442
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DMR",
+"DC",
+"DML",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0618,
+"geo_min": 0.0406
+},
+{
+"label": "C_DMR-DML-MCR-MC-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DC",
+"DML",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0617,
+"geo_min": 0.026
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0616,
+"geo_min": 0.0451
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0614,
+"geo_min": 0.0469
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"AMC",
+"MCL",
+"AMR",
+"STR",
+"AML",
+"STL"
+],
+"geo": 0.061,
+"geo_min": 0.0354
+},
+{
+"label": "C_DMR-DML-MCR-MC-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.061,
+"geo_min": 0.0306
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"DC",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0609,
+"geo_min": 0.0395
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0609,
+"geo_min": 0.0415
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"DC",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0608,
+"geo_min": 0.0394
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"DMR",
+"AML",
+"ST",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0607,
+"geo_min": 0.0401
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"ST",
+"DML",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0607,
+"geo_min": 0.0433
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"MCR",
+"MCL",
+"AML",
+"AMC",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0607,
+"geo_min": 0.0397
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMCR-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"STR",
+"STL",
+"ST"
+],
+"geo": 0.0606,
+"geo_min": 0.032
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0606,
+"geo_min": 0.044
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"DMR",
+"AML",
+"AMC",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0606,
+"geo_min": 0.04
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0605,
+"geo_min": 0.0409
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"AMC",
+"DML",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0605,
+"geo_min": 0.0403
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMCR-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"DMR",
+"AMC",
+"AML",
+"AMR",
+"STL",
+"STR"
+],
+"geo": 0.0605,
+"geo_min": 0.0319
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0605,
+"geo_min": 0.0298
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0604,
+"geo_min": 0.0414
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMC-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"AMR",
+"MCL",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0604,
+"geo_min": 0.0446
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"ST",
+"MCL",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0604,
+"geo_min": 0.0433
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"DC",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0603,
+"geo_min": 0.0367
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMCR-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCL",
+"AMR",
+"MCR",
+"AML",
+"STR",
+"STL",
+"ST"
+],
+"geo": 0.0603,
+"geo_min": 0.0365
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0603,
+"geo_min": 0.0413
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"DC",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0601,
+"geo_min": 0.0381
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0601,
+"geo_min": 0.0455
+},
+{
+"label": "C_DMR-DML-MR-MC-ML-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DMR",
+"DML",
+"DR",
+"DC",
+"DL",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.06,
+"geo_min": 0.0373
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"AMC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.06,
+"geo_min": 0.0393
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMR",
+"MC",
+"DML",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.06,
+"geo_min": 0.0408
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.06,
+"geo_min": 0.0407
+},
+{
+"label": "C_DMR-DML-MR-MC-ML-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DMR",
+"DML",
+"DR",
+"DC",
+"DL",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0598,
+"geo_min": 0.0373
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"AMR",
+"MCR",
+"DC",
+"AML",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0598,
+"geo_min": 0.0218
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMCR-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DMR",
+"DC",
+"DML",
+"AML",
+"STR",
+"STL",
+"ST"
+],
+"geo": 0.0597,
+"geo_min": 0.0319
+},
+{
+"label": "C_DMR-DML-MR-MC-ML-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DC",
+"AML",
+"MCR",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0597,
+"geo_min": 0.0418
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0596,
+"geo_min": 0.0393
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0596,
+"geo_min": 0.023
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMCR-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DMR",
+"DC",
+"DML",
+"AML",
+"STR",
+"STL",
+"AMC"
+],
+"geo": 0.0596,
+"geo_min": 0.0318
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"AMR",
+"MCL",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0595,
+"geo_min": 0.0427
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"MC",
+"DML",
+"STL",
+"AMR",
+"STR",
+"AML"
+],
+"geo": 0.0595,
+"geo_min": 0.0449
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DCR-DCL-DMC-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DMC",
+"AMR",
+"MCR",
+"MCL",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0595,
+"geo_min": 0.0265
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0594,
+"geo_min": 0.0421
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMCR-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"STR",
+"STL",
+"ST"
+],
+"geo": 0.0594,
+"geo_min": 0.0363
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0593,
+"geo_min": 0.0419
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0593,
+"geo_min": 0.0424
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"MC",
+"DML",
+"AMR",
+"STR",
+"AML",
+"STL"
+],
+"geo": 0.0592,
+"geo_min": 0.0338
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"DMR",
+"AML",
+"AMR",
+"ST",
+"STL",
+"STR"
+],
+"geo": 0.0592,
+"geo_min": 0.0286
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCL",
+"AMR",
+"MCR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0591,
+"geo_min": 0.0462
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"MC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0591,
+"geo_min": 0.0396
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"DMR",
+"AML",
+"AMR",
+"AMC",
+"STL",
+"STR"
+],
+"geo": 0.059,
+"geo_min": 0.0286
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMR-AMC-AML-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"STR",
+"DML",
+"AMR",
+"ST",
+"AML",
+"STL"
+],
+"geo": 0.059,
+"geo_min": 0.0333
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"DMR",
+"DML",
+"AML",
+"MC",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0589,
+"geo_min": 0.0381
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"AMR",
+"MCL",
+"STR",
+"ST",
+"AML",
+"STL"
+],
+"geo": 0.0588,
+"geo_min": 0.0331
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMR-AMC-AML-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMC",
+"DML",
+"AMR",
+"STR",
+"AML",
+"STL"
+],
+"geo": 0.0588,
+"geo_min": 0.034
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0587,
+"geo_min": 0.0277
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DMR",
+"DC",
+"DML",
+"AML",
+"MC",
+"STR",
+"STL"
+],
+"geo": 0.0587,
+"geo_min": 0.0393
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MC",
+"AMR",
+"MCR",
+"MCL",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0587,
+"geo_min": 0.0409
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMR-AMC-AML-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0587,
+"geo_min": 0.0385
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DCR-DCL-DMC-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"AMR",
+"MCR",
+"DMC",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0587,
+"geo_min": 0.0197
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"AMR",
+"DCL",
+"DCR",
+"DC",
+"MCR",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0586,
+"geo_min": 0.0248
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMR-AMC-AML-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"STR",
+"MCL",
+"AMR",
+"ST",
+"AML",
+"STL"
+],
+"geo": 0.0586,
+"geo_min": 0.0369
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-AMC-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"ST",
+"DML",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0586,
+"geo_min": 0.0344
+},
+{
+"label": "C_DMR-DMC-DML-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DMC",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"AMR",
+"DMR",
+"DML",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0586,
+"geo_min": 0.0371
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DC-WBR-WBL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"DMR",
+"AMR",
+"DML",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0586,
+"geo_min": 0.0275
+},
+{
+"label": "C_DR-DL-DMC-MR-MC-ML-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"STR",
+"ST",
+"AML",
+"STL"
+],
+"geo": 0.0585,
+"geo_min": 0.0389
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"DMR",
+"DML",
+"AML",
+"AMR",
+"ST",
+"STL",
+"STR"
+],
+"geo": 0.0585,
+"geo_min": 0.0286
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DCR-DC-DCL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"MR",
+"MCR",
+"ML",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0585,
+"geo_min": 0.03
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMR-AMC-AML-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0585,
+"geo_min": 0.0355
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-STR-ST-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0584,
+"geo_min": 0.024
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-AMC-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"AMC",
+"DML",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0584,
+"geo_min": 0.0363
+},
+{
+"label": "C_DMR-DMC-DML-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DMC",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"AMR",
+"DMR",
+"DML",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0584,
+"geo_min": 0.0395
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DCR-DCL-DMC-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"AMR",
+"MCR",
+"MCL",
+"AML",
+"DMC",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0584,
+"geo_min": 0.0185
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DC-WBR-WBL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"DMR",
+"AMR",
+"DML",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0584,
+"geo_min": 0.0274
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0583,
+"geo_min": 0.0407
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMR-AMC-AML-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MCL",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0583,
+"geo_min": 0.0384
+},
+{
+"label": "C_DR-DL-DMC-MR-MC-ML-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"STR",
+"AMC",
+"AML",
+"STL"
+],
+"geo": 0.0583,
+"geo_min": 0.039
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"DL",
+"STR",
+"AMC",
+"AML",
+"STL"
+],
+"geo": 0.0583,
+"geo_min": 0.0286
+},
+{
+"label": "C_WBR-WBL-DMR-DMC-DML-MCR-MCL-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DMC",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DC",
+"DML",
+"AMR",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0583,
+"geo_min": 0.0354
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-AMC-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"ST",
+"MCL",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0583,
+"geo_min": 0.0382
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MC",
+"MCL",
+"STL",
+"AMR",
+"STR",
+"AML"
+],
+"geo": 0.0583,
+"geo_min": 0.0429
+},
+{
+"label": "C_DMR-DMC-DML-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DMC",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"AMR",
+"MCR",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0582,
+"geo_min": 0.0412
+},
+{
+"label": "C_DR-DL-DMC-MC-AMR-AMCR-AMC-AMCL-AML-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMR",
+"AMCR",
+"AMC",
+"AMCL",
+"AML",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMR",
+"STR",
+"DML",
+"STL",
+"AML",
+"ST"
+],
+"geo": 0.0582,
+"geo_min": 0.0354
+},
+{
+"label": "C_DR-DL-DMC-MR-MC-ML-AMCR-AMC-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"AML",
+"STR",
+"MCL",
+"STL",
+"ST"
+],
+"geo": 0.0582,
+"geo_min": 0.0419
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMCR-AMC-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"MCR",
+"MCL",
+"AML",
+"AMR",
+"ST",
+"STL",
+"STR"
+],
+"geo": 0.0582,
+"geo_min": 0.0331
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMCL-STR-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"MC",
+"DML",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0582,
+"geo_min": 0.0374
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMC-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"AMR",
+"MCL",
+"AMC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0582,
+"geo_min": 0.0413
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-STR-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"AMC",
+"MCL",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0581,
+"geo_min": 0.0372
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DC-WBR-WBL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0581,
+"geo_min": 0.0328
+},
+{
+"label": "C_WBR-WBL-DMR-DMC-DML-MCR-MCL-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DMC",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DC",
+"DML",
+"AMR",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0581,
+"geo_min": 0.0391
+},
+{
+"label": "C_DMR-DML-MR-MC-ML-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DMR",
+"DML",
+"DR",
+"DC",
+"DL",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0581,
+"geo_min": 0.0351
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMCR-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"AMR",
+"AMC",
+"MCL",
+"STR",
+"AML",
+"STL"
+],
+"geo": 0.0581,
+"geo_min": 0.0332
+},
+{
+"label": "C_DR-DL-DMC-MC-AMR-AMCR-AMC-AMCL-AML-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMR",
+"AMCR",
+"AMC",
+"AMCL",
+"AML",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"AMR",
+"STR",
+"AMC",
+"DML",
+"AML",
+"STL"
+],
+"geo": 0.058,
+"geo_min": 0.0334
+},
+{
+"label": "C_WBR-WBL-DMR-DMC-DML-MCR-MCL-AMC-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DMC",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0579,
+"geo_min": 0.0394
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MC",
+"MCL",
+"AMR",
+"STR",
+"AML",
+"STL"
+],
+"geo": 0.0579,
+"geo_min": 0.0339
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DC-WBR-WBL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"AMC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0579,
+"geo_min": 0.0327
+},
+{
+"label": "C_DMR-DML-MR-MC-ML-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DMR",
+"DML",
+"DR",
+"DC",
+"DL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0579,
+"geo_min": 0.0361
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMC-MCR-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"DMC",
+"MCL",
+"STL",
+"AMR",
+"STR",
+"AML"
+],
+"geo": 0.0579,
+"geo_min": 0.0428
+},
+{
+"label": "C_DR-DL-DMC-MC-AMR-AMCR-AMC-AMCL-AML-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMR",
+"AMCR",
+"AMC",
+"AMCL",
+"AML",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"AMR",
+"STR",
+"MCL",
+"STL",
+"AML",
+"ST"
+],
+"geo": 0.0579,
+"geo_min": 0.0363
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DCR-DC-DCL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0579,
+"geo_min": 0.0263
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0579,
+"geo_min": 0.0394
+},
+{
+"label": "C_WBR-WBL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0578,
+"geo_min": 0.0219
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DCR-DC-DCL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"MR",
+"MCR",
+"DC",
+"ML",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0578,
+"geo_min": 0.022
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"AML",
+"MC",
+"STR",
+"STL"
+],
+"geo": 0.0578,
+"geo_min": 0.0375
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MCL",
+"AMR",
+"MC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0578,
+"geo_min": 0.0375
+},
+{
+"label": "C_DMR-DML-MCR-MC-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DC",
+"DML",
+"AMR",
+"AML",
+"STR",
+"MC",
+"STL"
+],
+"geo": 0.0578,
+"geo_min": 0.0257
+},
+{
+"label": "C_DMR-DML-MR-MC-ML-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DC",
+"AML",
+"MCR",
+"ST",
+"MCL",
+"STR",
+"STL"
+],
+"geo": 0.0578,
+"geo_min": 0.0391
+},
+{
+"label": "C_DMR-DML-MCR-MCL-AMR-AMC-AML-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"DML",
+"AMR",
+"DMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0578,
+"geo_min": 0.0376
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-MR-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"MR",
+"DML",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0577,
+"geo_min": 0.0372
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0577,
+"geo_min": 0.0394
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-MR-ML-AMC-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"MR",
+"DML",
+"ML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0577,
+"geo_min": 0.0373
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"DMR",
+"MC",
+"AML",
+"STR",
+"AMR",
+"STL"
+],
+"geo": 0.0577,
+"geo_min": 0.0384
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DCR-DC-DCL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"MR",
+"MCR",
+"DC",
+"MCL",
+"ML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0577,
+"geo_min": 0.0232
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DCR-DCL-DMC-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DMC",
+"AMR",
+"MCR",
+"MCL",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0577,
+"geo_min": 0.0254
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DC-WBR-WBL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"ST",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0577,
+"geo_min": 0.0286
+},
+{
+"label": "C_WBR-WBL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"AMC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0577,
+"geo_min": 0.0256
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DC-WBR-WBL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"STR",
+"ST",
+"AML",
+"STL"
+],
+"geo": 0.0576,
+"geo_min": 0.0205
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"DL",
+"MC",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0576,
+"geo_min": 0.0382
+},
+{
+"label": "C_DMR-DML-MCR-MCL-AMR-AMC-AML-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"DML",
+"AMR",
+"DMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0576,
+"geo_min": 0.0367
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"MCL",
+"AMR",
+"MCR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0576,
+"geo_min": 0.0245
+},
+{
+"label": "C_DR-DL-DMC-MR-MC-ML-AMCR-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"STR",
+"AML",
+"ST",
+"STL"
+],
+"geo": 0.0575,
+"geo_min": 0.0395
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-STR-ST-STL|DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"DMR",
+"MC",
+"DML",
+"AML",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0575,
+"geo_min": 0.0403
+},
+{
+"label": "C_WBR-WBL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCR",
+"MCL",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0575,
+"geo_min": 0.0259
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMC-MCR-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMC",
+"MCR",
+"MCL",
+"AML",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0575,
+"geo_min": 0.0379
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DC-WBR-WBL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"DMR",
+"DML",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0575,
+"geo_min": 0.0285
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"MC",
+"STR",
+"STL"
+],
+"geo": 0.0575,
+"geo_min": 0.0394
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-STR-ST-STL|DCR-DCL-DMC-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"AMR",
+"MCR",
+"DMC",
+"MCL",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0207
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MC-AMCR-AMCL-STR-ST-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0228
+},
+{
+"label": "C_DMR-DML-MR-MC-ML-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"DC",
+"AML",
+"MCR",
+"MCL",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0385
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DC-WBR-WBL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DML",
+"WBR",
+"DMR",
+"AML",
+"WBL",
+"ST",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0248
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DCR-DCL-DMC-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DMC",
+"MR",
+"MCR",
+"ML",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0264
+},
+{
+"label": "C_DMR-DML-MCR-MCL-AMR-AMC-AML-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"MCL",
+"AMR",
+"MCR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0397
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCL",
+"MR",
+"MCR",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0422
+},
+{
+"label": "C_DR-DL-DMC-MR-MC-ML-AMCR-AMCL-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"DMR",
+"DML",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.0365
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DCR-DCL-DMC-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"AMR",
+"AML",
+"DCR",
+"DCL",
+"MCR",
+"DMC",
+"MCL",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0574,
+"geo_min": 0.021
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DC-WBR-WBL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DMR",
+"DML",
+"WBR",
+"AMR",
+"DC",
+"AML",
+"WBL",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0573,
+"geo_min": 0.026
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-MR-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MR",
+"DMR",
+"ML",
+"DML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0573,
+"geo_min": 0.0411
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-DMR-DML-MR-ML-AMC-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MR",
+"DMR",
+"DML",
+"AMC",
+"STR",
+"STL",
+"ML"
+],
+"geo": 0.0573,
+"geo_min": 0.0425
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MCL-AMC-STR-ST-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"AMR",
+"DCL",
+"DCR",
+"DC",
+"MCR",
+"MCL",
+"ST",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0573,
+"geo_min": 0.0234
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DC-WBR-WBL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DML",
+"WBR",
+"DMR",
+"AML",
+"WBL",
+"AMC",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0572,
+"geo_min": 0.0247
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MC-MCL-ML-STR-STL|DCR-DC-DCL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"AMR",
+"MCR",
+"ST",
+"MCL",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0572,
+"geo_min": 0.0277
+},
+{
+"label": "C_DR-DL-DMR-DML-MCR-MC-MCL-AMCR-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"STR",
+"STL",
+"ST"
+],
+"geo": 0.0572,
+"geo_min": 0.0316
+},
+{
+"label": "C_DR-DL-DMC-MR-MC-ML-AMCR-AMCL-STR-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"AMR",
+"MCL",
+"AML",
+"MCR",
+"STL",
+"STR",
+"ST"
+],
+"geo": 0.0572,
+"geo_min": 0.0395
+},
+{
+"label": "C_DMR-DML-MR-MCR-MCL-ML-AMC-STR-ST-STL|DR-DC-DL-DMC-MCR-MCL-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"DR",
+"MCR",
+"MCL",
+"AML",
+"DMC",
+"AMR",
+"STR",
+"STL"
+],
+"geo": 0.0572,
+"geo_min": 0.036
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMCR-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"STR",
+"STL",
+"AMC"
+],
+"geo": 0.0572,
+"geo_min": 0.0331
+},
+{
+"label": "C_WBR-WBL-DMR-DML-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"AMR",
+"DMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0571,
+"geo_min": 0.035
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DC-WBR-WBL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DMR",
+"DML",
+"WBR",
+"AMR",
+"DC",
+"AML",
+"WBL",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0571,
+"geo_min": 0.0259
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DR-DC-DL-DMC-MCR-MCL-AMR-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DC",
+"DL",
+"AMR",
+"DR",
+"DMC",
+"MCL",
+"AML",
+"MCR",
+"STR",
+"STL"
+],
+"geo": 0.0571,
+"geo_min": 0.0372
+},
+{
+"label": "C_DMR-DML-MR-MCR-MC-MCL-ML-AMC-STR-STL|DCR-DC-DCL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"AMR",
+"MCR",
+"DC",
+"MCL",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.057,
+"geo_min": 0.0195
+},
+{
+"label": "C_DR-DL-DMR-DML-MCR-MC-MCL-AMCR-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"DMR",
+"AMC",
+"AML",
+"AMR",
+"STL",
+"STR"
+],
+"geo": 0.057,
+"geo_min": 0.0316
+},
+{
+"label": "C_DR-DL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.057,
+"geo_min": 0.0362
+},
+{
+"label": "C_DMR-DML-MCR-MC-MCL-AMCR-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.057,
+"geo_min": 0.0273
+},
+{
+"label": "C_WBR-WBL-DMR-DML-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DML",
+"AMR",
+"DMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.057,
+"geo_min": 0.0349
+},
+{
+"label": "C_DR-DL-DMR-DML-MC-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"DC",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.057,
+"geo_min": 0.0402
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-MR-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MR",
+"DMR",
+"DML",
+"STR",
+"ST",
+"ML",
+"STL"
+],
+"geo": 0.0569,
+"geo_min": 0.0302
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-MR-ML-AMC-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MR",
+"DMR",
+"DML",
+"STR",
+"AMC",
+"ML",
+"STL"
+],
+"geo": 0.0569,
+"geo_min": 0.0302
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMC-STR-ST-STL|DR-DC-DL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MR",
+"MCR",
+"ML",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0569,
+"geo_min": 0.0449
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMCL-STR-STL|DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCR",
+"MC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0569,
+"geo_min": 0.0353
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DCR-DC-DCL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"MCL",
+"MR",
+"MCR",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0569,
+"geo_min": 0.0247
+},
+{
+"label": "C_DR-DL-DMR-DML-MCR-MC-MCL-AMCR-AMCL-ST|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"MCL",
+"AMR",
+"MCR",
+"AML",
+"STR",
+"STL",
+"ST"
+],
+"geo": 0.0569,
+"geo_min": 0.0361
+},
+{
+"label": "C_WBR-WBL-DMR-DMC-DML-MC-AMCR-AMC-AMCL-ST|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DMC",
+"DML",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DC",
+"DML",
+"ST",
+"AMR",
+"STL",
+"AML",
+"STR"
+],
+"geo": 0.0569,
+"geo_min": 0.0316
+},
+{
+"label": "C_WBR-WBL-DMR-DML-MCR-MC-MCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"AMR",
+"AMC",
+"MCL",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0569,
+"geo_min": 0.0437
+},
+{
+"label": "C_DR-DL-DMR-DML-MCR-MC-MCL-AMC-STR-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"DC",
+"AML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0399
+},
+{
+"label": "C_DR-DL-DMC-MC-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-DMR-DMC-DML-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMC",
+"AMR",
+"DMR",
+"DML",
+"STR",
+"STL",
+"AML"
+],
+"geo": 0.0568,
+"geo_min": 0.0312
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-MR-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"MR",
+"ST",
+"ML",
+"STR",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0383
+},
+{
+"label": "C_DR-DL-DMC-MCR-MCL-AMCR-AMC-AMCL-STR-STL|DR-DC-DL-DMR-DML-MR-ML-AMC-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DC",
+"DMR",
+"DML",
+"MR",
+"AMC",
+"ML",
+"STR",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0378
+},
+{
+"label": "C_WBR-WBL-DMR-DML-AMCR-AMC-AMCL-STR-ST-STL|DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"MCR",
+"DC",
+"AMR",
+"MCL",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0394
+},
+{
+"label": "C_DR-DL-DMC-MR-MCR-MCL-ML-AMC-STR-STL|DCR-DC-DCL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DCR",
+"DCL",
+"DC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"ST",
+"STR",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0279
+},
+{
+"label": "C_DR-DL-DMR-DML-MC-AMCR-AMCL-STR-ST-STL|DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DL",
+"DMR",
+"DML",
+"DC",
+"AMR",
+"AML",
+"STR",
+"AMC",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0406
+},
+{
+"label": "C_DR-DL-DMC-MCR-MC-MCL-AMCR-AMCL-STR-STL|DC-WBR-WBL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"WBR",
+"WBL",
+"DC",
+"DMR",
+"ST",
+"DML",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0283
+},
+{
+"label": "C_DMR-DMC-DML-MR-MCR-MC-MCL-ML-STR-STL|DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DMR",
+"DMC",
+"DML",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"AMR",
+"DMR",
+"ST",
+"DML",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0568,
+"geo_min": 0.0367
+},
+{
+"label": "S_DR-DC-DL-DMC-MR-MCR-MCL-ML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"geo": 0.0355,
+"geo_min": 0.0135
+},
+{
+"label": "S_DR-DC-DL-DMC-MCR-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0373,
+"geo_min": 0.0114
+},
+{
+"label": "S_DR-DC-DL-DMC-MCR-MCL-AMCR-AMCL-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"geo": 0.0269,
+"geo_min": 0.0097
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MR-MC-ML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MR",
+"MC",
+"ML",
+"STR",
+"STL"
+],
+"geo": 0.0274,
+"geo_min": 0.0075
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MCR-MC-MCL-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"STL"
+],
+"geo": 0.0215,
+"geo_min": 0.0026
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MC",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MC",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0264,
+"geo_min": 0.0033
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MC-AMCR-AMCL-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"geo": 0.028,
+"geo_min": 0.0121
+},
+{
+"label": "S_DR-DC-DL-MR-MCR-MC-MCL-ML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MCR",
+"MC",
+"MCL",
+"ML",
+"STR",
+"STL"
+],
+"geo": 0.0341,
+"geo_min": 0.0125
+},
+{
+"label": "S_DR-DC-DL-MCR-MC-MCL-AMR-AML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MC",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0366,
+"geo_min": 0.0115
+},
+{
+"label": "S_DR-DC-DL-MCR-MC-MCL-AMCR-AMCL-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MC",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"STL"
+],
+"geo": 0.0236,
+"geo_min": 0.0071
+},
+{
+"label": "S_DC-WBR-WBL-DMR-DML-MC-AMR-AML-STR-STL",
+"ip": [
+"DC",
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DC",
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MC",
+"AMR",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0242,
+"geo_min": 0.0009
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MR-ML-AMC-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MR",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MR",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0275,
+"geo_min": 0.0106
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MCR-MCL-AMC-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0283,
+"geo_min": 0.0094
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0277,
+"geo_min": 0.0083
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-AMCR-AMC-AMCL-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"geo": 0.0265,
+"geo_min": 0.0084
+},
+{
+"label": "S_DR-DC-DL-MR-MCR-MCL-ML-AMC-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0379,
+"geo_min": 0.0177
+},
+{
+"label": "S_DR-DC-DL-MCR-MCL-AMR-AMC-AML-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.0414,
+"geo_min": 0.0181
+},
+{
+"label": "S_DR-DC-DL-MCR-MCL-AMCR-AMC-AMCL-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"geo": 0.025,
+"geo_min": 0.0107
+},
+{
+"label": "S_DC-WBR-WBL-DMR-DML-MCR-MCL-AMC-STR-STL",
+"ip": [
+"DC",
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DC",
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0282,
+"geo_min": 0.003
+},
+{
+"label": "S_DC-WBR-WBL-DMR-DML-AMR-AMC-AML-STR-STL",
+"ip": [
+"DC",
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"oop": [
+"DC",
+"WBR",
+"WBL",
+"DMR",
+"DML",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"STL"
+],
+"geo": 0.025,
+"geo_min": 0.0007
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MR-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MR",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MR",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0158,
+"geo_min": 0.0034
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-MCR-MCL-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"MCR",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0228,
+"geo_min": 0.0037
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0172,
+"geo_min": 0.0018
+},
+{
+"label": "S_DR-DC-DL-DMR-DML-AMCR-AMCL-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMR",
+"DML",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0245,
+"geo_min": 0.0079
+},
+{
+"label": "S_DR-DC-DL-MR-MCR-MCL-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MCR",
+"MCL",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0339,
+"geo_min": 0.0183
+},
+{
+"label": "S_DR-DC-DL-MCR-MCL-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0388,
+"geo_min": 0.02
+},
+{
+"label": "S_DR-DC-DL-MCR-MCL-AMCR-AMCL-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MCL",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0258,
+"geo_min": 0.0102
+},
+{
+"label": "S_DR-DCR-DCL-DL-DMC-MCR-MCL-AMC-STR-STL",
+"ip": [
+"DR",
+"DCR",
+"DCL",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DCR",
+"DCL",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.0286,
+"geo_min": 0.0068
+},
+{
+"label": "S_DR-DCR-DCL-DL-DMC-MCR-MCL-STR-ST-STL",
+"ip": [
+"DR",
+"DCR",
+"DCL",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DCR",
+"DCL",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0244,
+"geo_min": 0.0023
+},
+{
+"label": "S_DR-DC-DL-DMC-MR-MC-ML-AMC-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.03,
+"geo_min": 0.0071
+},
+{
+"label": "S_DR-DC-DL-DMC-MCR-MC-MCL-AMC-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"STL"
+],
+"geo": 0.035,
+"geo_min": 0.0159
+},
+{
+"label": "S_DR-DC-DL-DMC-MC-AMCR-AMC-AMCL-STR-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"STL"
+],
+"geo": 0.0258,
+"geo_min": 0.0084
+},
+{
+"label": "S_DR-DC-DL-DMC-MR-MC-ML-AMCR-AMCL-ST",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"ST"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"AMCR",
+"AMCL",
+"ST"
+],
+"geo": 0.0186,
+"geo_min": 0.0018
+},
+{
+"label": "S_DR-DC-DL-DMC-MR-MC-ML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"MC",
+"ML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.031,
+"geo_min": 0.013
+},
+{
+"label": "S_DR-DC-DL-DMC-MCR-MC-MCL-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MC",
+"MCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0364,
+"geo_min": 0.0171
+},
+{
+"label": "S_DR-DC-DL-DMC-MC-AMR-AMCR-AMCL-AML-ST",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMR",
+"AMCR",
+"AMCL",
+"AML",
+"ST"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMR",
+"AMCR",
+"AMCL",
+"AML",
+"ST"
+],
+"geo": 0.0277,
+"geo_min": 0.0022
+},
+{
+"label": "S_DR-DC-DL-DMC-MC-AMR-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMR",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0282,
+"geo_min": 0.0064
+},
+{
+"label": "S_DR-DC-DL-DMC-MC-AMCR-AMCL-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MC",
+"AMCR",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0313,
+"geo_min": 0.0144
+},
+{
+"label": "S_DR-DC-DL-DMC-MR-ML-AMC-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MR",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0272,
+"geo_min": 0.0116
+},
+{
+"label": "S_DR-DC-DL-DMC-MCR-MCL-AMC-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"MCR",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.04,
+"geo_min": 0.0221
+},
+{
+"label": "S_DR-DC-DL-DMC-AMR-AMC-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0255,
+"geo_min": 0.0065
+},
+{
+"label": "S_DR-DC-DL-DMC-AMCR-AMC-AMCL-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"DMC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0273,
+"geo_min": 0.0102
+},
+{
+"label": "S_DR-DC-DL-MR-MC-ML-AMC-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MC",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MR",
+"MC",
+"ML",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0241,
+"geo_min": 0.0076
+},
+{
+"label": "S_DR-DC-DL-MCR-MC-MCL-AMC-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MCR",
+"MC",
+"MCL",
+"AMC",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.032,
+"geo_min": 0.0132
+},
+{
+"label": "S_DR-DC-DL-MC-AMR-AMC-AML-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MC",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MC",
+"AMR",
+"AMC",
+"AML",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0235,
+"geo_min": 0.0042
+},
+{
+"label": "S_DR-DC-DL-MC-AMCR-AMC-AMCL-STR-ST-STL",
+"ip": [
+"DR",
+"DC",
+"DL",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"oop": [
+"DR",
+"DC",
+"DL",
+"MC",
+"AMCR",
+"AMC",
+"AMCL",
+"STR",
+"ST",
+"STL"
+],
+"geo": 0.0215,
+"geo_min": 0.0036
+}
+]

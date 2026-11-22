@@ -1,0 +1,4 @@
+P1_3-2-3-2 DR-DC-DL-DMR-DML-AMCR-AMC-AMCL-STR-STL: base xGdiff +0.486; adopted roles: OOP DMR/DML=OPPressingDefensiveMidfielder (+0.416±0.338)
+P2_3-2-2-3 DR-DC-DL-DMR-DML-AMCR-AMCL-STR-ST-STL: base xGdiff +0.423; adopted roles: none (no change beat its CI)
+P3_4-3-1-2 DR-DCR-DCL-DL-DMC-MCR-MCL-AMC-STR-STL: base xGdiff +0.761; adopted roles: none (no change beat its CI)
+combine: 7 to run (0 done), 150 seeds each

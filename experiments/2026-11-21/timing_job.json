@@ -1,0 +1,2165 @@
+{
+ "batch_schema": 1,
+ "workers": 10,
+ "failures": [],
+ "active": [],
+ "id": "b13f751f8097",
+ "status": "complete",
+ "completed": 10,
+ "total": 10,
+ "runs": [
+  {
+   "variant": "B",
+   "seed": 1000,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23215,
+    "clock": 22349,
+    "score": [
+     2,
+     2
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 5966,
+      "possession": 0.434522942,
+      "xg": 1.22008753,
+      "shots": 15,
+      "shots_on_target": 9,
+      "passes": 518,
+      "completed_passes": 449
+     },
+     {
+      "side": 1,
+      "possession_ticks": 7764,
+      "possession": 0.565477058,
+      "xg": 1.0936054,
+      "shots": 13,
+      "shots_on_target": 7,
+      "passes": 686,
+      "completed_passes": 612
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 1715,
+     "clock": 1714,
+     "score": [
+      1,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 10973,
+     "clock": 10972,
+     "score": [
+      2,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 12667,
+     "clock": 11980,
+     "score": [
+      2,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 13254,
+     "clock": 12567,
+     "score": [
+      2,
+      2
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0000_B_seed_1000.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 47,
+    "preparation_ms": 15,
+    "simulation_ms": 1953,
+    "total_ms": 2015
+   },
+   "elapsed_seconds": 2.949,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.0004154999996899278,
+   "postprocess_queue_seconds": 0.0002893999999287189,
+   "native_elapsed_seconds": 2.015,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 31960,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\8690a4b707f64fad9dd710718d9cf04d\\startup_receipt.json",
+   "startup_receipt_sha256": "14b8372960b89b3cfc398c6dec3bb1411ca68366ad615f2162b6752df6ef7d11",
+   "tactic_pool_entry": {
+    "index": 33,
+    "name": "Chelsea-Xabi Alonso-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "708c185e538eabde6b06e73d46dfece50aeea399066f234cdc6504dfc62c01e6",
+   "sequence": 6
+  },
+  {
+   "variant": "B",
+   "seed": 1001,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 22677,
+    "clock": 21841,
+    "score": [
+     1,
+     3
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 6516,
+      "possession": 0.496116948,
+      "xg": 0.691252649,
+      "shots": 13,
+      "shots_on_target": 6,
+      "passes": 594,
+      "completed_passes": 530
+     },
+     {
+      "side": 1,
+      "possession_ticks": 6618,
+      "possession": 0.503883052,
+      "xg": 2.27338672,
+      "shots": 19,
+      "shots_on_target": 10,
+      "passes": 556,
+      "completed_passes": 483
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 2153,
+     "clock": 2152,
+     "score": [
+      1,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 4154,
+     "clock": 4153,
+     "score": [
+      1,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 10230,
+     "clock": 10229,
+     "score": [
+      1,
+      2
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 20953,
+     "clock": 20312,
+     "score": [
+      1,
+      3
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0001_B_seed_1001.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 47,
+    "preparation_ms": 0,
+    "simulation_ms": 1875,
+    "total_ms": 1922
+   },
+   "elapsed_seconds": 2.89,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.0004062999996676808,
+   "postprocess_queue_seconds": 0.00025160000041068997,
+   "native_elapsed_seconds": 1.922,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 47824,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\75db3ae9d1434e46a7a4495762a1eff1\\startup_receipt.json",
+   "startup_receipt_sha256": "1e84cff33edc8c2e973811d0518e9a3d405f0ba57cebb917e1d8f07cab746727",
+   "tactic_pool_entry": {
+    "index": 58,
+    "name": "Spurs-Roberto De Zerbi-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "abfaf8ee1230ab9b6ed369b7df7812b00661ae01c68af56d1ab4293de6a3fd97",
+   "sequence": 9
+  },
+  {
+   "variant": "B",
+   "seed": 1002,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23923,
+    "clock": 22804,
+    "score": [
+     3,
+     2
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 5766,
+      "possession": 0.457002457,
+      "xg": 1.24668622,
+      "shots": 10,
+      "shots_on_target": 7,
+      "passes": 494,
+      "completed_passes": 426
+     },
+     {
+      "side": 1,
+      "possession_ticks": 6851,
+      "possession": 0.542997543,
+      "xg": 1.71131063,
+      "shots": 12,
+      "shots_on_target": 6,
+      "passes": 584,
+      "completed_passes": 519
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 4533,
+     "clock": 4532,
+     "score": [
+      1,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 7444,
+     "clock": 7443,
+     "score": [
+      2,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 7999,
+     "clock": 7998,
+     "score": [
+      3,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 12574,
+     "clock": 11677,
+     "score": [
+      3,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 15749,
+     "clock": 14852,
+     "score": [
+      3,
+      2
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0002_B_seed_1002.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 62,
+    "preparation_ms": 0,
+    "simulation_ms": 1828,
+    "total_ms": 1890
+   },
+   "elapsed_seconds": 2.809,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.0004866999997830135,
+   "postprocess_queue_seconds": 0.00022460000036517158,
+   "native_elapsed_seconds": 1.89,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 46180,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\eda04b2396724d6ebff15fbfed47c263\\startup_receipt.json",
+   "startup_receipt_sha256": "0de1bb5c25bba6af3ca9d12cfff5e4964c1f43063b4e8f238ea03f810b4ada5d",
+   "tactic_pool_entry": {
+    "index": 60,
+    "name": "Sunderland-Régis Le Bris-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "401ae41029efafa44ad7280c5ccaaf63ae209ce397b91cdf0fc70bc4f773ed9c",
+   "sequence": 8
+  },
+  {
+   "variant": "B",
+   "seed": 1003,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23024,
+    "clock": 21875,
+    "score": [
+     2,
+     2
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 5553,
+      "possession": 0.426203085,
+      "xg": 1.75823224,
+      "shots": 11,
+      "shots_on_target": 8,
+      "passes": 490,
+      "completed_passes": 430
+     },
+     {
+      "side": 1,
+      "possession_ticks": 7476,
+      "possession": 0.573796915,
+      "xg": 1.58633029,
+      "shots": 13,
+      "shots_on_target": 6,
+      "passes": 555,
+      "completed_passes": 500
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 1481,
+     "clock": 1480,
+     "score": [
+      0,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 3444,
+     "clock": 3443,
+     "score": [
+      0,
+      2
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 7107,
+     "clock": 7106,
+     "score": [
+      1,
+      2
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 14717,
+     "clock": 13750,
+     "score": [
+      2,
+      2
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0003_B_seed_1003.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 46,
+    "preparation_ms": 0,
+    "simulation_ms": 1829,
+    "total_ms": 1875
+   },
+   "elapsed_seconds": 2.879,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.00032840000039868755,
+   "postprocess_queue_seconds": 0.00019470000006549526,
+   "native_elapsed_seconds": 1.875,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 49140,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\1f78ba3993ca4531b969061ed7799f2a\\startup_receipt.json",
+   "startup_receipt_sha256": "b8225d9290047dc9ea7fa1a5f11c8510ea24bca6e96d968dac40a96f94f28532",
+   "tactic_pool_entry": {
+    "index": 1,
+    "name": "Basel-Slaviša Jokanović-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "e6a68ec92186b7c6fd8566541a7f4ee3bee85d682021946509d286c620d1089b",
+   "sequence": 2
+  },
+  {
+   "variant": "B",
+   "seed": 1004,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23389,
+    "clock": 22396,
+    "score": [
+     1,
+     2
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 6412,
+      "possession": 0.524155972,
+      "xg": 1.40460157,
+      "shots": 13,
+      "shots_on_target": 8,
+      "passes": 555,
+      "completed_passes": 506
+     },
+     {
+      "side": 1,
+      "possession_ticks": 5821,
+      "possession": 0.475844028,
+      "xg": 1.33157492,
+      "shots": 13,
+      "shots_on_target": 9,
+      "passes": 392,
+      "completed_passes": 344
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 6020,
+     "clock": 6019,
+     "score": [
+      1,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 7204,
+     "clock": 7203,
+     "score": [
+      1,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 19185,
+     "clock": 18382,
+     "score": [
+      1,
+      2
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0004_B_seed_1004.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 46,
+    "preparation_ms": 0,
+    "simulation_ms": 1625,
+    "total_ms": 1671
+   },
+   "elapsed_seconds": 2.602,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.0005797999992864789,
+   "postprocess_queue_seconds": 0.0002818000002662302,
+   "native_elapsed_seconds": 1.671,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 45936,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\8f03792df36148ff9d3dc52305da7241\\startup_receipt.json",
+   "startup_receipt_sha256": "eed95d6bfec55d725b9e2bb39d3470c98052d339baec547a95322ec71af401c5",
+   "tactic_pool_entry": {
+    "index": 28,
+    "name": "Brentford-Keith Andrews-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "f0f0af3dda3f0f087476934543253c28adbbfab81696013484b9c097d9593c34",
+   "sequence": 1
+  },
+  {
+   "variant": "B",
+   "seed": 1005,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23373,
+    "clock": 22460,
+    "score": [
+     1,
+     0
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 6299,
+      "possession": 0.518308237,
+      "xg": 0.85206461,
+      "shots": 13,
+      "shots_on_target": 6,
+      "passes": 527,
+      "completed_passes": 464
+     },
+     {
+      "side": 1,
+      "possession_ticks": 5854,
+      "possession": 0.481691763,
+      "xg": 1.20712066,
+      "shots": 12,
+      "shots_on_target": 3,
+      "passes": 477,
+      "completed_passes": 429
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 16386,
+     "clock": 15675,
+     "score": [
+      1,
+      0
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0005_B_seed_1005.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 47,
+    "preparation_ms": 0,
+    "simulation_ms": 1719,
+    "total_ms": 1766
+   },
+   "elapsed_seconds": 2.706,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.0002905000001192093,
+   "postprocess_queue_seconds": 0.00019690000044647604,
+   "native_elapsed_seconds": 1.766,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 43996,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\c9b2abe7d3744a20a7c844a7bb0a0248\\startup_receipt.json",
+   "startup_receipt_sha256": "50629d3b3e933c0efbe62070ea940195afd5e2ab366db3a60586b4d080bff48d",
+   "tactic_pool_entry": {
+    "index": 18,
+    "name": "Vaduz-Marc Schneider-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "a9e60a7ee38a9bea6b7ae041f155f50d715cc60c05fc9a4010e10697d0e3cd11",
+   "sequence": 10
+  },
+  {
+   "variant": "B",
+   "seed": 1006,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23089,
+    "clock": 22321,
+    "score": [
+     0,
+     4
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 6466,
+      "possession": 0.478183701,
+      "xg": 0.245655954,
+      "shots": 7,
+      "shots_on_target": 5,
+      "passes": 584,
+      "completed_passes": 518
+     },
+     {
+      "side": 1,
+      "possession_ticks": 7056,
+      "possession": 0.521816299,
+      "xg": 1.84979212,
+      "shots": 12,
+      "shots_on_target": 8,
+      "passes": 602,
+      "completed_passes": 534
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 417,
+     "clock": 416,
+     "score": [
+      0,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 5581,
+     "clock": 5580,
+     "score": [
+      0,
+      2
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 13583,
+     "clock": 13020,
+     "score": [
+      0,
+      3
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 20099,
+     "clock": 19536,
+     "score": [
+      0,
+      4
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0006_B_seed_1006.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 63,
+    "preparation_ms": 0,
+    "simulation_ms": 1859,
+    "total_ms": 1922
+   },
+   "elapsed_seconds": 2.862,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.0002949999998236308,
+   "postprocess_queue_seconds": 0.0002179000002797693,
+   "native_elapsed_seconds": 1.922,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 10644,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\c27b80134ce6473aa68e366b18b70ebd\\startup_receipt.json",
+   "startup_receipt_sha256": "326a18a594586fae10b0b90d22411cfcfa10dbbfb5f56d22b41b1358096dd90a",
+   "tactic_pool_entry": {
+    "index": 37,
+    "name": "Crystal Palace-Pierre Sage-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "a68ab3a421b0c7215f4a5d693111db23fadc67c73291becf2a9d4c5655aa1d51",
+   "sequence": 3
+  },
+  {
+   "variant": "B",
+   "seed": 1007,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23243,
+    "clock": 21929,
+    "score": [
+     0,
+     1
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 7085,
+      "possession": 0.572617797,
+      "xg": 0.505417824,
+      "shots": 11,
+      "shots_on_target": 4,
+      "passes": 592,
+      "completed_passes": 529
+     },
+     {
+      "side": 1,
+      "possession_ticks": 5288,
+      "possession": 0.427382203,
+      "xg": 0.899368107,
+      "shots": 14,
+      "shots_on_target": 6,
+      "passes": 404,
+      "completed_passes": 350
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 1350,
+     "clock": 1349,
+     "score": [
+      0,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 21465,
+     "clock": 20356,
+     "score": [
+      1,
+      1
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 21534,
+     "clock": 20425,
+     "score": [
+      0,
+      1
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0007_B_seed_1007.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 47,
+    "preparation_ms": 0,
+    "simulation_ms": 1672,
+    "total_ms": 1719
+   },
+   "elapsed_seconds": 2.64,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.00032929999997577397,
+   "postprocess_queue_seconds": 0.00021669999932782957,
+   "native_elapsed_seconds": 1.719,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 38596,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\159cd666ee1e4e71aee8405622d82a74\\startup_receipt.json",
+   "startup_receipt_sha256": "0d47aea7b7fb8d3db9de983dcba080d88b50879d21ca1a08d82c089d154eadac",
+   "tactic_pool_entry": {
+    "index": 48,
+    "name": "Liverpool-Andoni Iraola-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "ea2836698d6b74fe17e4c5cfac3e8cf91493cb84a44add8c2b672675b61c5669",
+   "sequence": 5
+  },
+  {
+   "variant": "B",
+   "seed": 1008,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 23301,
+    "clock": 22801,
+    "score": [
+     1,
+     0
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 5776,
+      "possession": 0.501040944,
+      "xg": 1.01016617,
+      "shots": 12,
+      "shots_on_target": 6,
+      "passes": 506,
+      "completed_passes": 448
+     },
+     {
+      "side": 1,
+      "possession_ticks": 5752,
+      "possession": 0.498959056,
+      "xg": 1.10246861,
+      "shots": 13,
+      "shots_on_target": 6,
+      "passes": 456,
+      "completed_passes": 403
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 18585,
+     "clock": 18262,
+     "score": [
+      1,
+      0
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0008_B_seed_1008.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 46,
+    "preparation_ms": 0,
+    "simulation_ms": 1657,
+    "total_ms": 1703
+   },
+   "elapsed_seconds": 2.649,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.00046949999978096457,
+   "postprocess_queue_seconds": 0.0002905000001192093,
+   "native_elapsed_seconds": 1.703,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 42768,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\a0755054f2f044839229163b8ff869ec\\startup_receipt.json",
+   "startup_receipt_sha256": "c5b3da86801bad01e4a15f400ddc617172ff59deed0f53c0945f09986dba787d",
+   "tactic_pool_entry": {
+    "index": 37,
+    "name": "Crystal Palace-Pierre Sage-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "7d191ec3f39a2b197358055e95cbebd4a1d088e27d4750ba1e49e4bbd1baf5d9",
+   "sequence": 4
+  },
+  {
+   "variant": "B",
+   "seed": 1009,
+   "result": {
+    "event": "natural_match_finished",
+    "full_match_completed": true,
+    "runtime": "native_library_host",
+    "extracted_engine": false,
+    "tick": 24283,
+    "clock": 23319,
+    "score": [
+     3,
+     0
+    ]
+   },
+   "episode": null,
+   "generated_plans": [],
+   "statistics": {
+    "event": "native_match_statistics",
+    "schema": 1,
+    "source": "original_team_statistics",
+    "teams": [
+     {
+      "side": 0,
+      "possession_ticks": 5132,
+      "possession": 0.409380983,
+      "xg": 2.19070721,
+      "shots": 15,
+      "shots_on_target": 4,
+      "passes": 442,
+      "completed_passes": 381
+     },
+     {
+      "side": 1,
+      "possession_ticks": 7404,
+      "possession": 0.590619017,
+      "xg": 0.922118843,
+      "shots": 14,
+      "shots_on_target": 7,
+      "passes": 609,
+      "completed_passes": 560
+     }
+    ]
+   },
+   "events": {
+    "collected": false,
+    "disabled": true,
+    "source": "disabled_by_user",
+    "goals": [],
+    "cards": [],
+    "reason": "快速模式仅保留原生终场比分和球队统计，未采集或校验球员事件明细"
+   },
+   "score_changes": [
+    {
+     "event": "observed_score_change",
+     "tick": 5112,
+     "clock": 5111,
+     "score": [
+      1,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 16488,
+     "clock": 15747,
+     "score": [
+      2,
+      0
+     ],
+     "observation_step": 1
+    },
+    {
+     "event": "observed_score_change",
+     "tick": 21219,
+     "clock": 20478,
+     "score": [
+      3,
+      0
+     ],
+     "observation_step": 1
+    }
+   ],
+   "log": "0009_B_seed_1009.jsonl",
+   "verified": true,
+   "attempts": 1,
+   "retry_errors": [],
+   "timings": {
+    "event": "native_timings",
+    "load_ms": 0,
+    "activation_ms": 0,
+    "input_bootstrap_ms": 46,
+    "preparation_ms": 0,
+    "simulation_ms": 1735,
+    "total_ms": 1781
+   },
+   "elapsed_seconds": 2.826,
+   "elapsed_scope": "session_submission_through_postprocess_including_queue",
+   "postprocess_seconds": 0.0003701999994518701,
+   "postprocess_queue_seconds": 0.00023950000013428507,
+   "native_elapsed_seconds": 1.781,
+   "native_elapsed_scope": "job_pipeline_excludes_session_DLL_load_and_activation",
+   "engine_compatibility": {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   "engine_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+   "collector_sha256": "f8cc1aabcaf7078fffcf04d36d92845058d4cf1742ff362c89b95f857fe85006",
+   "runtime_mode": "reused_native_worker",
+   "event_details": false,
+   "validation_scope": "native_match_score_and_team_statistics",
+   "worker_pid": 42700,
+   "worker_job_index": 1,
+   "startup_receipt": "worker_sessions\\89710b90351844f28581d4e26f825a68\\startup_receipt.json",
+   "startup_receipt_sha256": "ec0225afd8e0763d636cd33952ea262eb29395a7ad2b026138181490221b3684",
+   "tactic_pool_entry": {
+    "index": 40,
+    "name": "Fulham-Álvaro Arbeloa-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   "log_sha256": "1ddd7b1ff1c4bf67fda482478a4728f5160467257d7fa55898a14dee86d7a05a",
+   "sequence": 7
+  }
+ ],
+ "metrics": {
+  "B": {
+   "n": 10,
+   "wins": 4,
+   "draws": 2,
+   "losses": 4,
+   "win_rate": 0.4,
+   "win_interval": [
+    0.16818032970623614,
+    0.6873262302663417
+   ],
+   "goals_for": 1.4,
+   "goals_against": 1.6,
+   "points": 1.4
+  }
+ },
+ "created": 1795211274.5772154,
+ "output_dir": "C:\\Users\\pawan\\fm-tactics-lab\\data\\runs\\20261120_164753_b13f751f8097",
+ "seed_mode": "fixed",
+ "name": "主队 · Geometrismo · 10场",
+ "event_details": false,
+ "match_conditions": {
+  "B": {
+   "importance": null,
+   "manual_execution": false
+  }
+ },
+ "engine_compatibility": {
+  "policy": "graded-adapter-compatibility-v2",
+  "compatible": true,
+  "can_simulate": true,
+  "disposition": "verified",
+  "selected_game_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Football Manager 27",
+  "actual_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+  "resource_fingerprint": "e99e04e19fe4f191f00859cbf6864332a8b17249bfcf7a080cc0f31203a32900",
+  "whole_file_sha_is_admission_gate": false,
+  "whole_engine_behavior_equivalence_proven": false,
+  "adapter": "steam",
+  "adapter_version": "27.1.0+2505117",
+  "reference_dll_sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b",
+  "tactic_version": "1b010000",
+  "profile": "fm27_desktop_d12202dd_adapter_v1",
+  "trial_allowed": false,
+  "reason": "ok",
+  "message": "引擎关键接口检查通过",
+  "diagnostics": [
+   {
+    "event": "native_engine_compatibility",
+    "profile": "fm27_desktop_d12202dd_adapter_v1",
+    "compatible": true,
+    "trial_allowed": false,
+    "disposition": "verified",
+    "warning_count": 0,
+    "reason": "ok",
+    "rva": 0,
+    "whole_file_hash_is_gate": false
+   },
+   {
+    "event": "native_image_fingerprint",
+    "sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b"
+   },
+   {
+    "event": "native_match_importance_capability",
+    "supported": true
+   }
+  ],
+  "diagnostic_error": "",
+  "match_importance_available": true,
+  "original_build_verified": true,
+  "files": [
+   {
+    "path": "game_plugin.dll",
+    "sha256": "d12202dd01c3911d4c4e55e778f37b2251ffb10f9cf8cecc3b9ec08ece622c6b"
+   },
+   {
+    "path": "icudt65l.dat",
+    "sha256": "fc6a02273fb5e48de8df4cd40d9e35f2d41cafef3fae5303701cb1ce7cfd322e"
+   },
+   {
+    "path": "libs/EOSSDK-Win64-Shipping.dll",
+    "sha256": "9c498fe31c8df1d9085dfa9c71c6d50ec6b569acdb29f1decb97be105b6341dc"
+   },
+   {
+    "path": "libs/PartyWin.dll",
+    "sha256": "529229efe4612cce38bd6aeac1554de8bcb537a6562cb2ad666643c074cd7172"
+   },
+   {
+    "path": "libs/PlayFabMultiplayerWin.dll",
+    "sha256": "d83bc8af2511f4c0c312be1cb1939c83f1c96e5101be1e0c2c93f76de6e9a7d8"
+   },
+   {
+    "path": "libs/icudt65.dll",
+    "sha256": "95aec2b7c2fc9fbf6ee5a541c1557977349d4c0f181e8180b35085a375eaba14"
+   },
+   {
+    "path": "libs/icuin65.dll",
+    "sha256": "ee08cc82dbb65394c499bf35becee839614c43ec4c795a198d4d5988c57b79a7"
+   },
+   {
+    "path": "libs/icuuc65.dll",
+    "sha256": "0c13994266c64aa5a4e522e49b238c9f04ae4f545247ecc48f61ce4ea94c9c11"
+   },
+   {
+    "path": "libs/steam_api64.dll",
+    "sha256": "eb17909a76668cf9ae0b92a618a34a50f6c73d3a6787cb4dd8ce36a8b10bfb75"
+   },
+   {
+    "path": "shared/data/simatch.fmf",
+    "sha256": "6e2339a9b7ba71244f0543d85d6c724d42bdf830104cd7e0279b3cc2292df4c4"
+   },
+   {
+    "path": "shared/data/simatchshared.fmf",
+    "sha256": "6f72b8f924a70ab0eeea1e6c1f7e40c4ddcca1364972fe49bb5d253fd3ec284e"
+   }
+  ]
+ },
+ "runtime_mode": "reused_native_worker",
+ "jobs_per_native_session": null,
+ "initial_state_policy": {
+  "id": "controlled-start-v3",
+  "player_values": {
+   "condition": 10000,
+   "sharpness": 10000,
+   "sharpness_secondary": 10000,
+   "fatigue_raw": 0,
+   "team_cohesion": 80,
+   "club_cohesion": 100,
+   "morale": 20
+  },
+  "morale_verified": true,
+  "cohesion_verified": true
+ },
+ "mode": "single",
+ "variant_names": {
+  "B": "Geometrismo"
+ },
+ "team_names": {
+  "B": [
+   "主队",
+   "客队"
+  ]
+ },
+ "tactic_pool": {
+  "profile": "away-tactic-pool-v1",
+  "enabled": true,
+  "uniform": {
+   "enabled": true,
+   "attribute_value": 15
+  },
+  "entries": [
+   {
+    "index": 0,
+    "name": "Basel-Slaviša Jokanović-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 1,
+    "name": "Basel-Slaviša Jokanović-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 2,
+    "name": "Grasshoppers-Olaf Janßen-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 3,
+    "name": "Grasshoppers-Olaf Janßen-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 4,
+    "name": "Lausanne-Luka Elsner-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 5,
+    "name": "Lausanne-Luka Elsner-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 6,
+    "name": "Lugano-Mattia Croci-Torti-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 7,
+    "name": "Lugano-Mattia Croci-Torti-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 8,
+    "name": "Luzern-Jörg Portmann-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 9,
+    "name": "Luzern-Jörg Portmann-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 10,
+    "name": "Servette-Jocelyn Gourvennec-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 11,
+    "name": "Servette-Jocelyn Gourvennec-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 12,
+    "name": "Sion-Didier Tholot-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 13,
+    "name": "Sion-Didier Tholot-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 14,
+    "name": "St. Gallen-Enrico Maassen-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 15,
+    "name": "St. Gallen-Enrico Maassen-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 16,
+    "name": "Thun-Gian-Luca Privitelli-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 17,
+    "name": "Thun-Gian-Luca Privitelli-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 18,
+    "name": "Vaduz-Marc Schneider-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 19,
+    "name": "Vaduz-Marc Schneider-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 20,
+    "name": "Young Boys-Gerardo Seoane-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 21,
+    "name": "Young Boys-Gerardo Seoane-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 22,
+    "name": "Arsenal-Mikel Arteta-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 23,
+    "name": "Arsenal-Mikel Arteta-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 24,
+    "name": "Aston Villa-Unai Emery-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 25,
+    "name": "Aston Villa-Unai Emery-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 26,
+    "name": "Bournemouth-Marco Rose-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 27,
+    "name": "Bournemouth-Marco Rose-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 28,
+    "name": "Brentford-Keith Andrews-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 29,
+    "name": "Brentford-Keith Andrews-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 30,
+    "name": "Brighton-Fabian Hürzeler-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 31,
+    "name": "Brighton-Fabian Hürzeler-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 32,
+    "name": "Chelsea-Xabi Alonso-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 33,
+    "name": "Chelsea-Xabi Alonso-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 34,
+    "name": "Coventry-Frank Lampard-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 35,
+    "name": "Coventry-Frank Lampard-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 36,
+    "name": "Crystal Palace-Pierre Sage-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 37,
+    "name": "Crystal Palace-Pierre Sage-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 38,
+    "name": "Everton-David Moyes-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 39,
+    "name": "Everton-David Moyes-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 40,
+    "name": "Fulham-Álvaro Arbeloa-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 41,
+    "name": "Fulham-Álvaro Arbeloa-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 42,
+    "name": "Hull-Sergej Jakirović-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 43,
+    "name": "Hull-Sergej Jakirović-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 44,
+    "name": "Ipswich-Gary O'Neil-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 45,
+    "name": "Leeds-Daniel Farke-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 46,
+    "name": "Leeds-Daniel Farke-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 47,
+    "name": "Liverpool-Andoni Iraola-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 48,
+    "name": "Liverpool-Andoni Iraola-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 49,
+    "name": "Man City-Enzo Maresca-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 50,
+    "name": "Man City-Enzo Maresca-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 51,
+    "name": "Man Utd-Michael Carrick-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 52,
+    "name": "Man Utd-Michael Carrick-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 53,
+    "name": "Newcastle-Matthias Jaissle-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 54,
+    "name": "Newcastle-Matthias Jaissle-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 55,
+    "name": "Nott'm Forest-Oliver Glasner-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 56,
+    "name": "Nott'm Forest-Oliver Glasner-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 57,
+    "name": "Spurs-Roberto De Zerbi-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 58,
+    "name": "Spurs-Roberto De Zerbi-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 59,
+    "name": "Sunderland-Régis Le Bris-第1套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   },
+   {
+    "index": 60,
+    "name": "Sunderland-Régis Le Bris-第2套战术",
+    "weight": 1,
+    "probability": 0.01639344262295082
+   }
+  ],
+  "salt": "b13f751f8097",
+  "draws": {
+   "total": 10,
+   "counts": {
+    "0": 0,
+    "1": 1,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 1,
+    "19": 0,
+    "20": 0,
+    "21": 0,
+    "22": 0,
+    "23": 0,
+    "24": 0,
+    "25": 0,
+    "26": 0,
+    "27": 0,
+    "28": 1,
+    "29": 0,
+    "30": 0,
+    "31": 0,
+    "32": 0,
+    "33": 1,
+    "34": 0,
+    "35": 0,
+    "36": 0,
+    "37": 2,
+    "38": 0,
+    "39": 0,
+    "40": 1,
+    "41": 0,
+    "42": 0,
+    "43": 0,
+    "44": 0,
+    "45": 0,
+    "46": 0,
+    "47": 0,
+    "48": 1,
+    "49": 0,
+    "50": 0,
+    "51": 0,
+    "52": 0,
+    "53": 0,
+    "54": 0,
+    "55": 0,
+    "56": 0,
+    "57": 0,
+    "58": 1,
+    "59": 0,
+    "60": 1
+   }
+  }
+ },
+ "session_scope": "remaining_batch_lane",
+ "started": 1795211274.596799,
+ "current": null,
+ "elapsed_seconds": 11.314,
+ "matches_per_minute": 53.03,
+ "eta_seconds": 0,
+ "distributions": {
+  "B": {
+   "matches_with_events": 0,
+   "unverified_goal_matches": 0,
+   "unverified_card_matches": 0,
+   "players": [],
+   "positions": []
+  }
+ },
+ "session_diagnostics": [
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.626769699999386,
+   "manifest_sha256": "da3de5c87d80064e841919cc1d987cbf0e9aa499e8704c110dce55386dc6788f",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\8f03792df36148ff9d3dc52305da7241\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.899372900000344,
+   "manifest_sha256": "905f504556a0b1a72d8c521292a73b4d8d474ad8008a6822df52bbb08095f147",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\1f78ba3993ca4531b969061ed7799f2a\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.8819731999992655,
+   "manifest_sha256": "7dee378ae660bb6c2e2d5dedba3936faca0ccb206ef7e5e67af0d8acb64d73da",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\c27b80134ce6473aa68e366b18b70ebd\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.668832299999849,
+   "manifest_sha256": "ce41ac6530feb6041cf8b67b2ee1cc8eeaa4291492fd74eff63935faa62b102b",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\a0755054f2f044839229163b8ff869ec\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.6600678000004336,
+   "manifest_sha256": "b8ca038d9f603073c10153b87772527f3fae1afd41a857694c66861f702f80d7",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\159cd666ee1e4e71aee8405622d82a74\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.949160899999697,
+   "manifest_sha256": "5acd70a8b342d3166130ac1c5591fc30e16f2e640c95073d90517e487a87c973",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\8690a4b707f64fad9dd710718d9cf04d\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.8263895999998567,
+   "manifest_sha256": "9ea4e7e55016c8759d7630e3deff78fb777ee0396086c1c47277a08177a4b923",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\89710b90351844f28581d4e26f825a68\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.8090167000000292,
+   "manifest_sha256": "54e98f1d822e57c422337ec0e14355c5128165d0917a34af5661a8362c717911",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\eda04b2396724d6ebff15fbfed47c263\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.889689000000544,
+   "manifest_sha256": "e431288cdbf7eef8974d7a5de872ce6f699ba2da5430c36244a340634f4adf7f",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\75db3ae9d1434e46a7a4495762a1eff1\\session.jsonl"
+  },
+  {
+   "returncode": 0,
+   "completed": 1,
+   "expected": 1,
+   "failure": null,
+   "stdout": "native_match_exit=0\r\n",
+   "wall_seconds": 2.7258590000001277,
+   "manifest_sha256": "929cdd0e5aada9db541fbc1b88a112a5c4dc34d0a17b973bf61d1aa1c7065948",
+   "steam_session_cleanup": {
+    "event": "steam_session_cleanup",
+    "module_loaded": true,
+    "shutdown_called": true,
+    "pipe_before": 0,
+    "pipe_after": 0,
+    "user_before": 0,
+    "user_after": 0,
+    "fault": 0,
+    "ok": true
+   },
+   "session_log": "worker_sessions\\c9b2abe7d3744a20a7c844a7bb0a0248\\session.jsonl"
+  }
+ ],
+ "finished": 1795211285.8926413
+}
