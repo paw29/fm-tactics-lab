@@ -32,3 +32,4 @@ __pycache__/
 /src/tactics_ui/catalog.json
 engine_compat_profile.h
 engine_compat_profile.json
+exports/

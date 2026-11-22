@@ -194,7 +194,7 @@ def main(which):
     json.dump(cur, open(os.path.join(HERE, f'{P}_everything.json'), 'w', encoding='utf8'), ensure_ascii=False)
     fin = copy.deepcopy(cur); fin['teams'][0]['tactic_name'] = NAME
     ex = call('/api/export-fmf', {'side': 0, 'scenario': fin, 'name': NAME})
-    path = os.path.join(r'C:\Users\pawan\Documents\Sports Interactive\Football Manager 27\tactics', NAME + '.fmf')
+    path = os.path.join(r'C:\Users\pawan\fm-tactics-lab\exports', NAME + '.fmf')  # Documents is blocked by Controlled Folder Access
     open(path, 'wb').write(base64.b64decode(ex['file_base64']))
     tt = fin['teams'][0]
     pis = [f"{'IP' if ph == 0 else 'OOP'} {c['position']}: " + ', '.join(

@@ -100,7 +100,7 @@ if __name__ == '__main__':
     print('\n'.join(log[-3:]), flush=True)
     final = copy.deepcopy(current); final['teams'][0]['tactic_name'] = NAME
     ex = call('/api/export-fmf', {'side': 0, 'scenario': final, 'name': NAME})
-    path = os.path.join(r'C:\Users\pawan\Documents\Sports Interactive\Football Manager 27\tactics', NAME + '.fmf')
+    path = os.path.join(r'C:\Users\pawan\fm-tactics-lab\exports', NAME + '.fmf')  # Documents is blocked by Controlled Folder Access
     open(path, 'wb').write(base64.b64decode(ex['file_base64']))
     ph = final['teams'][0]['phases']
     report = [f'# {NAME} - lab result (FM27 27.1.0+2505117)', '',
