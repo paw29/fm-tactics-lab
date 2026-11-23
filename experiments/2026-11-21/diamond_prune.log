@@ -1,0 +1,35 @@
+dprune01: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 128s, failures 0
+remove 传球方式=短传: +0.032 ±0.148 -> keep
+dprune02: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 128s, failures 0
+remove 进攻宽度=较窄: +0.069 ±0.159 -> keep
+dprune03: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+remove 防守介入线=高位逼抢: +0.086 ±0.172 -> keep
+dprune04: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 137s, failures 0
+remove 丢球后=立即反抢: -0.274 ±0.160 -> keep
+dprune05: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 139s, failures 0
+remove 门将出球目标=中后卫: +0.033 ±0.161 -> keep
+dprune06: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+remove 进攻耐心=将球做入禁区: +0.048 ±0.170 -> keep
+dprune07: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 128s, failures 0
+remove 接球方式=传至脚下: -0.041 ±0.160 -> keep
+dprune08: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+remove 后场组织=通过传递破解逼抢: -0.007 ±0.160 -> keep
+dprune09: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+remove 逼抢陷阱=诱导至边路: +0.015 ±0.147 -> keep
+dprune10: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 128s, failures 0
+remove 球门球=长传: +0.022 ±0.147 -> keep
+dprune11: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+remove 外侧套上=两翼外套: -0.187 ±0.153 -> keep
+remove 球门球=长传: +0.022 ±0.147 -> keep
+remove 外侧套上=两翼外套: -0.187 ±0.153 -> keep
