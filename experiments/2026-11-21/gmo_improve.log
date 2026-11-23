@@ -1,0 +1,27 @@
+gimp_r1_screen: 228 to run (0 done), 100 seeds each
+  batch 1: 60 shapes, 6000 matches, 3279s, failures 0
+  batch 2: 60 shapes, 6000 matches, 3191s, failures 0
+  batch 3: 60 shapes, 6000 matches, 3181s, failures 0
+  batch 4: 48 shapes, 4800 matches, 2153s, failures 0
+round 1 screen: 227 single changes, 3 with CI above 0: ROLE|IP|AMR/AML=InsideWinger +0.385, ROLE|OOP|DR/DL=OPPressingFullBack +0.317, TI|进攻宽度=较窄 +0.267
+gimp_rt01: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 127s, failures 0
+retest ROLE|IP|AMR/AML=InsideWinger: -0.036 ±0.147 -> drop (screen hit was noise)
+gimp_rt02: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 127s, failures 0
+retest ROLE|OOP|DR/DL=OPPressingFullBack: -0.052 ±0.149 -> drop (screen hit was noise)
+gimp_rt03: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 127s, failures 0
+retest TI|进攻宽度=较窄: +0.161 ±0.154 -> ADOPT
+gimp_r2_screen: 228 to run (0 done), 100 seeds each
+  batch 1: 60 shapes, 6000 matches, 3347s, failures 0
+  batch 2: 60 shapes, 6000 matches, 3421s, failures 0
+  batch 3: 60 shapes, 6000 matches, 3363s, failures 0
+  batch 4: 48 shapes, 4800 matches, 2255s, failures 0
+round 2 screen: 227 single changes, 0 with CI above 0: none
+gimp_final: 3 to run (0 done), 300 seeds each
+  batch 1: 3 shapes, 900 matches, 191s, failures 0
+final GEOMETRISMO_IMPROVED: xGdiff +0.157, pts 1.73; minus old Geometrismo +0.107 ±0.164
+final DIAMOND_FINAL: xGdiff +0.470, pts 2.05; minus old Geometrismo +0.420 ±0.160
+final GEOMETRISMO_OLD: xGdiff +0.050, pts 1.62
+FMF: C:\Users\pawan\fm-tactics-lab\exports\Geometrismo Improved.fmf, sha256 f8c32bd4db61a60995228b74d4b91cc9ec84461ae9b2d2fe12e5b7a99a3da8f0, native round-trip verified
