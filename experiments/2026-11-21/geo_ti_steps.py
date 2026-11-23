@@ -42,7 +42,7 @@ def load(tag):
 
 def compare(R, a, b):
     d = [(R[b][s]['xgf'] - R[b][s]['xga']) - (R[a][s]['xgf'] - R[a][s]['xga']) for s in R[a] if s in R[b]]
-    assert len(d) > 250, f'only {len(d)} paired matches - is Steam running?'
+    assert len(d) >= 0.8 * len(R[a]) and len(d) >= 80, f'only {len(d)} paired matches - is Steam running?'
     return st.mean(d), 1.96 * st.stdev(d) / math.sqrt(len(d))
 
 

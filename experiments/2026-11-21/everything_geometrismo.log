@@ -1,0 +1,25 @@
+gmo_ment: 7 to run (0 done), 300 seeds each
+  batch 1: 7 shapes, 2100 matches, 552s, failures 0
+mentality 1 vs 4: -0.180 ±0.142
+mentality 2 vs 4: -0.084 ±0.138
+mentality 3 vs 4: +0.059 ±0.143
+mentality 5 vs 4: +0.153 ±0.145
+mentality 6 vs 4: +0.109 ±0.157
+mentality 7 vs 4: +0.053 ±0.144
+-> mentality 5 adopted
+gmo_gpi02: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 137s, failures 0
+geoPI CBs+HB shorter passing: -0.016 ±0.149 -> KEEP
+gmo_gpi04: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 137s, failures 0
+geoPI CMs more direct: +0.000 ±0.000 -> KEEP
+gmo_gpi05: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 137s, failures 0
+geoPI WBs more direct: +0.002 ±0.003 -> KEEP
+gmo_gpi08: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 137s, failures 0
+geoPI ST fewer runs: +0.004 ±0.040 -> KEEP
+gmo_gpi09: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 137s, failures 0
+geoPI ST more direct: +0.000 ±0.000 -> KEEP
+gmo_screen: 149 to run (0 done), 100 seeds each
