@@ -1,0 +1,119 @@
+f4_roles: 38 to run (0 done), 100 seeds each
+  batch 1: 38 shapes, 3800 matches, 1755s, failures 0
+roles screen: 37 single role changes, 0 with CI above 0: []
+f401: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 1 Much Shorter Passing: -0.184 ±0.190 xG/match (current +0.222, with it +0.038) -> KEEP
+f402: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 2 High Press: +0.051 ±0.175 xG/match (current +0.088, with it +0.138) -> KEEP
+f403: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 3 Much Narrower: +0.003 ±0.187 xG/match (current +0.126, with it +0.129) -> KEEP
+f404: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 4 Much Lower Defensive Line: -0.013 ±0.183 xG/match (current +0.158, with it +0.146) -> KEEP
+f405: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 5 Trap Outside: -0.028 ±0.186 xG/match (current +0.045, with it +0.018) -> KEEP
+f406: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 6 Play Through Press: +0.085 ±0.192 xG/match (current -0.143, with it -0.058) -> KEEP
+f407: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 149s, failures 0
+step 7 GK Distribute to Centre-Backs: -0.017 ±0.176 xG/match (current +0.007, with it -0.010) -> KEEP
+f408: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 140s, failures 0
+step 8 Progress Through Both Flanks: -0.153 ±0.187 xG/match (current +0.049, with it -0.104) -> KEEP
+f409: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 9 Work Ball Into Box: +0.011 ±0.027 xG/match (current -0.054, with it -0.043) -> KEEP
+f410: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 10 Hold Shape: -0.035 ±0.174 xG/match (current +0.050, with it +0.016) -> KEEP
+f411: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 11 Discourage Shots from Distance: +0.000 ±0.000 xG/match (current +0.050, with it +0.050) -> KEEP
+f412: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 139s, failures 0
+step 12 Pass to Feet: +0.056 ±0.151 xG/match (current -0.036, with it +0.020) -> KEEP
+f413: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 13 Overlap Both Flanks: +0.123 ±0.181 xG/match (current +0.073, with it +0.196) -> KEEP
+f414: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+step 14 Long Goal Kicks: +0.025 ±0.189 xG/match (current +0.009, with it +0.034) -> KEEP
+f4_ment: 7 to run (0 done), 300 seeds each
+  batch 1: 7 shapes, 2100 matches, 606s, failures 0
+mentality 1 vs 4: -0.190 ±0.175
+mentality 2 vs 4: -0.188 ±0.176
+mentality 3 vs 4: -0.082 ±0.171
+mentality 5 vs 4: -0.012 ±0.190
+mentality 6 vs 4: -0.153 ±0.190
+mentality 7 vs 4: -0.111 ±0.188
+-> mentality unchanged (no level clearly better)
+f4_gpi02: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI FBs more runs: +0.000 ±0.000 -> KEEP
+f4_gpi03: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI FBs sit narrower: +0.007 ±0.010 -> KEEP
+f4_gpi05: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 128s, failures 0
+geoPI Wingers sit narrower: +0.001 ±0.014 -> KEEP
+f4_gpi07: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI ST fewer runs: -0.002 ±0.034 -> KEEP
+f4_gpi08: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI CBs+DMC shorter passing: +0.002 ±0.005 -> KEEP
+f4_gpi09: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI FBs more direct: +0.000 ±0.000 -> KEEP
+f4_gpi10: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI Wingers shorter passing: +0.000 ±0.000 -> KEEP
+f4_gpi11: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI ST shorter passing: +0.000 ±0.000 -> KEEP
+f4_gpi12: 2 to run (0 done), 300 seeds each
+  batch 1: 2 shapes, 600 matches, 138s, failures 0
+geoPI STR/STL shorter passing: +0.000 ±0.000 -> KEEP
+f4_screen: 150 to run (0 done), 100 seeds each
+  batch 1: 60 shapes, 6000 matches, 3968s, failures 0
+  batch 2: 60 shapes, 6000 matches, 3895s, failures 0
+  batch 3: 30 shapes, 3000 matches, 1134s, failures 0
+screen: 149 single changes, 0 with CI above 0: []
+f4_final: 4 to run (0 done), 300 seeds each
+  batch 1: 4 shapes, 1200 matches, 276s, failures 0
+
+## Everything stage (mentality, player instructions, remaining team instructions)
+- mentality 1 vs 4: -0.190 ±0.175
+- mentality 2 vs 4: -0.188 ±0.176
+- mentality 3 vs 4: -0.082 ±0.171
+- mentality 5 vs 4: -0.012 ±0.190
+- mentality 6 vs 4: -0.153 ±0.190
+- mentality 7 vs 4: -0.111 ±0.188
+- -> mentality unchanged (no level clearly better)
+- geoPI STR/STL more runs: not allowed for these roles -> skipped
+- geoPI FBs more runs: +0.000 ±0.000 -> KEEP
+- geoPI FBs sit narrower: +0.007 ±0.010 -> KEEP
+- geoPI Wingers fewer runs: not allowed for these roles -> skipped
+- geoPI Wingers sit narrower: +0.001 ±0.014 -> KEEP
+- geoPI CBs+DMC more runs: not allowed for these roles -> skipped
+- geoPI ST fewer runs: -0.002 ±0.034 -> KEEP
+- geoPI CBs+DMC shorter passing: +0.002 ±0.005 -> KEEP
+- geoPI FBs more direct: +0.000 ±0.000 -> KEEP
+- geoPI Wingers shorter passing: +0.000 ±0.000 -> KEEP
+- geoPI ST shorter passing: +0.000 ±0.000 -> KEEP
+- geoPI STR/STL shorter passing: +0.000 ±0.000 -> KEEP
+- screen: 149 single changes, 0 with CI above 0: []
+- final AFTER_TEAM_INSTRUCTIONS: xGdiff -0.029, pts 1.67; vs old Geometrismo -0.195 ±0.158
+- final FINAL_EVERYTHING: xGdiff -0.042, pts 1.67; vs old Geometrismo -0.208 ±0.158
+- final DIAMOND_FINAL: xGdiff +0.404, pts 1.84; this tactic minus diamond -0.446 ±0.169
+- final GEOMETRISMO_OLD: xGdiff +0.166, pts 1.78
+
+Mentality: 4 (1 Very Defensive ... 4 Balanced ... 7 Very Attacking)
+Team instructions: 传球方式=极短传, 得球后=保持队形, 进攻宽度=极窄, 创造自由度=标准, 争取定位球=保持比赛进行, 拖延时间=从不, 防守介入线=高位逼抢, 防线高度=极低, 逼抢频率=标准, 丢球后=标准, 铲抢=标准, 防线行为=均衡, 门将出球目标=中后卫, 门将出球速度=均衡, 进攻耐心=将球做入禁区, 盘带=标准, 接球方式=传至脚下, 比赛节奏=标准, 防守传中=标准, 阻止门将短传=否, 后场组织=通过传递破解逼抢, 逼抢陷阱=诱导至边路, 传中方式=混合传中, 远射=减少远射, 肋部套上=标准, 球门球=长传, 推进方向=两翼, 外侧套上=两翼外套, 门将参与进攻定位球=不参与
+Player instructions: IP DR: 进攻站位=靠近中路, 前插=更多前插, 传球距离=更直接传球; IP DCR: 传球距离=短传; IP DCL: 传球距离=短传; IP DL: 进攻站位=靠近中路, 前插=更多前插, 传球距离=更直接传球; IP DMC: 传球距离=短传; IP AMR: 进攻站位=靠近中路, 传球距离=短传; IP AML: 进攻站位=靠近中路, 传球距离=短传; IP STR: 传球距离=短传; IP ST: 前插=保持位置, 传球距离=短传; IP STL: 传球距离=短传
+FMF (overwritten with everything included): C:\Users\pawan\fm-tactics-lab\exports\Geometrismo 4-1-2-3.fmf, sha256 66f51255d6e3610f1bbea3d0b4550c3944762f0ae6b16669ab843a2e54b53fae, native round-trip verified
