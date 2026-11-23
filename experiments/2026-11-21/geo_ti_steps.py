@@ -61,8 +61,15 @@ GMO_STEPS = [('High Press', 8, 61), ('Underlap Both Flanks', 28, 28), ('Much Mor
              ('Trap Outside', 25, 81), ('GK Distribute to Centre-Backs', 16, 35), ('Much Narrower', 4, 53),
              ('Long Goal Kicks', 29, 45)]
 
+# 4-1-2-3 (three strikers): picks from f4123_instructions.txt, ordered by geometric effect size
+F_STEPS = [('Much Shorter Passing', 1, 4), ('High Press', 8, 61), ('Much Narrower', 4, 53), ('Much Lower Defensive Line', 9, 59),
+           ('Trap Outside', 25, 81), ('Play Through Press', 24, 7), ('GK Distribute to Centre-Backs', 16, 35),
+           ('Progress Through Both Flanks', 30, 24), ('Work Ball Into Box', 18, 17), ('Hold Shape', 3, 55),
+           ('Discourage Shots from Distance', 27, 16), ('Pass to Feet', 20, 6), ('Overlap Both Flanks', 31, 25),
+           ('Long Goal Kicks', 29, 45)]
+
 if __name__ == '__main__':
-    GMO = len(sys.argv) > 1 and sys.argv[1] == 'geometrismo'
+    GMO =len(sys.argv) > 1 and sys.argv[1] == 'geometrismo'
     geo = uniform_home(json.load(open(os.path.join(HERE, 'base_scenario.json'), encoding='utf8')))
     geo.pop('away_tactic_pool')
     if GMO:

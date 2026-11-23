@@ -31,7 +31,16 @@ GEO_PIS = {
                     ('WBs more direct', ['DR', 'DL'], 7, 2), ('IFs sit narrower', ['AMR', 'AML'], 0, 26),
                     ('IFs fewer runs', ['AMR', 'AML'], 3, 23), ('ST fewer runs', ['ST'], 3, 23),
                     ('ST more direct', ['ST'], 7, 2)],
+    'f4123': [('STR/STL more runs', ['STR', 'STL'], 3, 22), ('FBs more runs', ['DR', 'DL'], 3, 22),
+              ('FBs sit narrower', ['DR', 'DL'], 0, 26), ('Wingers fewer runs', ['AMR', 'AML'], 3, 23),
+              ('Wingers sit narrower', ['AMR', 'AML'], 0, 26), ('CBs+DMC more runs', ['DCR', 'DCL', 'DMC'], 3, 22),
+              ('ST fewer runs', ['ST'], 3, 23), ('CBs+DMC shorter passing', ['DCR', 'DCL', 'DMC'], 7, 1),
+              ('FBs more direct', ['DR', 'DL'], 7, 2), ('Wingers shorter passing', ['AMR', 'AML'], 7, 1),
+              ('ST shorter passing', ['ST'], 7, 1), ('STR/STL shorter passing', ['STR', 'STL'], 7, 1)],
 }
+# which -> (file prefix, tactic name, geometry team-instruction steps)
+CONFIG = {'diamond': ('gti', 'Geometrismo Diamond', gts.STEPS), 'geometrismo': ('gmo', 'Geometrismo Geo', gts.GMO_STEPS),
+          'f4123': ('f4', 'Geometrismo 4-1-2-3', gts.F_STEPS)}
 
 
 def policy(phase, cell):
@@ -119,9 +128,7 @@ def selftest():
 
 
 def main(which):
-    gmo = which == 'geometrismo'
-    P, NAME = ('gmo', 'Geometrismo Geo') if gmo else ('gti', 'Geometrismo Diamond')
-    steps = gts.GMO_STEPS if gmo else gts.STEPS
+    P, NAME, steps = CONFIG[which]
     geo = uniform_home(json.load(open(os.path.join(HERE, 'base_scenario.json'), encoding='utf8'))); geo.pop('away_tactic_pool')
     cur = json.load(open(os.path.join(HERE, f'{P}_current.json'), encoding='utf8'))
     start = copy.deepcopy(cur)
@@ -185,11 +192,19 @@ def main(which):
         log.append(f'retest {label}: {a:+.3f} ±{b:.3f} -> {"ADOPT" if a - b > 0 else "drop (screen hit was noise)"}'); print(log[-1], flush=True)
     # 5 confirm + export
     t = f'{P}_final'
-    stage(t, [('GEOMETRISMO_OLD', geo), ('AFTER_TEAM_INSTRUCTIONS', start), ('FINAL_EVERYTHING', cur)], 300, 490000, t)
+    final = [('GEOMETRISMO_OLD', geo), ('AFTER_TEAM_INSTRUCTIONS', start), ('FINAL_EVERYTHING', cur)]
+    dia = os.path.join(HERE, 'gti_everything.json')
+    if which != 'diamond' and os.path.exists(dia):             # head-to-head benchmark: the finished diamond
+        final.append(('DIAMOND_FINAL', json.load(open(dia, encoding='utf8'))))
+    stage(t, final, 300, 490000, t)
     R = gts.load(t)
     for b in ('AFTER_TEAM_INSTRUCTIONS', 'FINAL_EVERYTHING'):
         a, c = gts.compare(R, 'GEOMETRISMO_OLD', b)
         log.append(f'final {b}: xGdiff {gts.xgd(R, b):+.3f}, pts {gts.pts(R, b):.2f}; vs old Geometrismo {a:+.3f} ±{c:.3f}')
+    if 'DIAMOND_FINAL' in R:
+        a, c = gts.compare(R, 'DIAMOND_FINAL', 'FINAL_EVERYTHING')
+        log.append(f'final DIAMOND_FINAL: xGdiff {gts.xgd(R, "DIAMOND_FINAL"):+.3f}, pts {gts.pts(R, "DIAMOND_FINAL"):.2f}; '
+                   f'this tactic minus diamond {a:+.3f} ±{c:.3f}')
     log.append(f'final GEOMETRISMO_OLD: xGdiff {gts.xgd(R, "GEOMETRISMO_OLD"):+.3f}, pts {gts.pts(R, "GEOMETRISMO_OLD"):.2f}')
     json.dump(cur, open(os.path.join(HERE, f'{P}_everything.json'), 'w', encoding='utf8'), ensure_ascii=False)
     fin = copy.deepcopy(cur); fin['teams'][0]['tactic_name'] = NAME
