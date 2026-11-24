@@ -49,6 +49,8 @@ def run_batch(base_with_pool, variants, seeds_first, count, salt, workers=12):
         if brief['status'] not in ('queued', 'running'):
             break
         time.sleep(10)
+    if brief['status'] != 'complete':                 # never save a cut-short job as if it were complete
+        raise SystemExit(f'lab job {key} ended {brief["status"]}: {call("/api/jobs/" + key).get("error")}')
     j, rows = harvest(key)
     call('/api/jobs/delete', {'id': key})            # drop the job's per-match files; compact rows are kept
     return j, rows

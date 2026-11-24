@@ -22,6 +22,15 @@ def sha(path):
     with Path(path).open('rb')as stream:return hashlib.file_digest(stream,'sha256').hexdigest()
 
 
+def read_ack(path,tries=50):
+    """The native worker may still hold the .worker_done file open when exists() turns true; Windows then denies the read."""
+    for i in range(tries):
+        try:return json.loads(path.read_text(encoding='utf8'))
+        except (PermissionError,json.JSONDecodeError):
+            if i==tries-1:raise
+            time.sleep(0.1)
+
+
 def read_rows(path,live=False):
     lines=path.read_text(encoding='utf8').splitlines(keepends=True)
     return [json.loads(line)for i,line in enumerate(lines)if line.strip()and not(live and i==len(lines)-1 and not line.endswith('\n'))]
@@ -216,7 +225,7 @@ class DesktopWarmRunner(BatchRunner):
                         starting=False
                     while completed<len(chunk)and Path(str(chunk[completed]['path'])+'.worker_done').exists():
                         task=chunk[completed];path=Path(task['path']);rows=read_rows(path)
-                        ack=json.loads(Path(str(path)+'.worker_done').read_text(encoding='utf8'))
+                        ack=read_ack(Path(str(path)+'.worker_done'))
                         if not(ack['released']and ack['exit_code']==0 and ack['index']==completed+1):raise ValueError('原生逐场释放标记无效')
                         if receipt is None:
                             header=read_rows(startup,live=True)
